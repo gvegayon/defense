@@ -1,0 +1,489 @@
+@article{Chandrasekhar2012,
+	abstract = {We define a general class of network formation models, Statistical Exponential Random Graph Models (SERGMs), that nest standard exponential random graph models (ERGMs) as a special case. We provide the first general results on when these models' (including ERGMs) parameters estimated from the observation of a single network are consistent (i.e., become accurate as the number of nodes grows). Next, addressing the problem that standard techniques of estimating ERGMs have been shown to have exponentially slow mixing times for many specifications, we show that by reformulating network formation as a distribution over the space of sufficient statistics instead of the space of networks, the size of the space of estimation can be greatly reduced, making estimation practical and easy. We also develop a related, but distinct, class of models that we call subgraph generation models (SUGMs) that are useful for modeling sparse networks and whose parameter estimates are also directly and easily estimable, consistent, and asymptotically normally distributed. Finally, we show how choice-based (strategic) network formation models can be written as SERGMs and SUGMs, and apply our models and techniques to network data from rural Indian villages.},
+	archivePrefix = {arXiv},
+	arxivId = {1210.7375},
+	author = {Chandrasekhar, Arun G. and Jackson, Matthew O.},
+	eprint = {1210.7375},
+	month = {10},
+	title = {{Tractable and Consistent Random Graph Models}},
+	url = {http://arxiv.org/abs/1210.7375},
+	year = {2012}
+}
+
+@inproceedings{Schmid2017,
+	abstract = {With the growth of interest in network data across fields, the Exponential Random Graph Model (ERGM) has emerged as the leading approach to the statistical analysis of network data. ERGM parameter estimation requires the approximation of an intractable normalizing constant. Simulation methods represent the state-of-the-art approach to approximating the normalizing constant, leading to estimation by Monte Carlo maximum likelihood (MCMLE). MCMLE is accurate when a large sample of networks is used to approximate the normalizing constant. However, MCMLE is computationally expensive, and may be prohibitively so if the size of the network is on the order of 1,000 nodes (i.e., one million potential ties) or greater. When the network is large, one option is maximum pseudolikelihood estimation (MPLE). The standard MPLE is simple and fast, but generally underestimates standard errors. We show that a resampling method---the parametric bootstrap---results in accurate coverage probabilities for confidence intervals. We find that bootstrapped MPLE can be run in 1/5th the time of MCMLE. We study the relative performance of MCMLE and MPLE with simulation studies, and illustrate the two different approaches by applying them to a network of bills introduced in the United State Senate.},
+	author = {Schmid, Christian S. and Desmarais, Bruce A.},
+	booktitle = {2017 IEEE International Conference on Big Data (Big Data)},
+	doi = {10.1109/BigData.2017.8257919},
+	isbn = {978-1-5386-2715-0},
+	month = {12},
+	pages = {116--121},
+	publisher = {IEEE},
+	title = {{Exponential random graph models with big networks: Maximum pseudolikelihood estimation and the parametric bootstrap}},
+	url = {http://arxiv.org/abs/1708.02598 http://ieeexplore.ieee.org/document/8257919/},
+	year = {2017}
+}
+
+@article{Desmarais2012,
+	author = {Desmarais, B.A. and Cranmer, S.J.},
+	doi = {10.1016/j.physa.2011.10.018},
+	issn = {03784371},
+	journal = {Physica A: Statistical Mechanics and its Applications},
+	month = {2},
+	number = {4},
+	pages = {1865--1876},
+	title = {{Statistical mechanics of networks: Estimation and uncertainty}},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0378437111008168},
+	volume = {391},
+	year = {2012}
+}
+
+@article{Admiraal2006,
+	author = {Admiraal, Ryan and Handcock, Mark S},
+	journal = {Statistics},
+	title = {{Sequential Importance Sampling for Bipartite Graphs With Applications to Likelihood-Based}},
+	year = {2006}
+}
+
+@article{Snijders2002,
+	author = {Snijders, Tom A B},
+	title = {{Markov Chain Monte Carlo Estimation of Exponential Random Graph Models}},
+	year = {2002}
+}
+
+@article{Wang2009,
+	author = {Wang, Peng and Sharpe, Ken and Robins, Garry L and Pattison, Philippa E},
+	doi = {10.1016/j.socnet.2008.08.002},
+	keywords = {affiliation networks,exponential random graph,models,p},
+	pages = {12--25},
+	title = {{Exponential random graph (p*) models for affiliation networks}},
+	volume = {31},
+	year = {2009}
+}
+
+@article{Lauro1996,
+    author = {Lauro, Carlo},
+    doi = {10.1016/0167-9473(96)88920-1},
+    issn = {01679473},
+    journal = {Computational Statistics {\&} Data Analysis},
+    month = {11},
+    number = {1},
+    pages = {191--193},
+    title = {{Computational statistics or statistical computing, is that the question?}},
+    url = {https://linkinghub.elsevier.com/retrieve/pii/0167947396889201},
+    volume = {23},
+    year = {1996}   
+}
+
+
+@article{hastings1970,
+  title={Monte Carlo sampling methods using Markov chains and their applications},
+  author={Hastings, W Keith},
+  year={1970},
+  publisher={Oxford University Press},
+  doi={10.2307/2334940}
+}
+
+@article{metropolis1953,
+  title={Equation of state calculations by fast computing machines},
+  author={Metropolis, Nicholas and Rosenbluth, Arianna W and Rosenbluth, Marshall N and Teller, Augusta H and Teller, Edward},
+  journal={The journal of chemical physics},
+  volume={21},
+  number={6},
+  pages={1087--1092},
+  year={1953},
+  publisher={AIP},
+  doi={10.1063/1.1699114}
+}
+
+
+@article{Martin2011,
+   author = {Andrew Martin and Kevin Quinn and Jong Hee Park},
+   title = {MCMCpack: Markov Chain Monte Carlo in R},
+   journal = {Journal of Statistical Software, Articles},
+   volume = {42},
+   number = {9},
+   year = {2011},
+   keywords = {},
+   abstract = {We introduce MCMCpack, an R package that contains functions to perform Bayesian inference using posterior simulation for a number of statistical models. In addition to code that can be used to fit commonly used models, MCMCpack also contains some useful utility functions, including some additional density functions and pseudo-random number generators for statistical distributions, a general purpose Metropolis sampling algorithm, and tools for visualization.},
+   issn = {1548-7660},
+   pages = {1--21},
+   doi = {10.18637/jss.v042.i09},
+   url = {https://www.jstatsoft.org/v042/i09}
+}
+
+@Manual{Geyer2019,
+    title = {mcmc: Markov Chain Monte Carlo},
+    author = {Charles J. Geyer and Leif T. Johnson},
+    year = {2019},
+    note = {R package version 0.9-6},
+    url = {https://CRAN.R-project.org/package=mcmc},
+  }
+  
+@Article{Plummer2006,
+    title = {CODA: Convergence Diagnosis and Output Analysis for MCMC},
+    author = {Martyn Plummer and Nicky Best and Kate Cowles and Karen Vines},
+    journal = {R News},
+    year = {2006},
+    volume = {6},
+    number = {1},
+    pages = {7--11},
+    url = {https://journal.r-project.org/archive/},
+    pdf = {https://www.r-project.org/doc/Rnews/Rnews_2006-1.pdf},
+  }
+
+@Manual{Morey2009,
+    title = {HybridMC: Implementation of the Hybrid Monte Carlo and Multipoint Hybrid
+Monte Carlo sampling techniques},
+    author = {Richard D. Morey},
+    year = {2009},
+    note = {R package version 0.2},
+    url = {https://CRAN.R-project.org/package=HybridMC},
+  }
+
+@Manual{Scheidegger2019,
+    title = {adaptMCMC: Implementation of a Generic Adaptive Monte Carlo Markov Chain
+Sampler},
+    author = {Andreas Scheidegger},
+    year = {2018},
+    note = {R package version 1.3},
+    url = {https://CRAN.R-project.org/package=adaptMCMC},
+  }
+
+@Misc{Stan2018,
+    title = {{RStan}: the {R} interface to {Stan}},
+    author = {{Stan Development Team}},
+    note = {R package version 2.18.2},
+    year = {2018},
+    url = {http://mc-stan.org/},
+  }  
+@article{Stan2017,
+title = {Stan : A Probabilistic Programming Language},
+author = {Carpenter, Bob and Gelman, Andrew and Hoffman, Matthew D. and Lee, Daniel and Goodrich, Ben and Betancourt, Michael and Brubaker, Marcus and Guo, Jiqiang and Li, Peter and Riddell, Allen},
+abstractNote = {Stan is a probabilistic programming language for specifying statistical models. A Stan program imperatively defines a log probability function over parameters conditioned on specified data and constants. As of version 2.14.0, Stan provides full Bayesian inference for continuous-variable models through Markov chain Monte Carlo methods such as the No-U-Turn sampler, an adaptive form of Hamiltonian Monte Carlo sampling. Penalized maximum likelihood estimates are calculated using optimization methods such as the limited memory Broyden-Fletcher-Goldfarb-Shanno algorithm. Stan is also a platform for computing log densities and their gradients and Hessians, which can be used in alternative algorithms such as variational Bayes, expectation propagation, and marginal inference using approximate integration. To this end, Stan is set up so that the densities, gradients, and Hessians, along with intermediate quantities of the algorithm such as acceptance probabilities, are easily accessible. Stan can also be called from the command line using the cmdstan package, through R using the rstan package, and through Python using the pystan package. All three interfaces support sampling and optimization-based inference with diagnostics and posterior analysis. rstan and pystan also provide access to log probabilities, gradients, Hessians, parameter transforms, and specialized plotting.},
+doi = {10.18637/jss.v076.i01},
+journal = {Journal of Statistical Software},
+issn = {1548-7660},
+number = 1,
+volume = 76,
+place = {United States},
+year = {2017},
+month = {1}
+}
+
+
+@article{Gelman1992,
+  title={Inference from iterative simulation using multiple sequences},
+  author={Gelman, Andrew and Rubin, Donald B and others},
+  journal={Statistical science},
+  volume={7},
+  number={4},
+  pages={457--472},
+  year={1992},
+  publisher={Institute of Mathematical Statistics},
+  doi={10.1214/ss/1177011136}
+}
+
+@book{Geweke1991,
+  title={Evaluating the accuracy of sampling-based approaches to the calculation of posterior moments},
+  author={Geweke, John and others},
+  volume={196},
+  year={1991},
+  publisher={Federal Reserve Bank of Minneapolis, Research Department Minneapolis, MN}
+}
+
+@Article{Sturtz2005,
+    title = {R2WinBUGS: A Package for Running WinBUGS from R},
+    author = {Sibylle Sturtz and Uwe Ligges and Andrew Gelman},
+    journal = {Journal of Statistical Software},
+    year = {2005},
+    pages = {1--16},
+    number = {3},
+    volume = {12},
+    url = {http://www.jstatsoft.org},
+    doi = {10.18637/jss.v012.i03}
+  }
+  
+
+@Manual{Marchand2018,
+    year   = {2017},
+    title  = {rslurm: Submit R Calculations to a Slurm Cluster},
+    author = {Philippe Marchand and Mike Smorul and Ian Carrol},
+    note   = {R package version 0.4.0.9000-1},
+    url    = {https://github.com/SESYNC-ci/rslurm},
+  }
+
+@Manual{Bengtsson2019,
+  title = {future.batchtools: A Future API for Parallel and Distributed Processing using
+'batchtools'},
+  author = {Henrik Bengtsson},
+  year = {2019},
+  note = {R package version 0.7.2},
+  url = {https://CRAN.R-project.org/package=future.batchtools},
+}
+
+@Article{Bischl2015,
+  title = {batchtools: Tools for R to work on batch systems},
+  author = {Michel Lang and Bernd Bischl and Dirk Surmann},
+  journal = {The Journal of Open Source Software},
+  year = {2017},
+  month = {2},
+  volume = {2},
+  number = {10},
+  doi = {10.21105/joss.00135},
+  url = {https://doi.org/10.21105/joss.00135},
+}
+
+@Article{Schubert2019,
+  title = {clustermq enables efficient parallelisation of genomic analyses},
+  author = {Michael Schubert},
+  journal = {Bioinformatics},
+  month = {5},
+  year = {2019},
+  language = {en},
+  doi = {10.1093/bioinformatics/btz284},
+  url = {https://github.com/mschubert/clustermq},
+}
+
+@article{Landau2018,
+  doi = {10.21105/joss.00550},
+  year = {2018},
+  month = {1},
+  volume = {3},
+  number = {21},
+  pages = {550},
+  author = {William Michael Landau},
+  title = {The drake {R} package: a pipeline toolkit for reproducibility and high-performance computing},
+  journal = {The Journal of Open Source Software}
+}
+
+@article{Byshkin2018,
+	author = {Byshkin, Maksym and Stivala, Alex and Mira, Antonietta and Robins, Garry and Lomi, Alessandro},
+	doi = {10.1038/s41598-018-29725-8},
+	issn = {2045-2322},
+	journal = {Scientific Reports},
+	month = {12},
+	number = {1},
+	pages = {11509},
+	title = {{Fast Maximum Likelihood Estimation via Equilibrium Expectation for Large Network Data}},
+	url = {http://www.nature.com/articles/s41598-018-29725-8},
+	volume = {8},
+	year = {2018}
+}
+
+@article{Stivala2016,
+	author = {Stivala, Alex D. and Koskinen, Johan H. and Rolls, David A. and Wang, Peng and Robins, Garry L.},
+	doi = {10.1016/j.socnet.2015.11.003},
+	issn = {03788733},
+	journal = {Social Networks},
+	month = {10},
+	pages = {167--188},
+	title = {{Snowball sampling for estimating exponential random graph models for large networks}},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0378873315000878},
+	volume = {47},
+	year = {2016}
+}
+
+@article{Coleman1958,
+	author = {Coleman, James},
+	doi = {10.17730/humo.17.4.q5604m676260q8n7},
+	issn = {0018-7259},
+	journal = {Human Organization},
+	month = {12},
+	number = {4},
+	pages = {28--36},
+	title = {{Relational Analysis: The Study of Social Organizations with Survey Methods}},
+	url = {http://sfaajournals.net/doi/10.17730/humo.17.4.q5604m676260q8n7},
+	volume = {17},
+	year = {1958}
+}
+
+@article{Goodman1961,
+	author = {Goodman, Leo A.},
+	doi = {10.1214/aoms/1177705148},
+	issn = {0003-4851},
+	journal = {The Annals of Mathematical Statistics},
+	month = {3},
+	number = {1},
+	pages = {148--170},
+	title = {{Snowball Sampling}},
+	url = {http://projecteuclid.org/euclid.aoms/1177705148},
+	volume = {32},
+	year = {1961}
+}
+
+@article{Ising1925,
+	author = {Ising, Ernst},
+	doi = {10.1007/BF02980577},
+	issn = {0044-3328},
+	journal = {Zeitschrift f{\"{u}}r Physik},
+	month = {2},
+	number = {1},
+	pages = {253--258},
+	title = {{Beitrag zur Theorie des Ferromagnetismus}},
+	url = {http://link.springer.com/10.1007/BF02980577},
+	volume = {31},
+	year = {1925}
+}
+
+  @Manual{ergmitopkg,
+	title = {ergmito: Exponential Random Graph Models for Small Networks},
+	author = {George {Vega Yon}},
+	year = {2020},
+	note = {R package version 0.2-1-9999},
+	url = {https://cran.r-project.org/package=ergmito},
+}
+
+@article{davis1967structure,
+	title={The structure of positive interpersonal relations in small groups.},
+	author={Davis, James A and Leinhardt, Samuel},
+	year={1967},
+	publisher={ERIC}
+}
+
+@book{efron2016computer,
+  title={Computer Age Statistical Inference},
+  author={Efron, B. and Hastie, T.},
+  isbn={9781107149892},
+  lccn={2016028353},
+  series={Institute of Mathematical Statistics Monographs},
+  url={https://books.google.com/books?id=Sj1yDAAAQBAJ},
+  year={2016},
+  publisher={Cambridge University Press}
+}
+
+@article{Dresden1920,
+author = {Dresden, Arnold},
+doi = {10.1090/S0002-9904-1920-03322-7},
+issn = {0002-9904},
+journal = {Bulletin of the American Mathematical Society},
+month = {6},
+number = {9},
+pages = {385--397},
+title = {{The fourteenth western meeting of the American Mathematical Society}},
+url = {http://www.ams.org/journal-getitem?pii=S0002-9904-1920-03322-7},
+volume = {26},
+year = {1920}
+}
+
+@article{Penrose1955,
+author = {Penrose, R.},
+doi = {10.1017/S0305004100030401},
+issn = {0305-0041},
+journal = {Mathematical Proceedings of the Cambridge Philosophical Society},
+month = {7},
+number = {3},
+pages = {406--413},
+title = {{A generalized inverse for matrices}},
+url = {https://www.cambridge.org/core/product/identifier/S0305004100030401/type/journal{\_}article},
+volume = {51},
+year = {1955}
+}
+
+@article{Ashburner2000,
+author = {Ashburner, Michael and Ball, Catherine A. and Blake, Judith A. and Botstein, David and Butler, Heather and Cherry, J. Michael and Davis, Allan P. and Dolinski, Kara and Dwight, Selina S. and Eppig, Janan T. and Harris, Midori A. and Hill, David P. and Issel-Tarver, Laurie and Kasarskis, Andrew and Lewis, Suzanna and Matese, John C. and Richardson, Joel E. and Ringwald, Martin and Rubin, Gerald M. and Sherlock, Gavin},
+doi = {10.1038/75556},
+issn = {1061-4036},
+journal = {Nature Genetics},
+month = {5},
+number = {1},
+pages = {25--29},
+title = {{Gene Ontology: tool for the unification of biology}},
+url = {http://www.nature.com/articles/ng0500{\_}25},
+volume = {25},
+year = {2000}
+}
+
+@article{go2018,
+    author = {The {G}ene {O}ntology {C}onsortium},
+    title = "{The Gene Ontology Resource: 20 years and still GOing strong}",
+    journal = {Nucleic Acids Research},
+    volume = {47},
+    number = {D1},
+    pages = {D330-D338},
+    year = {2018},
+    month = {11},
+    issn = {0305-1048},
+    doi = {10.1093/nar/gky1055},
+    url = {https://doi.org/10.1093/nar/gky1055},
+    eprint = {https://academic.oup.com/nar/article-pdf/47/D1/D330/27437640/gky1055.pdf},
+}
+
+@article{Binns2009,
+author = {Binns, D. and Dimmer, E. and Huntley, R. and Barrell, D. and O'Donovan, C. and Apweiler, R.},
+doi = {10.1093/bioinformatics/btp536},
+issn = {1367-4803},
+journal = {Bioinformatics},
+month = {11},
+number = {22},
+pages = {3045--3046},
+title = {{QuickGO: a web-based tool for Gene Ontology searching}},
+url = {https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp536},
+volume = {25},
+year = {2009}
+}
+
+
+@article{Wang2020,
+    author = {Wang, Cheng and Butts, Carter T. and Hipp, John and Lakon, Cynthia M.},
+    doi = {10.1177/0049124120914933},
+    issn = {0049-1241},
+    journal = {Sociological Methods {\&} Research},
+    month = {4},
+    pages = {004912412091493},
+    title = {{Model Adequacy Checking/Goodness-of-fit Testing for Behavior in Joint Dynamic Network/Behavior Models, with an Extension to Two-mode Networks}},
+    url = {http://journals.sagepub.com/doi/10.1177/0049124120914933},
+    year = {2020}
+}
+
+@article{Chen2019,
+    author = {Chen, Sixing and Onnela, Jukka-Pekka},
+    doi = {10.1038/s41598-019-53166-6},
+    issn = {2045-2322},
+    journal = {Scientific Reports},
+    month = {12},
+    number = {1},
+    pages = {16674},
+    title = {{A Bootstrap Method for Goodness of Fit and Model Selection with a Single Observed Network}},
+    url = {http://www.nature.com/articles/s41598-019-53166-6},
+    volume = {9},
+    year = {2019}
+}
+
+@article{Li2013,
+    author = {Li, Yin and Carriere, Keumhee Chough},
+    doi = {10.5539/ijsp.v2n4p64},
+    issn = {1927-7040},
+    journal = {International Journal of Statistics and Probability},
+    month = {10},
+    number = {4},
+    title = {{Assessing Goodness of Fit of Exponential Random Graph Models}},
+    url = {http://www.ccsenet.org/journal/index.php/ijsp/article/view/27900},
+    volume = {2},
+    year = {2013}
+}
+
+@article{Ouadah2015,
+    archivePrefix = {arXiv},
+    arxivId = {1507.08140},
+    author = {Ouadah, Sarah and Robin, St{\'{e}}phane and Latouche, Pierre},
+    eprint = {1507.08140},
+    month = {7},
+    title = {{Degree-based goodness-of-fit tests for heterogeneous random graph models : independent and exchangeable cases}},
+    url = {http://arxiv.org/abs/1507.08140},
+    year = {2015}
+}
+
+@article{Eriksson2006,
+    author = {Eriksson, Nicholas and Fienberg, Stephen E. and Rinaldo, Alessandro and Sullivant, Seth},
+    doi = {10.1016/j.jsc.2005.04.003},
+    issn = {07477171},
+    journal = {Journal of Symbolic Computation},
+    month = {2},
+    number = {2},
+    pages = {222--233},
+    title = {{Polyhedral conditions for the nonexistence of the MLE for hierarchical log-linear models}},
+    url = {https://linkinghub.elsevier.com/retrieve/pii/S0747717105001112},
+    volume = {41},
+    year = {2006}
+}
