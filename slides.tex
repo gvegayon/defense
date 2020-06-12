@@ -2,7 +2,7 @@
 
 % \transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
-% \mode<handout>
+%\mode<handout>
 
 % Some important packages
 \usepackage{epstopdf}
@@ -17,7 +17,9 @@
 \input{notation-thesis.tex}
 
 \usepackage[style=authoryear-comp]{biblatex}
-\addbibresource{bibliography.bib}
+\addbibresource{bibliography-aphylo.bib}
+\addbibresource{bibliography-ergmito.bib}
+\addbibresource{bibliography-extra.bib}
 % \renewcommand{\bibsection}{\subsubsection*{\bibname } }
 
 
@@ -37,7 +39,7 @@ Social Network Analysis
 Complex Systems}}
 \author[GGVY]{George G Vega Yon}
 \institute[USC-PREVMED]{University of Southern California, Department of Preventive Medicine}
-\date{November 18, 2019}
+\date{June 22, 2020}
 
 % Some definitions
 \def\cursection{\frame{\frametitle{Contents}\tableofcontents[current]}}
@@ -61,7 +63,6 @@ Complex Systems}}
 \newcommand{\nhlc}[2]{{\only<#1>{#2}}}
 
 \begin{document}
-% \SweaveOpts{concordance=TRUE}
 
 % ------------------------------------------------------------------------------
 \begin{frame}%[noframenumbering]
@@ -203,20 +204,7 @@ genes
 \end{itemize}
 \end{minipage}
 \hfill
-\begin{minipage}{.5\linewidth}
-\uncover<5->{
-<<random-tree, echo=FALSE, messages=FALSE, out.width=".85\\linewidth", fig.align='center', fig.cap="Simulated phylogenetic tree and gene annotations.">>=
-oldpar <- par(mai=rep(0, 4))
-set.seed(115)
-tree <- aphylo::raphylo(20, P = 2)
-tree$tree$edge.length <- runif(nrow(tree$tree$edge))
-tree$tree$tip.label   <- paste("Gene", tree$tree$tip.label)
-plot(aphylo::rdrop_annotations(tree, .2), main = "",
-     node.type.col = c("darkgreen", "darkgray"))
-par(oldpar)
-@
-}
-\end{minipage}
+
 \end{frame}
 
 \note[enumerate]{
@@ -356,6 +344,92 @@ data from PantherDB with GO annotations and fit a large pooled model.
 \end{frame}
 
 % ------------------------------------------------------------------------------
+\section{Data}
+
+\begin{frame}
+	\usebeamertemplate{section intro}{}{}
+	\textcolor{uscgold}{
+		\Large {\bf Data} \vskip0.25em
+		\large Phylogenetic trees and Experimental Annotations
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data: Phylogenetic trees}
+	
+	
+	
+	Sample of annotations (first 10 in a single tree)
+	
+	\small
+	
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{rrlll}
+			\toprule
+			& branch\_length & type & ancestor & duplication \\ 
+			\midrule
+			AN0 &  & S & LUCA & FALSE \\ 
+			AN1 & 0.06 & S & Archaea-Eukaryota & FALSE \\ 
+			AN2 & 0.24 & S & Eukaryota & FALSE \\ 
+			AN3 & 0.44 & S & Unikonts & FALSE \\ 
+			AN4 & 0.42 & S & Opisthokonts & FALSE \\ 
+			AN6 & 0.68 & D &  & TRUE \\ 
+			AN9 & 0.79 & S & Amoebozoa & FALSE \\ 
+			AN10 & 0.18 & D &  & TRUE \\ 
+			AN15 & 0.57 & S & Dictyostelium & FALSE \\ 
+			AN18 & 0.52 & S & Alveolata-Stramenopiles & FALSE \\ 
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data: Node type (events)}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.7\linewidth]{distribution-event-type.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data: Annotations (example)}
+	
+	This is the first 10 of $\sim$ 400,000 experimental annotations used:
+	
+	\footnotesize
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{rllll}
+			\toprule
+			& Family & Id & GO term & Qualifier \\ 
+			\midrule
+			1 & PTHR12345 & HUMAN$|$HGNC=15756$|$UniProtKB=Q9H190 & GO:0005546 &  \\ 
+			2 & PTHR11361 & HUMAN$|$HGNC=7325$|$UniProtKB=P43246 & GO:0016887 & CONTRIBUTES\_TO \\ 
+			3 & PTHR10782 & MOUSE$|$MGI=MGI=3040693$|$UniProtKB=Q6P1E1 & GO:0045582 &  \\ 
+			4 & PTHR23086 & ARATH$|$TAIR=AT3G09920$|$UniProtKB=Q8L850 & GO:0006520 &  \\ 
+			5 & PTHR32061 & RAT$|$RGD=619819$|$UniProtKB=Q9EPI6 & GO:0043197 &  \\ 
+			6 & PTHR46870 & ARATH$|$TAIR=AT3G46870$|$UniProtKB=Q9STF9 & GO:1990825 &  \\ 
+			7 & PTHR15204 & MOUSE$|$MGI=MGI=1919439$|$UniProtKB=Q9Z1R2 & GO:0045861 &  \\ 
+			8 & PTHR22928 & DROME$|$FlyBase=FBgn0050085$|$UniProtKB=Q9XZ34 & GO:0030174 &  \\ 
+			9 & PTHR35972 & HUMAN$|$HGNC=34401$|$UniProtKB=A2RU48 & GO:0005515 &  \\ 
+			10 & PTHR10133 & DROME$|$FlyBase=FBgn0002905$|$UniProtKB=O18475 & GO:0097681 &  \\ 
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data: Experimental Annotations}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.7\linewidth]{distribution-annotation-type.pdf}
+	\end{figure}
+\end{frame}
+
+
+% ------------------------------------------------------------------------------
 \begin{frame}[t]
 \frametitle{Prediction with real data}
 
@@ -409,38 +483,107 @@ of each type, and (2) must not have large sets of siblings (this due to
 numerical underflow issues, WIP)
 }
 
-% % ------------------------------------------------------------------------------
-% \begin{frame}
-% \frametitle{Paper 1: Pooled estimation (worth it?)}
-% 
-% \begin{figure}
-% \centering
-% \includegraphics[width=.5\linewidth]{comparing-accuracy-1.pdf}
-% \end{figure}
-% 
-% \end{frame}
-
-% ------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Prediction with real data: Leave-one-out}
-
-\begin{figure}
-\centering
-\includegraphics[width=.7\linewidth]{annotations1.pdf}
-\end{figure}
+	
+	% latex table generated in R 3.6.3 by xtable 1.8-4 package
+	% Mon Jun  8 00:12:30 2020
+	
+	\begin{table}[!htbp]
+		\centering
+		\scalebox{.7}{
+		\begin{tabular}{l*{4}{m{.14\linewidth}<\centering}}
+			\toprule
+			& & \multicolumn{3}{c}{Type of Annotation} \\
+			\cmidrule(r){3-5} & Pooled & Molecular Function & Biological Process & Cellular Component \\ 
+			\midrule
+			\multicolumn{3}{l}{\hspace{-10pt}Mislabeling} \\
+			$\psi_{01}$ & 0.23 & 0.18 & 0.09 & 0.66 \\ 
+			$\psi_{10}$ & 0.01 & 0.01 & 0.01 & 0.33 \\ 
+			\multicolumn{3}{l}{\hspace{-10pt}Duplication Events} \\
+			$\mu_{d01}$ & 0.97 & 0.97 & 0.10 & 0.55 \\ 
+			$\mu_{d10}$ & 0.52 & 0.51 & 0.03 & 0.56 \\ 
+			\multicolumn{3}{l}{\hspace{-10pt}Speciation Events} \\
+			$\mu_{s01}$ & 0.05 & 0.05 & 0.05 & 0.37 \\ 
+			$\mu_{s10}$ & 0.01 & 0.01 & 0.02 & 0.37 \\ 
+			\multicolumn{3}{l}{\hspace{-10pt}Root node} \\
+			$\pi$ & 0.79 & 0.71 & 0.88 & 0.52 \\ \midrule
+			Trees & 141 & 74 & 45 & 22 \\ 
+			\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the by-aspect model} \\
+			AUC & - & 0.77 & 0.83 & 0.53 \\ 
+			MAE & - & 0.34 & 0.26 & 0.50 \\ 
+			\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the pooled-data model} \\
+			AUC & - & 0.77 & 0.75 & 0.75 \\ 
+			MAE & - & 0.35 & 0.34 & 0.37 \\ 
+			\bottomrule
+		\end{tabular}}
+		%\caption[Parameter estimates comparing pooled-data vs by-type]{MCMC estimates for experimentally annotated trees. The first column shows the estimates under the pooled-data model in \ref{tab:pooled-experimentally-annotated}, while the following three columns report the estimates obtained when fitting the model using a pooled-data approach, but doing so by type of annotation. Readers should be aware that the estimation process of the fourth column, \textit{cellular component}, did not fully converge, likely due to sparsity of annotations within that category.}
+		\label{tab:by-aspect-estimates}
+	\end{table}
 
 \end{frame}
 
 % ------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Prediction with real data: Out-of-sample prediction}
-
-\begin{figure}
-\centering
-\includegraphics[width=.65\linewidth]{out-of-sample1-1.pdf}
-\end{figure}
-
+\begin{frame}[t]
+	\frametitle{Future Research: phylogenetic models}
+	
+	Imagine that we have 3 functions (rows) and that each node has 2 siblings (columns)
+	
+	\mode<beamer>{
+		\begin{table}
+			\begin{tabular}{llcc}
+				\toprule
+				& & \multicolumn{2}{c}{\bf Transitions to} \\
+				& & Case 1 & Case 2 \\ \cmidrule(r){3-4}
+				\multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 1\end{array}\right]$} & 
+				$\left[\begin{array}{cc} %
+				0 & \nhlc{1-2}{1}\hlc{3-5}{1}\nhlc{6-}{1} \\ %
+				1 & \nhlc{1-3}{0}\hlc{4-5}{0}\nhlc{6-}{0} \\ %
+				1 & \nhlc{1-3}{0}\hlc{4}{1}\nhlc{5-}{1} %
+				\end{array}\right]$ & 
+				$\left[\begin{array}{cc} %
+				0 & \nhlc{-2}{1}\nhlc{4}{1}\hlc{3}{1}\hlc{5}{1}\nhlc{6-}{1} \\ %
+				\nhlc{-5}{1}\hlc{6}{1}\nhlc{7-}{1} & \nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0}\\ %
+				\nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0} & \nhlc{1-5}{1}\hlc{6}{1}\nhlc{7-}{1}%
+				\end{array}\right]$ \pause \\ \midrule 
+				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \pause \\ 
+				& \# Gains (Neofunctionalization) & 1 & 1 \pause \\
+				& Only one offspring changes (yes/no) & 1 & 0 \pause \\
+				& \# Changes (gain+loss) & 2 & 3 \pause \\
+				& Subfunctionalization (yes/no) & 0 & 1 \\ \bottomrule
+			\end{tabular}
+		\end{table}
+	}
+	\mode<handout>{
+		\begin{table}
+			\begin{tabular}{llcc}
+				\toprule
+				& & \multicolumn{2}{c}{\bf Transitions to} \\
+				& & Case 1 & Case 2 \\ \cmidrule(r){3-4}
+				\multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 1\end{array}\right]$} & 
+				$\left[\begin{array}{cc} %
+				0 & 1 \\ %
+				1 & 0 \\ %
+				1 & 1 %
+				\end{array}\right]$ & 
+				$\left[\begin{array}{cc} %
+				0 & 1 \\ %
+				1 & 0\\ %
+				0 & 1%
+				\end{array}\right]$ \\ \midrule 
+				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \\ 
+				& \# Neofunctionalizations & 1 & 1  \\
+				& Only one offspring changes (yes/no) & 1 & 0 \\
+				& \# Changes (gain+loss) & 2 & 3 \\
+				& Subfunctionalizations (yes/no) & 0 & 1 \\ \bottomrule
+			\end{tabular}
+		\end{table}
+	}
+	
+	\pause
+	In SIFTER, for modelling 3 functions (with offsprings conditionally independent), we need $2^{2\times 3} = 64$ parameters.
+	
 \end{frame}
+
 
 % ------------------------------------------------------------------------------
 \begin{frame}[t]
@@ -542,14 +685,6 @@ govern social networks
 
 In this network\linebreak
 
-<<simple-model, echo=FALSE, cache=TRUE, fig.align='center', fig.width=8, fig.height=5, out.width='.9\\linewidth', warning=FALSE, message=FALSE>>=
-set.seed(13)
-# x <- ergmito::rbernoulli(4)
-x <- structure(c(0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0), .Dim = c(4L, 
-4L))
-library(sna)
-gplot(x, vertex.col = rgb(153, 0, 0, maxColorValue = 255))
-@
 
 \pause
 
@@ -578,16 +713,10 @@ The probability function of this model would be
 
 \end{columns}
 
-<<simple-model-estimates, cache=TRUE, echo=FALSE, warning=FALSE>>=
-estimates0 <- ergmito::ergmito(x ~ edges + ttriad + mutual)
-estimates0_coefs <- sprintf("%03.2f", coef(estimates0))
-@
-
 \pause
 
 \vspace{1cm}
 
-This model has \textbf{MLE parameter estimates} of \Sexpr{estimates0_coefs[1]} (low density), \Sexpr{estimates0_coefs[2]} (high chance of ttriads), and \Sexpr{estimates0_coefs[3]} (low chance of mutuality) for the parameters \texttt{edges}, \texttt{ttriads}, and \texttt{mutual} respectively.
 
 \end{frame}
 
@@ -773,52 +902,64 @@ comparing MC-MLE (ergm) with MLE (ergmito).
 \end{frame}
 
 % ------------------------------------------------------------------------------
-\begin{frame}[label=ergmsims,allowframebreaks]
-\frametitle{Paper 2 Simulation Studies: Error rate}
 
-\begin{minipage}{.45\linewidth}
-\begin{itemize}[<+->]
-\item The MC-MLE implementation failed $\sim$ 5,000/20,000 times
-\item In $\sim$700 of those cases ergmito (MLE) reported a significant effect
-\item I no case that MLE failed MC-MLE reported an effect.
-\end{itemize}
-\end{minipage}
-\hfill
-\begin{minipage}{.45\linewidth}
-\begin{figure}
-\centering
-\includegraphics[width=.9\linewidth]{failed-tree.pdf}
-\end{figure}
-\end{minipage}
-
-% \hyperlink{ergmitoexperiment}{\beamerreturnbutton{go back}}
-
+\begin{frame}
+	\begin{figure}[!htbp]
+		\centering
+		%\caption[Distribution of Converged and Non-converged Fits]{\label{fig:failed}Distribution of the average sufficient statistics per sample. Since samples can contain networks of sizes four and five, we have re-scaled the sufficient statistics counts by each network size's corresponding maximum value so these range from zero to one. Most of the cases in which methods failed to converge happened in scenarios where either all the graphs in the sample were fully connected or there was no transitive triad; exactly the cases that we excluded for the reminder of the analysis.}
+		\includegraphics[width=.5\linewidth]{failed.pdf}
+	\end{figure}
 \end{frame}
 
-% ------------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Paper 2 Simulation Studies: Empirical Type I error}
+	\begin{table}[!htbp]
+		\centering
+		\begin{tabular}{rccc}
+			\toprule
+			& MLE & MC-MLE & RM \\ 
+			\midrule
+			edges & [0.27, 0.36] & [1.23, 1.65] & [0.55, 1.54] \\ 
+			ttriads & [-0.05, -0.03] & [-0.22, -0.16] & [-0.15, 0.48] \\ 
+			\bottomrule
+		\end{tabular}
+%		\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
+	\end{table}
+\end{frame}
 
-\footnotesize
+\begin{frame}
+	\begin{figure}[!htbp]
+		\centering
+%		\caption[Empirical Power by Sample and Effect Size]{\label{fig:power}Empirical power by dataset size and effect size (the later considering only magnitude), for ERGM and \ergmito{} estimation methods. Power increases for both MC-MLE (ERGM) and MLE (\ergmito{}) with increases in the size of the dataset and effect size. There are indistinguishable differences in power between the two estimation methods.}
+		\includegraphics[width=.7\linewidth]{power.pdf}
+	\end{figure}
+\end{frame}
 
-\begin{table}[ht]
-	\centering
-	\begin{tabular}{cccc}
-		\toprule & \multicolumn{2}{c}{P(Type I error)} \\ \cmidrule(r){2-3}
-		Sample size  & \makecell{MC-MLE \\ (\ergmpkg{})} & \makecell{MLE \\ (\ergmitopkg{})} & $\chi^2$ \\ 
-		\midrule
-		5 & 0.084 & 0.057 & 11.71 *** \\ 
-		10 & 0.070 & 0.045 & 12.46 *** \\ 
-		15 & 0.084 & 0.066 & 5.55 * \\ 
-		20 & 0.074 & 0.060 & 3.58  \\ 
-		30 & 0.057 & 0.052 & 0.67  \\ 
-		50 & 0.046 & 0.044 & 0.17  \\ 
-		100 & 0.048 & 0.048 & 0.00  \\ 
-		\bottomrule
-	\end{tabular}
-	\caption{\label{tab:typeI}Empirical Type I error rates. The $\chi^2$ statistic is from a 2-sample test for equality of proportions, and the significance levels are given by *** $p < 0.001$, ** $p < 0.01$, and * $p < 0.05$.} 
-\end{table}
+\begin{frame}
+	\begin{figure}[!htbp]
+		\centering
+%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
+	\includegraphics[width=.7\linewidth]{time.pdf}
+\end{figure}
+\end{frame}
 
+\begin{frame}
+	\begin{table}[!htbp]
+		\centering\small
+		\begin{tabular}{*{2}{m{.1\linewidth}<\centering}*{5}{c}}
+			\toprule & & \multicolumn{3}{c}{P(Type I error)} & \multicolumn{2}{c}{$\chi^2$ (vs MLE)}\\ \cmidrule(r){3-5} \cmidrule(r){6-7}
+			Sample size & N. Sims. & MLE & MC-MLE & RM & MC-MLE & RM \\ 
+			\midrule
+			5 & 4,325 & 0.066 & 0.086 & 0.086 & 11.36 *** & 11.36 *** \\ 
+			10 & 4,677 & 0.063 & 0.078 & 0.073 & 8.44 *** & 3.73 * \\ 
+			15 & 4,818 & 0.060 & 0.072 & 0.063 & 5.50 ** & 0.41  \\ 
+			20 & 4,889 & 0.054 & 0.065 & 0.061 & 5.30 ** & 2.05  \\ 
+			30 & 4,946 & 0.053 & 0.059 & 0.055 & 1.60  & 0.07  \\ 
+			50 & 4,987 & 0.053 & 0.055 & 0.047 & 0.16  & 1.67  \\ 
+			100 & 4,999 & 0.054 & 0.054 & 0.050 & 0.00  & 0.81  \\ 
+			\bottomrule
+		\end{tabular}
+%		\caption[Empirical Type I Error Rates]{\label{tab:typeI}Empirical Type I error rates. The $\chi^2$ statistic is from a 2-sample test for equality of proportions, and the significance levels are given by *** $p < 0.01$, ** $p < 0.05$, and * $p < 0.10$.} 
+	\end{table}
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -832,6 +973,57 @@ comparing MC-MLE (ergm) with MLE (ergmito).
 
 \vfill\hfill\hyperlink{ergmito-bias}{\beamergotobutton{more results}}
 
+\end{frame}
+
+\begin{frame}
+	
+	\begin{table}[!htbp]
+		\centering
+		\scalebox{.65}{
+		\begin{tabular}{l c c c c c c }
+			\toprule
+			& (1) & (2) & (3) & (4) & (5) & (4b) \\
+			\midrule
+			edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
+			& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
+			ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
+			& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
+			Homophily (gender)                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+			& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
+			$\text{edges} \times \isone{n = 5}$       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
+			& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
+			$(\text{Homophily})^{1/2}$                &               &               & $0.54$        &               &               &               \\
+			&               &               & $(1.32)$      &               &               &               \\
+			Sender (female)                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
+			&               &               &               & $(0.18)$      &               & $(0.18)$      \\
+			Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
+			&               &               &               &               & $(0.18)$      &               \\
+			\textit{Constraint (offset)} \\
+			\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
+			&               & $$            &               &               &               &               \\
+			\midrule
+			AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
+			BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
+%			Log Likelihood                            & -315.63       & -280.96       & -315.54       & -312.34       & -315.53       & -312.34       \\
+			Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
+			Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
+			N replicates                              &               &               &               &               &               & 1000          \\
+%			N Used replicates                         &               &               &               &               &               & 1000          \\
+			\bottomrule
+			\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+			\end{tabular}}
+%			\caption[Parameter Estimates for the Homophily Models (teams dataset)]{Testing for gender homopholy. Models (1) through (3) include either an interaction term or a transformation of the term \textit{Homphily (gender)}. Models (4) and (5) include female sender and receiver effects, while model (4b) is a bootstrapped version of model (4). Model (2) constraints the sample space by setting an offset restricting the support to networks with at least 5 edges. Furthermore, since three of the 31 teams had less than five ties, these were excluded from the analysis, hence (2) includes 28 of the 31 available networks.}
+			\label{tab:ci-ergm-full}
+			\end{table}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[!p]
+		\centering
+		\includegraphics[width = .4\linewidth]{ci-ergmito-gof-full.pdf}
+%		\caption[Distribution of the Sufficient Statistics under Model (4) (GOF post-estimation analysis)]{Distribution of the sufficient statistics under the ERGM specified by the parameters from model (4) in \autoref{tab:ci-ergm-full}. Each bar represents the exact 95\% confidence interval for the corresponding network+term combination, while the black dots show the location of the corresponding observed statistic. Red diamonds mark the observed statistics that fall out of the 95\% confidence interval. Of the 31 networks in the sample, it is only in two networks that the CIs don't cover the observed statistic, one that is fully connected and another that only has one tie.}
+		\label{fig:ci-gof-full}
+	\end{figure}
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -902,98 +1094,7 @@ $$
 
 \end{frame}
 
-% % ------------------------------------------------------------------------------
-% \begin{frame}[t]
-% \frametitle{Future Research: phylogenetic models}
-% 
-% \textbf{Example 1}\pause
-% \begin{itemize}[<+->]
-% \item 2 siblings 2 function involves modelling the following array:
-% 
-% $$
-% \left[\begin{array}{c}x_{p1}\\x_{p2}\end{array}\right] \to
-% \left(%
-% \left[\begin{array}{c} x_{i1} \\ x_{i2}\end{array}\right],%
-% \left[\begin{array}{c} x_{j1} \\ x_{j2}\end{array}\right]
-% \right)
-% $$
-% \item Here we have $2^2 = 4$ possible states.
-% \end{itemize}
-% 
-% \only<4->{\textbf{Example 2}}
-% 
-% \begin{itemize}[<+->]
-% \item If we treat siblings independent, but work with 5 functions, SIFTER needs
-% to estimate $2^{10} = 1,024$ parameters.
-% 
-% \item Our approach can reduce this number to, for example, 11 terms:
-% \begin{itemize}
-% \item $5\times 4 / 2 = 10$ statistics for pairwise correlation.
-% \item One statistic accounting for longest branch.
-% \end{itemize}
-% \end{itemize}
-% 
-% \end{frame}
-
 % ------------------------------------------------------------------------------
-\begin{frame}[t]
-\frametitle{Future Research: phylogenetic models}
-
-Imagine that we have 3 functions (rows) and that each node has 2 siblings (columns)
-
-\mode<beamer>{
-  \begin{table}
-  \begin{tabular}{llcc}
-  \toprule
-  & & \multicolumn{2}{c}{\bf Transitions to} \\
-   & & Case 1 & Case 2 \\ \cmidrule(r){3-4}
-  \multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 0\end{array}\right]$} & 
-  $\left[\begin{array}{cc} %
-    0 & \nhlc{1-3}{0}\hlc{4}{0}\nhlc{5-}{0} \\ %
-    1 & \nhlc{1-3}{0}\hlc{4-5}{0}\nhlc{6-}{0} \\ %
-    0 & \nhlc{1-2}{1}\hlc{3-5}{1}\nhlc{6-}{1} %
-    \end{array}\right]$ & 
-  $\left[\begin{array}{cc} %
-    \nhlc{-2}{1}\hlc{3}{1}\nhlc{4}{1}\hlc{5}{1}\nhlc{6-}{1} & 0 \\ %
-    \nhlc{1-4}{0}\hlc{5}{0}\nhlc{6-}{0} & \nhlc{1-4}{0}\hlc{5}{0}\nhlc{6-}{0} \\ %
-    \nhlc{-2}{1}\hlc{3}{1}\nhlc{4}{1}\hlc{5}{1}\nhlc{6-}{1} & 0 %
-    \end{array}\right]$ \pause \\ \midrule 
-  \multicolumn{3}{l}{\textbf{Sufficient statistics}} \pause \\ 
-  & \# Gains & 1 & 2 \pause \\
-  & \# only one offspring changes & 1 & 0 \pause \\
-  & \# Swaps (0$\to$1, 1$\to$0) & 2 & 4 \\ \bottomrule
-  \end{tabular}
-  \end{table}
-}
-\mode<handout>{
-  \begin{table}
-  \begin{tabular}{llcc}
-  \toprule
-  & & \multicolumn{2}{c}{\bf Transitions to} \\
-   & & Case 1 & Case 2 \\ \cmidrule(r){3-4}
-  \multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 0\end{array}\right]$} & 
-  $\left[\begin{array}{cc} %
-    0 & 0 \\ %
-    1 & 0 \\ %
-    0 & 1 %
-    \end{array}\right]$ & 
-  $\left[\begin{array}{cc} %
-    1 & 0 \\ %
-    0 & 0 \\ %
-    1 & 0 %
-    \end{array}\right]$ \pause \\ \midrule 
-  \multicolumn{3}{l}{\textbf{Sufficient statistics}} \pause \\ 
-  & \# Gains & 1 & 2 \pause \\
-  & \# only one offspring changes & 1 & 0 \pause \\
-  & \# Swaps (0$\to$1, 1$\to$0) & 2 & 4 \\ \bottomrule
-  \end{tabular}
-  \end{table}
-}
-
-\pause
-In SIFTER, for modelling 3 functions, we need $2^{2\times 3} = 64$ parameters.
-
-\end{frame}
 
 % ------------------------------------------------------------------------------
 \begin{frame}[t]
@@ -1015,6 +1116,15 @@ In SIFTER, for modelling 3 functions, we need $2^{2\times 3} = 64$ parameters.
 \end{itemize}
 
 \end{frame}
+
+\frame{
+\begin{figure}[!hbtp]
+	\centering
+	\includegraphics[width = .8\linewidth]{max-out-stats.pdf}
+	%\caption[Examples of Networks with Saturated Statistics]{Networks with saturated statistics. All three networks have five vertices composed of two females (black vertices) and three males (gray vertices). Network (a) shows the required set of ties to saturate the \textit{Mutuals} and \textit{Transitive Triads} sufficient statistics, which actually coincides with a fully connected graph, containing $(5\times 4)/2 = 10$ mutual ties and $5 \times 4 \times 3 = 60$ transitive triads. Graph (b) shows the required configuration to saturate the \textit{Gender-Homophily} sufficient statistic, containing $3\times 2 + 2\times 1 = 8$ homophilic ties. Graph (c) shows the minimum arrangement to saturate the \textit{Gender-Receiver Effect} statistic, also having $4 + 4 = 8$ ties (so each female receives 4 ties).}
+	\label{fig:maxout-gof-chapter}
+\end{figure}
+}
 
 % % ------------------------------------------------------------------------------
 \begin{frame}[t]
