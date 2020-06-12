@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169, 9pt]{beamer}
+\documentclass[aspectratio=169, 9pt,handout]{beamer}
 
 % \transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
@@ -522,6 +522,26 @@ numerical underflow issues, WIP)
 
 \end{frame}
 
+
+\begin{frame}
+	\begin{figure}[!htbp]
+		\centering
+		\includegraphics[width=.5\linewidth]{example-trees-good1-loo-annotated.pdf}
+		\caption{A tree with }
+%		\caption[Example of Accurate Predictions]{\textit{High accuracy predictions} The first set of annotations, first column, shows the experimental annotations of the term GO:0001730 for PTHR11258. The second column shows the 95\% C.I. of the predicted annotations. The column ranges from 0 (left end) to 1 (right-end). Bars closer to the left are colored red to indicate that lack of function is suggested,  while bars closer to  the right are colored blue to indicate function is suggested. Depth of color corresponds to strength of inference. The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34.}
+		\label{fig:featured-good1}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[!htbp]
+		\centering
+		\includegraphics[width=.5\linewidth]{example-trees-bad1-loo-annotated.pdf}
+%		\caption[Example of Poor Predictions]{\textit{Low accuracy predictions}. The first set of annotations, first column, shows the experimental annotations of the term GO:0004571 for PTHR45679. The second column shows the 95\% C.I. of the predicted annotations using leave-one-out. Bars closer to the left are colored red to indicate that lack of function is suggested,  while bars closer to  the right are colored blue to indicate function is suggested. Depth of color corresponds to strength of inference.  The AUC for this analysis is 0.33 and the Mean Absolute Error is 0.52.}
+		\label{fig:featured-bad1}
+	\end{figure}
+\end{frame}
+
 % ------------------------------------------------------------------------------
 \begin{frame}[t]
 	\frametitle{Future Research: phylogenetic models}
@@ -660,64 +680,22 @@ govern social networks
 {\bf\color{suffstat} Sufficient statistics} have various forms
 
 \def\fig1width{.45\linewidth}
-\begin{figure}[tb]
-\centering
-\begin{tabular}{m{.2\linewidth}<\centering m{.4\linewidth}<\raggedright}
-\toprule Representation & Description  \\ \midrule
-\includegraphics[width=\fig1width]{ergm-terms/mutual.pdf} & Mutual Ties (Reciprocity)\linebreak[4]$\sum_{i\neq j}y_{ij}y_{ji}$  \\
-\includegraphics[width=\fig1width]{ergm-terms/ttriad.pdf} & Transitive Triad (Balance)\linebreak[4]$\sum_{i\neq j\neq k}y_{ij}y_{jk}y_{ik}$  \\
-\includegraphics[width=\fig1width]{ergm-terms/homophily.pdf} & Homophily\linebreak[4]$\sum_{i\neq j}y_{ij}\mathbf{1}\left(x_i=x_j\right)$ \\
-\includegraphics[width=\fig1width]{ergm-terms/nodeicov.pdf} & Covariate Effect for Incoming Ties\linebreak[4]$\sum_{i\neq j}y_{ij}x_j$ \\
-\includegraphics[width=\fig1width]{ergm-terms/fourcycle.pdf} & Four Cycle\linebreak[4]$\sum_{i\neq j \neq k \neq l}y_{ij}y_{jk}y_{kl}y_{li}$  \\
-\bottomrule
-\end{tabular}
+\begin{figure}[!htbp]
+	\centering
+	\begin{tabular}{m{.2\linewidth}<\centering m{.4\linewidth}<\raggedright}
+		\toprule Representation & Description  \\ \midrule
+		\includegraphics[width=\fig1width]{mutual.pdf} & Mutual Ties (Reciprocity)\linebreak[4]$\sum_{i\neq j}y_{ij}y_{ji}$  \\
+		\includegraphics[width=\fig1width]{ttriad.pdf} & Transitive Triad (Balance)\linebreak[4]$\sum_{i\neq j\neq k}y_{ij}y_{jk}y_{ik}$  \\
+		\includegraphics[width=\fig1width]{homophily.pdf} & Homophily\linebreak[4]$\sum_{i\neq j}y_{ij}\mathbf{1}\left(x_i=x_j\right)$ \\
+		\includegraphics[width=\fig1width]{nodeicov2.pdf} & Attribute-receiver effect \linebreak[4]$\sum_{i\neq j}y_{ij}x_j$ \\
+		\includegraphics[width=\fig1width]{fourcycle.pdf} & Four Cycle\linebreak[4]$\sum_{i\neq j \neq k \neq l}y_{ij}y_{jk}y_{kl}y_{li}$  \\
+		\bottomrule
+	\end{tabular}
+	\caption[Example of Graph Sufficient Statistics]{Besides of the common edge count statistic (number of ties in a graph), ERGMs allow measuring other more complex structures that can be captured as sufficient statistics. }
+	\label{fig:ergm-structs}
 \end{figure}
 
 % \vfill\hfill \hyperlink{ergmeq}{\beamerreturnbutton{go back}}
-\end{frame}
-
-% -----------------------------------------------------------------------------
-\begin{frame}[label=ergm-toyexample]
-
-\begin{columns}[c]
-
-\begin{column}[c]{.4\linewidth}
-
-In this network\linebreak
-
-
-\pause
-
-We see 4 \textbf{edges}, 1 \textbf{transitive triad} and \textbf{no mutual ties}.
-
-\end{column}
-
-\pause
-
-\begin{column}[c]{.4\linewidth}
-
-The probability function of this model would be
-
-\footnotesize
-
-\begin{equation*}
-\Prcond{\Graph = \graph}{\theta} = \frac{\exp{4\theta_{edges} + \theta_{ttriads} \textcolor{lightgray}{+ 0\theta_{mutual}}}}{%
-\sum_{\graph'\in\GRAPH} \exp{\transpose{\theta} \sufstats{\graph'}}}
-\end{equation*}
-
-\normalsize
-
-\noindent with $\theta = \transpose{[\theta_{edges}\quad \theta_{ttriads} \quad \theta_{mutual}]}$
-
-\end{column}
-
-\end{columns}
-
-\pause
-
-\vspace{1cm}
-
-
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -811,27 +789,6 @@ computationally feasible.
 
 
 % ------------------------------------------------------------------------------
-
-\begin{frame}
-Sidetrack...\vspace{.5cm}
-
-\begin{minipage}[c]{1\linewidth}
-\large \textbf{ito, ita}: From the latin -\textit{\=ittus}. suffix in Spanish used to denote small or affection. e.g.:
-
-\hspace{.5cm} \textit{¡Qué lindo ese perr\textcolor{USCCardinal}{\textbf{ito}}!} / \textit{What a beautiful little dog!}
-
-\hspace{.5cm} \textit{¿Me darías una tac\textcolor{USCCardinal}{\textbf{ita}} de azúcar?} / \textit{Would you give me a small cup of sugar?}
-\normalsize
-\end{minipage}\pause
-
-% Screen shot of ERGMito tweet.
-\vfill
-
-\alert{Special thanks to George Barnett who proposed the name during the 2018 NASN!}
-
-\end{frame}
-
-% ------------------------------------------------------------------------------
 \begin{frame}[label=ergmitopkg]
 \frametitle{The \ergmitopkg{}}
 
@@ -855,49 +812,6 @@ Other features
 \end{itemize}
 
 % \vfill\hfill \hyperlink{ergmito}{\beamerreturnbutton{go back}}
-
-\end{frame}
-
-% ------------------------------------------------------------------------------
-\begin{frame}[label = ergmitoexample]
-\frametitle{\ergmitopkg{} example}
-
-\begin{minipage}{.4\linewidth}
-\begin{figure}
-\centering
-\includegraphics[width = .9\linewidth]{fivenets_graphs.pdf}
-\caption{Random sample of 5 networks simulated using the ergmito package}
-\end{figure}
-\end{minipage}
-\hfill
-\begin{minipage}{.55\linewidth}
-\pause
-\footnotesize
-\begin{table}
-\begin{tabular}{l*{2}{m{.2\linewidth}<\centering}}
-\hline
- & Bernoulli & Full model \\
-\hline
-Edge-count             & $-0.69^{*}$ & $-1.70^{**}$ \\
-                      & $(0.27)$    & $(0.54)$     \\
-Homophily (on Gender) & & $1.59^{*}$   \\
-                      & & $(0.64)$     \\
-\hline
-AIC                   & 78.38       & 73.34        \\
-BIC                   & 80.48       & 77.53        \\
-Log Likelihood        & -38.19      & -34.67       \\
-Num. networks         & 5           & 5            \\
-\hline
-\multicolumn{3}{l}{\scriptsize{Standard errors in parenthesis. $^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
-\end{tabular}
-\caption{Fitted ERGMitos using the fivenets dataset.}
-\label{table:coefficients}
-\end{table}
-\normalsize
-\end{minipage}\pause
-
-We performed a large simulation study \hyperlink{ergmitodgp}{\beamergotobutton{more}}
-comparing MC-MLE (ergm) with MLE (ergmito).
 
 \end{frame}
 
@@ -935,14 +849,6 @@ comparing MC-MLE (ergm) with MLE (ergmito).
 \end{frame}
 
 \begin{frame}
-	\begin{figure}[!htbp]
-		\centering
-%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
-	\includegraphics[width=.7\linewidth]{time.pdf}
-\end{figure}
-\end{frame}
-
-\begin{frame}
 	\begin{table}[!htbp]
 		\centering\small
 		\begin{tabular}{*{2}{m{.1\linewidth}<\centering}*{5}{c}}
@@ -968,7 +874,10 @@ comparing MC-MLE (ergm) with MLE (ergmito).
 
 \begin{figure}
 \centering
-\includegraphics[width=.6\linewidth]{bias-elapsed-02-various-sizes-4-5-ttriad.pdf}
+%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
+\small
+  \def\svgwidth{.65\linewidth}
+\input{fig/time.pdf_tex}
 \end{figure}
 
 \vfill\hfill\hyperlink{ergmito-bias}{\beamergotobutton{more results}}
@@ -976,52 +885,97 @@ comparing MC-MLE (ergm) with MLE (ergmito).
 \end{frame}
 
 \begin{frame}
+	\frametitle{Key takeaways from simulation study}
 	
+	Current implementation of the ERGM MLE for small networks (ERGMito):
+	
+	\begin{enumerate}
+		\item Is \textbf{at least} 10 times faster than MC-MLE.
+		\item Has significantly \textbf{smaller bias}.
+		\item Has better \textbf{convergence rate}.
+		\item Shows significantly \textbf{smaller type I error} rates (and slightly more powerful) than MC-MLE and RM.
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	% latex table generated in R 3.6.3 by xtable 1.8-4 package
+	% Mon Apr 27 23:32:51 2020
 	\begin{table}[!htbp]
 		\centering
-		\scalebox{.65}{
-		\begin{tabular}{l c c c c c c }
+		\begin{tabular}{*{3}{c}*{3}{m{.15\linewidth}<\centering}}
 			\toprule
-			& (1) & (2) & (3) & (4) & (5) & (4b) \\
+			(1) & (2) & (3) & (4) & (5) & (6) \\
+			Size ($n$) & edges & ttriads & $\text{edges}\times\isone{n = 5}$ & $\text{ttriads}\times\isone{n = 5}$ & $\text{edges}\times\log{1/n}$ \\ 
 			\midrule
-			edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
-			& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
-			ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
-			& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
-			Homophily (gender)                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
-			& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
-			$\text{edges} \times \isone{n = 5}$       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
-			& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
-			$(\text{Homophily})^{1/2}$                &               &               & $0.54$        &               &               &               \\
-			&               &               & $(1.32)$      &               &               &               \\
-			Sender (female)                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
-			&               &               &               & $(0.18)$      &               & $(0.18)$      \\
-			Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
-			&               &               &               &               & $(0.18)$      &               \\
-			\textit{Constraint (offset)} \\
-			\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
-			&               & $$            &               &               &               &               \\
-			\midrule
-			AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
-			BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
-%			Log Likelihood                            & -315.63       & -280.96       & -315.54       & -312.34       & -315.53       & -312.34       \\
-			Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
-			Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
-			N replicates                              &               &               &               &               &               & 1000          \\
-%			N Used replicates                         &               &               &               &               &               & 1000          \\
+			4 &  10 &  14 &   0 &   0 & -13.86 \\ 
+			4 &   6 &   2 &   0 &   0 & -8.32 \\ 
+			4 &   4 &   0 &   0 &   0 & -5.55 \\ 
+			5 &   6 &   1 &   6 &   1 & -9.66 \\ 
+			5 &   8 &   8 &   8 &   8 & -12.88 \\ 
+			5 &   6 &   2 &   6 &   2 & -9.66 \\ 
+			\multicolumn{6}{c}{\dots\textit{25 more rows}\dots} \\
 			\bottomrule
-			\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
-			\end{tabular}}
-%			\caption[Parameter Estimates for the Homophily Models (teams dataset)]{Testing for gender homopholy. Models (1) through (3) include either an interaction term or a transformation of the term \textit{Homphily (gender)}. Models (4) and (5) include female sender and receiver effects, while model (4b) is a bootstrapped version of model (4). Model (2) constraints the sample space by setting an offset restricting the support to networks with at least 5 edges. Furthermore, since three of the 31 teams had less than five ties, these were excluded from the analysis, hence (2) includes 28 of the 31 available networks.}
+		\end{tabular}
+		\caption[Example of Observed Sufficient Statistics for the Applied Example]{\label{tab:example-suffstats}Example of observed sufficient statistics for the team advice networks. Pooled-data ERGMs have multiple observed sufficient statistics (also known as target statistics). Furthermore, as shown here, we can manipulate common statistics as \textit{edges} (2) and \textit{ttriads} (3) to include, e.g. interaction effects (4) and (5), or more complex transformations, e.g. (6).}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+
+\begin{minipage}[c]{.7\linewidth}
+	\begin{table}
+		\centering
+		\scalebox{.65}{
+			\begin{tabular}{l c c c c c c }
+				\toprule
+				& (1) & (2) & (3) & (4) & (5) & (4b) \\
+				\midrule
+				edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
+				& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
+				ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
+				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
+				Homophily (gender)                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+				& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
+				$\text{edges} \times \isone{n = 5}$       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
+				& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
+				$(\text{Homophily})^{1/2}$                &               &               & $0.54$        &               &               &               \\
+				&               &               & $(1.32)$      &               &               &               \\
+				Sender (female)                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
+				&               &               &               & $(0.18)$      &               & $(0.18)$      \\
+				Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
+				&               &               &               &               & $(0.18)$      &               \\
+				\textit{Constraint (offset)} \\
+				\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
+				\midrule
+				AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
+				BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
+				Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
+				Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
+				N replicates                              &               &               &               &               &               & 1000          \\ \bottomrule
+				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+				\end{tabular}}
 			\label{tab:ci-ergm-full}
 			\end{table}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.28\linewidth}
+	\begin{enumerate}
+	\item Structural terms \textit{edges}, \textit{ttriads}, and \textit{edges FE} significant across.
+	\item No support for gender homophily, but evidence of females sending more ties.
+	\item The bootstrap stage took roughly 0.08 seconds per iteration (support already computed).
+	\end{enumerate}
+\end{minipage}
+	
+	
 \end{frame}
 
 \begin{frame}
 	\begin{figure}[!p]
 		\centering
-		\includegraphics[width = .4\linewidth]{ci-ergmito-gof-full.pdf}
-%		\caption[Distribution of the Sufficient Statistics under Model (4) (GOF post-estimation analysis)]{Distribution of the sufficient statistics under the ERGM specified by the parameters from model (4) in \autoref{tab:ci-ergm-full}. Each bar represents the exact 95\% confidence interval for the corresponding network+term combination, while the black dots show the location of the corresponding observed statistic. Red diamonds mark the observed statistics that fall out of the 95\% confidence interval. Of the 31 networks in the sample, it is only in two networks that the CIs don't cover the observed statistic, one that is fully connected and another that only has one tie.}
+		\footnotesize
+  \def\svgwidth{.9\linewidth}
+   \input{fig/ci-ergmito-gof-full.pdf_tex}
 		\label{fig:ci-gof-full}
 	\end{figure}
 \end{frame}
@@ -1120,7 +1074,7 @@ $$
 \frame{
 \begin{figure}[!hbtp]
 	\centering
-	\includegraphics[width = .8\linewidth]{max-out-stats.pdf}
+	\includegraphics[width = .6\linewidth]{max-out-stats.pdf}
 	%\caption[Examples of Networks with Saturated Statistics]{Networks with saturated statistics. All three networks have five vertices composed of two females (black vertices) and three males (gray vertices). Network (a) shows the required set of ties to saturate the \textit{Mutuals} and \textit{Transitive Triads} sufficient statistics, which actually coincides with a fully connected graph, containing $(5\times 4)/2 = 10$ mutual ties and $5 \times 4 \times 3 = 60$ transitive triads. Graph (b) shows the required configuration to saturate the \textit{Gender-Homophily} sufficient statistic, containing $3\times 2 + 2\times 1 = 8$ homophilic ties. Graph (c) shows the minimum arrangement to saturate the \textit{Gender-Receiver Effect} statistic, also having $4 + 4 = 8$ ties (so each female receives 4 ties).}
 	\label{fig:maxout-gof-chapter}
 \end{figure}
@@ -1296,11 +1250,24 @@ There various approaches for this, some to highlight
 % --------------------------
 \begin{frame}[label=aphylo-pooled]
 
-\begin{figure}
-\centering
-\includegraphics[width=.4\linewidth]{comparing-accuracy-1.pdf}
-\caption{Comparing LOOCV AUC when performing predictions using either the estimates from the pooled model or each trees' own set of estimates obtained when fitting the model individually \hyperlink{aphylopkg}{\beamerreturnbutton{go back}}.}
-\end{figure}
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Tue Apr 28 11:51:17 2020
+\begin{table}[tb]
+	\centering
+	\begin{tabular}{m{.14\linewidth}*{3}{m{.14\linewidth}<\centering}}
+		\toprule & \multicolumn{1}{c}{\textit{Pooled-data}} & \multicolumn{2}{c}{One-at-a-time} \\ \cmidrule(r){2-2}\cmidrule(r){3-4}
+		& Beta prior & Unif. prior & Beta Prior \\ 
+		\midrule
+		\textit{Pooled-data} \\
+		\hspace{2mm}Unif. prior & \cellcolor{blue!25}[-0.02,-0.01] & \cellcolor{blue!25}[-0.14,-0.10] & \cellcolor{blue!25}[-0.06,-0.03] \\ 
+		\hspace{2mm}Beta prior &  - & \cellcolor{blue!25}[-0.12,-0.09] & \cellcolor{blue!25}[-0.04,-0.01] \\ 
+		\textit{One-at-a-time} \\
+		\hspace{2mm}Unif. prior &  - & - & \cellcolor{red!25}[\hphantom{-}0.06,\hphantom{-}0.09] \\ 
+		\bottomrule
+	\end{tabular}
+	\caption[Differences in Mean Absolute Error]{Differences in Mean Absolute Error [MAE]. Each cell shows the 95\% confidence interval for the difference in MAE resulting from two methods (row method minus column method). Cells are color coded blue when the method on that row has a significantly small MAE than the method on that column; Conversely, cells are colored red when the method in that column outperforms the method in that row.  Overall, predictions calculated using the parameter estimates from \textit{pooled-data} predictions outperform \textit{one-at-a-time}.}
+	\label{tab:vs-accuracy}
+\end{table}
 
 \end{frame}
 
