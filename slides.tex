@@ -523,20 +523,32 @@ numerical underflow issues, WIP)
 \end{frame}
 
 
-\begin{frame}
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics[width=.5\linewidth]{example-trees-good1-loo-annotated.pdf}
-		\caption{A tree with }
-%		\caption[Example of Accurate Predictions]{\textit{High accuracy predictions} The first set of annotations, first column, shows the experimental annotations of the term GO:0001730 for PTHR11258. The second column shows the 95\% C.I. of the predicted annotations. The column ranges from 0 (left end) to 1 (right-end). Bars closer to the left are colored red to indicate that lack of function is suggested,  while bars closer to  the right are colored blue to indicate function is suggested. Depth of color corresponds to strength of inference. The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34.}
-		\label{fig:featured-good1}
+\begin{frame}[t]
+	\frametitle{Example 1: Good quality prediction}
+	
+The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+
+\mode<beamer>{
+	\centering
+	\onslide<1>{\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}
+	\onslide<2>{\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}
+	\onslide<3>{\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
+}
+
+\mode<handout>{
+	\begin{figure}
+		\centering\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
 	\end{figure}
+}
+
 \end{frame}
 
 \begin{frame}
-	\begin{figure}[!htbp]
+	\frametitle{Example 2: Poor quality prediction}
+	
+	\begin{figure}
 		\centering
-		\includegraphics[width=.5\linewidth]{example-trees-bad1-loo-annotated.pdf}
+		\includegraphics[width=.6\linewidth]{example-trees-bad1-loo-annotated.pdf}
 %		\caption[Example of Poor Predictions]{\textit{Low accuracy predictions}. The first set of annotations, first column, shows the experimental annotations of the term GO:0004571 for PTHR45679. The second column shows the 95\% C.I. of the predicted annotations using leave-one-out. Bars closer to the left are colored red to indicate that lack of function is suggested,  while bars closer to  the right are colored blue to indicate function is suggested. Depth of color corresponds to strength of inference.  The AUC for this analysis is 0.33 and the Mean Absolute Error is 0.52.}
 		\label{fig:featured-bad1}
 	\end{figure}
@@ -815,18 +827,36 @@ Other features
 
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% Simulation study -------------------------------------------------------------
 
-\begin{frame}
-	\begin{figure}[!htbp]
-		\centering
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item \alert{\bf Higher convergence rate}
+		\end{enumerate}
+	\end{minipage}
+\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
+	\begin{figure}
+	\centering
 		%\caption[Distribution of Converged and Non-converged Fits]{\label{fig:failed}Distribution of the average sufficient statistics per sample. Since samples can contain networks of sizes four and five, we have re-scaled the sufficient statistics counts by each network size's corresponding maximum value so these range from zero to one. Most of the cases in which methods failed to converge happened in scenarios where either all the graphs in the sample were fully connected or there was no transitive triad; exactly the cases that we excluded for the reminder of the analysis.}
-		\includegraphics[width=.5\linewidth]{failed.pdf}
+		\includegraphics[width=.9\linewidth]{failed.pdf}
 	\end{figure}
+	\end{minipage}
 \end{frame}
 
-\begin{frame}
-	\begin{table}[!htbp]
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item \alert{\bf Smaller Bias}
+		\end{enumerate}
+	\end{minipage}
+\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
+		\begin{table}
 		\centering
 		\begin{tabular}{rccc}
 			\toprule
@@ -836,66 +866,87 @@ Other features
 			ttriads & [-0.05, -0.03] & [-0.22, -0.16] & [-0.15, 0.48] \\ 
 			\bottomrule
 		\end{tabular}
-%		\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
+		\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
 	\end{table}
+	\end{minipage}
 \end{frame}
 
-\begin{frame}
-	\begin{figure}[!htbp]
-		\centering
-%		\caption[Empirical Power by Sample and Effect Size]{\label{fig:power}Empirical power by dataset size and effect size (the later considering only magnitude), for ERGM and \ergmito{} estimation methods. Power increases for both MC-MLE (ERGM) and MLE (\ergmito{}) with increases in the size of the dataset and effect size. There are indistinguishable differences in power between the two estimation methods.}
-		\includegraphics[width=.7\linewidth]{power.pdf}
-	\end{figure}
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item Smaller Bias
+			\item \alert{\bf Higher power}
+		\end{enumerate}
+	\end{minipage}
+\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
+		\begin{figure}
+			\centering
+			%		\caption[Empirical Power by Sample and Effect Size]{\label{fig:power}Empirical power by dataset size and effect size (the later considering only magnitude), for ERGM and \ergmito{} estimation methods. Power increases for both MC-MLE (ERGM) and MLE (\ergmito{}) with increases in the size of the dataset and effect size. There are indistinguishable differences in power between the two estimation methods.}
+			\includegraphics[width=.95\linewidth]{power.pdf}
+		\end{figure}
+	\end{minipage}
 \end{frame}
 
-\begin{frame}
-	\begin{table}[!htbp]
-		\centering\small
-		\begin{tabular}{*{2}{m{.1\linewidth}<\centering}*{5}{c}}
-			\toprule & & \multicolumn{3}{c}{P(Type I error)} & \multicolumn{2}{c}{$\chi^2$ (vs MLE)}\\ \cmidrule(r){3-5} \cmidrule(r){6-7}
-			Sample size & N. Sims. & MLE & MC-MLE & RM & MC-MLE & RM \\ 
-			\midrule
-			5 & 4,325 & 0.066 & 0.086 & 0.086 & 11.36 *** & 11.36 *** \\ 
-			10 & 4,677 & 0.063 & 0.078 & 0.073 & 8.44 *** & 3.73 * \\ 
-			15 & 4,818 & 0.060 & 0.072 & 0.063 & 5.50 ** & 0.41  \\ 
-			20 & 4,889 & 0.054 & 0.065 & 0.061 & 5.30 ** & 2.05  \\ 
-			30 & 4,946 & 0.053 & 0.059 & 0.055 & 1.60  & 0.07  \\ 
-			50 & 4,987 & 0.053 & 0.055 & 0.047 & 0.16  & 1.67  \\ 
-			100 & 4,999 & 0.054 & 0.054 & 0.050 & 0.00  & 0.81  \\ 
-			\bottomrule
-		\end{tabular}
-%		\caption[Empirical Type I Error Rates]{\label{tab:typeI}Empirical Type I error rates. The $\chi^2$ statistic is from a 2-sample test for equality of proportions, and the significance levels are given by *** $p < 0.01$, ** $p < 0.05$, and * $p < 0.10$.} 
-	\end{table}
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item Smaller Bias
+			\item Higher power
+			\item \alert{\bf Smaller Type I Error}
+		\end{enumerate}
+	\end{minipage}
+\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
+		\begin{table}
+			\centering\small
+			\begin{tabular}{*{2}{m{.1\linewidth}<\centering}*{5}{c}}
+				\toprule & & \multicolumn{3}{c}{P(Type I error)} & \multicolumn{2}{c}{$\chi^2$ (vs MLE)}\\ \cmidrule(r){3-5} \cmidrule(r){6-7}
+				Sample size & N. Sims. & MLE & MC-MLE & RM & MC-MLE & RM \\ 
+				\midrule
+				5 & 4,325 & 0.066 & 0.086 & 0.086 & 11.36 *** & 11.36 *** \\ 
+				10 & 4,677 & 0.063 & 0.078 & 0.073 & 8.44 *** & 3.73 * \\ 
+				15 & 4,818 & 0.060 & 0.072 & 0.063 & 5.50 ** & 0.41  \\ 
+				20 & 4,889 & 0.054 & 0.065 & 0.061 & 5.30 ** & 2.05  \\ 
+				30 & 4,946 & 0.053 & 0.059 & 0.055 & 1.60  & 0.07  \\ 
+				50 & 4,987 & 0.053 & 0.055 & 0.047 & 0.16  & 1.67  \\ 
+				100 & 4,999 & 0.054 & 0.054 & 0.050 & 0.00  & 0.81  \\ 
+				\bottomrule
+			\end{tabular}
+			%		\caption[Empirical Type I Error Rates]{\label{tab:typeI}Empirical Type I error rates. The $\chi^2$ statistic is from a 2-sample test for equality of proportions, and the significance levels are given by *** $p < 0.01$, ** $p < 0.05$, and * $p < 0.10$.} 
+		\end{table}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item Smaller Bias
+			\item Higher power
+			\item Smaller Type I Error
+			\item \alert{\bf Elapsed time}
+		\end{enumerate}
+	\end{minipage}
+\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
+		\begin{figure}
+			\centering
+			%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
+			\small
+			\def\svgwidth{.95\linewidth}
+			\input{fig/time.pdf_tex}
+		\end{figure}
+	\end{minipage}
 \end{frame}
 
 % ------------------------------------------------------------------------------
-\begin{frame}[label=ergmitoexperiment]
-\frametitle{Paper 2 Simulation Studies: Elapsed time}
 
-\begin{figure}
-\centering
-%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
-\small
-  \def\svgwidth{.65\linewidth}
-\input{fig/time.pdf_tex}
-\end{figure}
-
-\vfill\hfill\hyperlink{ergmito-bias}{\beamergotobutton{more results}}
-
-\end{frame}
-
-\begin{frame}
-	\frametitle{Key takeaways from simulation study}
-	
-	Current implementation of the ERGM MLE for small networks (ERGMito):
-	
-	\begin{enumerate}
-		\item Is \textbf{at least} 10 times faster than MC-MLE.
-		\item Has significantly \textbf{smaller bias}.
-		\item Has better \textbf{convergence rate}.
-		\item Shows significantly \textbf{smaller type I error} rates (and slightly more powerful) than MC-MLE and RM.
-	\end{enumerate}
-\end{frame}
 
 
 \begin{frame}
