@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169, 9pt,handout]{beamer}
+\documentclass[aspectratio=169, 9pt]{beamer}
 
 % \transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
@@ -61,6 +61,7 @@ Complex Systems}}
 
 \newcommand{\hlc}[2]{{\only<#1>{\cellcolor{gray!50} #2}}}
 \newcommand{\nhlc}[2]{{\only<#1>{#2}}}
+\newcommand{\hlcAlt}[2]{\alt<#1>{\cellcolor{gray!50} #2}{#2}}
 
 \begin{document}
 
@@ -430,51 +431,51 @@ data from PantherDB with GO annotations and fit a large pooled model.
 
 
 % ------------------------------------------------------------------------------
-\begin{frame}[t]
-\frametitle{Prediction with real data}
-
-\begin{minipage}{.39\linewidth}
-\begin{table}[ht]
-\centering
-\scalebox{0.7}{
-\begin{tabular}{ll*{2}{m{0.3\linewidth}<\centering}}
-  \toprule
- & & \multicolumn{2}{c}{Prior} \\
- & & Uniform & Beta  \\ 
-  \midrule
-  \multicolumn{2}{l}{Mislab. prob.} \\
-  & $\psi_0$ & 0.23 & 0.25 \\ 
-  & $\psi_1$ & 0.01 & 0.01 \\ 
-  \multicolumn{2}{l}{\textcolor<4->{usccardinal}{\textbf<4->{Gain/Loss at dupl.}}} \\
-  & $\mu_{d0}$ & 0.97 & 0.96 \\ 
-  & $\mu_{d1}$ & 0.52 & 0.58 \\ 
-  \multicolumn{2}{l}{\textcolor<4->{usccardinal}{\textbf<4->{Gain/Loss at spec.}}} \\
-  & $\mu_{s0}$ & 0.05 & 0.06 \\ 
-  & $\mu_{s1}$ & 0.01 & 0.02 \\ 
-  \multicolumn{2}{l}{Root node} \\
-  & $\pi$ & 0.81 & 0.45  \\ 
-\midrule 
-\multicolumn{2}{l}{Leave-one-out AUC} \\
-  & Mean & 0.69 & 0.67 \\
-  & Median & 0.81 & 0.75 \\
-   \bottomrule
-\end{tabular}
-}
-\caption{Parameter estimates using different priors.} 
-\end{table}
+%\begin{frame}[t]
+%\frametitle{Prediction with real data}
 %
-\end{minipage}
-\begin{minipage}{.59\linewidth}
-\begin{itemize}[<+->]
-\item 141 pooled functions (trees) with 7,388 genes with 0/1 annotations.
-\item Parameter estimates are actually probabilities.
-\item Data driven results (uninformative prior).
-\item \textcolor{usccardinal}{Biologically meaningful results.}
-\item Took about 5 minutes each.
-\end{itemize}
-\end{minipage}
-
-\end{frame}
+%\begin{minipage}{.39\linewidth}
+%\begin{table}[ht]
+%\centering
+%\scalebox{0.7}{
+%\begin{tabular}{ll*{2}{m{0.3\linewidth}<\centering}}
+%  \toprule
+% & & \multicolumn{2}{c}{Prior} \\
+% & & Uniform & Beta  \\ 
+%  \midrule
+%  \multicolumn{2}{l}{Mislab. prob.} \\
+%  & $\psi_0$ & 0.23 & 0.25 \\ 
+%  & $\psi_1$ & 0.01 & 0.01 \\ 
+%  \multicolumn{2}{l}{\textcolor<4->{usccardinal}{\textbf<4->{Gain/Loss at dupl.}}} \\
+%  & $\mu_{d0}$ & 0.97 & 0.96 \\ 
+%  & $\mu_{d1}$ & 0.52 & 0.58 \\ 
+%  \multicolumn{2}{l}{\textcolor<4->{usccardinal}{\textbf<4->{Gain/Loss at spec.}}} \\
+%  & $\mu_{s0}$ & 0.05 & 0.06 \\ 
+%  & $\mu_{s1}$ & 0.01 & 0.02 \\ 
+%  \multicolumn{2}{l}{Root node} \\
+%  & $\pi$ & 0.81 & 0.45  \\ 
+%\midrule 
+%\multicolumn{2}{l}{Leave-one-out AUC} \\
+%  & Mean & 0.69 & 0.67 \\
+%  & Median & 0.81 & 0.75 \\
+%   \bottomrule
+%\end{tabular}
+%}
+%\caption{Parameter estimates using different priors.} 
+%\end{table}
+%%
+%\end{minipage}
+%\begin{minipage}{.59\linewidth}
+%\begin{itemize}[<+->]
+%\item 141 pooled functions (trees) with 7,388 genes with 0/1 annotations.
+%\item Parameter estimates are actually probabilities.
+%\item Data driven results (uninformative prior).
+%\item \textcolor{usccardinal}{Biologically meaningful results.}
+%\item Took about 5 minutes each.
+%\end{itemize}
+%\end{minipage}
+%
+%\end{frame}
 
 \note[enumerate]{
 \item The data used here corresponds to a subset of the trees.
@@ -483,63 +484,95 @@ of each type, and (2) must not have large sets of siblings (this due to
 numerical underflow issues, WIP)
 }
 
-\begin{frame}
+\begin{frame}[t]
+	\frametitle{Overview of Prediction Results}
 	
-	% latex table generated in R 3.6.3 by xtable 1.8-4 package
-	% Mon Jun  8 00:12:30 2020
-	
-	\begin{table}[!htbp]
+	\begin{minipage}[t]{.55\linewidth}
+		\vspace{-.5cm}
+		\begin{table}
 		\centering
-		\scalebox{.7}{
-		\begin{tabular}{l*{4}{m{.14\linewidth}<\centering}}
-			\toprule
-			& & \multicolumn{3}{c}{Type of Annotation} \\
-			\cmidrule(r){3-5} & Pooled & Molecular Function & Biological Process & Cellular Component \\ 
-			\midrule
-			\multicolumn{3}{l}{\hspace{-10pt}Mislabeling} \\
-			$\psi_{01}$ & 0.23 & 0.18 & 0.09 & 0.66 \\ 
-			$\psi_{10}$ & 0.01 & 0.01 & 0.01 & 0.33 \\ 
-			\multicolumn{3}{l}{\hspace{-10pt}Duplication Events} \\
-			$\mu_{d01}$ & 0.97 & 0.97 & 0.10 & 0.55 \\ 
-			$\mu_{d10}$ & 0.52 & 0.51 & 0.03 & 0.56 \\ 
-			\multicolumn{3}{l}{\hspace{-10pt}Speciation Events} \\
-			$\mu_{s01}$ & 0.05 & 0.05 & 0.05 & 0.37 \\ 
-			$\mu_{s10}$ & 0.01 & 0.01 & 0.02 & 0.37 \\ 
-			\multicolumn{3}{l}{\hspace{-10pt}Root node} \\
-			$\pi$ & 0.79 & 0.71 & 0.88 & 0.52 \\ \midrule
-			Trees & 141 & 74 & 45 & 22 \\ 
-			\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the by-aspect model} \\
-			AUC & - & 0.77 & 0.83 & 0.53 \\ 
-			MAE & - & 0.34 & 0.26 & 0.50 \\ 
-			\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the pooled-data model} \\
-			AUC & - & 0.77 & 0.75 & 0.75 \\ 
-			MAE & - & 0.35 & 0.34 & 0.37 \\ 
-			\bottomrule
+		\scalebox{.64}{
+%			\begin{tabular}{l*{4}{m{.22\linewidth}<\centering}}
+			\begin{tabular}{%
+					m{.24\linewidth}<\raggedright %
+					>{\color<1>{usccardinal}}m{.24\linewidth}<\centering%
+					>{\color<2>{usccardinal}}m{.24\linewidth}<\centering%
+					>{\color<3>{usccardinal}}m{.24\linewidth}<\centering%
+					>{\color<4>{usccardinal}}m{.24\linewidth}<\centering}
+				\toprule
+				& & \multicolumn{3}{c}{Type of Annotation} \\
+				\cmidrule(r){3-5} %
+					\phantom{\LARGE Cellular Component}& %
+					\alt<1>{\LARGE Pooled}{Pooled} & %
+					\alt<2>{\LARGE Molecular Function}{Molecular Function} & %
+					\alt<3>{\LARGE Biological Process}{Biological Process} & %
+					\alt<4>{\LARGE Cellular Comp.}{Cellular Component} \\ 
+				\midrule
+				\multicolumn{3}{l}{\hspace{-10pt}Mislabeling} \\
+				$\psi_{01}$ & 0.23 & 0.18 & 0.09 & 0.66 \\ 
+				$\psi_{10}$ & 0.01 & 0.01 & 0.01 & 0.33 \\ 
+				\multicolumn{3}{l}{\hspace{-10pt}Duplication Events} \\
+				$\mu_{d01}$ & 0.97 & 0.97 & \hlcAlt{3}{0.10} & 0.55 \\ 
+				$\mu_{d10}$ & 0.52 & 0.51 & \hlcAlt{3}{0.03} & 0.56 \\ 
+				\multicolumn{3}{l}{\hspace{-10pt}Speciation Events} \\
+				$\mu_{s01}$ & 0.05 & 0.05 & 0.05 & 0.37 \\ 
+				$\mu_{s10}$ & 0.01 & 0.01 & 0.02 & 0.37 \\ 
+				\multicolumn{3}{l}{\hspace{-10pt}Root node} \\
+				$\pi$ & 0.79 & 0.71 & 0.88 & 0.52 \\ \midrule
+				Trees & 141 & 74 & 45 & 22 \\ 
+				\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the by-aspect model} \\
+				AUC & - & 0.77 & \hlcAlt{3}{0.83} & 0.53 \\ 
+				MAE & - & 0.34 & \hlcAlt{3}{0.26} & 0.50 \\ 
+				\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the pooled-data model} \\
+				AUC & - & 0.77 & 0.75 & 0.75 \\ 
+				MAE & - & 0.35 & 0.34 & 0.37 \\ 
+				\bottomrule
 		\end{tabular}}
 		%\caption[Parameter estimates comparing pooled-data vs by-type]{MCMC estimates for experimentally annotated trees. The first column shows the estimates under the pooled-data model in \ref{tab:pooled-experimentally-annotated}, while the following three columns report the estimates obtained when fitting the model using a pooled-data approach, but doing so by type of annotation. Readers should be aware that the estimation process of the fourth column, \textit{cellular component}, did not fully converge, likely due to sparsity of annotations within that category.}
 		\label{tab:by-aspect-estimates}
 	\end{table}
+	\end{minipage}
+\hfill
+\begin{minipage}[t]{.44\linewidth}
+	Previously, joint estimates out-performed one-at-a-time
+	\begin{itemize}
+		\item \textbf{Molecular Function} No change.
+		\item \textbf{Biological Process} Significantly better.
+		\item \textbf{Cellular Component} does not converge.
+	\end{itemize}
+\end{minipage}
+	
+
 
 \end{frame}
 
+\section{abc}
 
 \begin{frame}[t]
 	\frametitle{Example 1: Good quality prediction}
 	
-The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+\begin{minipage}[m]{.3\linewidth}
+%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+	\textbf{MAE:} 0.34 \\
+	\textbf{AUC:} 0.91 \\
+	\textbf{Type:} Molecular Function\\
+	\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
+	\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (\href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
+\end{minipage}
+\begin{minipage}[m]{.65\linewidth}
+	\def\tmpwdth{.9\linewidth}
+	\mode<beamer>{
+		\centering
+		\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
+	}
+	
+	\mode<handout>{
+		\centering
+		\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
+	}
+	
+\end{minipage}
 
-\mode<beamer>{
-	\centering
-	\onslide<1>{\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}
-	\onslide<2>{\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}
-	\onslide<3>{\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
-}
-
-\mode<handout>{
-	\begin{figure}
-		\centering\includegraphics[width=.55\linewidth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
-	\end{figure}
-}
 
 \end{frame}
 
