@@ -9,7 +9,7 @@
 \hypersetup{colorlinks=false, allcolors=purple}
 \usepackage{booktabs}
 \linespread{1.3}
-\usepackage{tabularx}
+\usepackage{tabularx,multirow}
 \usepackage{makecell} % For makecell within tables
 \usepackage{geometry}
 \usepackage{algorithm2e}
@@ -20,6 +20,7 @@
 \addbibresource{bibliography-aphylo.bib}
 \addbibresource{bibliography-ergmito.bib}
 \addbibresource{bibliography-extra.bib}
+\addbibresource{bibliography.bib}
 % \renewcommand{\bibsection}{\subsubsection*{\bibname } }
 
 
@@ -323,25 +324,39 @@ cluster with the R package slurmR (described in the document).
 data from PantherDB with GO annotations and fit a large pooled model.
 }
 
-% ------------------------------------------------------------------------------
-\begin{frame}[label=aphylopkg]
-\frametitle{The \aphylopkg{} R package}
 
-\begin{itemize}[<+->]
-\item Simulation and visualization of annotated phylogenetic trees.
-\item Pruning algorithm implemented in C++ using the \texttt{pruner} template library (by-product).
-\item Uses meta-programming: users can specify different formulas, including pooled models \hyperlink{aphylo-pooled}{\beamergotobutton{more}}.
-\item The estimation is done using either Maximum Likelihood, Maximum A Posteriory, or MCMC.
-\item The MCMC estimation is done via the \texttt{fmcmc} R package using adaptive MCMC
-(also implemented as part of this project):
-\begin{itemize}
-\item Automatic stop via convergence check.
-\item Out-of-the-box parallel chains using parallel computing.
-\item User-defined transition kernel (in our case, Adaptive Kernel).
-\end{itemize}
-\end{itemize}
+\begin{frame}[t]
+	\frametitle{Phylogenetics Modeling: Extension 1}
 
-%\vfill\hfill \hyperlink{aphylographicalview}{\beamerreturnbutton{go back}}
+\begin{minipage}[m]{.7\linewidth}
+
+Ways to pool the data
+
+\begin{table}
+	\footnotesize
+	\centering
+	\begin{tabular}{lm{.15\linewidth}*{3}{m{.15\linewidth}<\centering}}\toprule
+		& & \multicolumn{3}{c}{Type of Prior} \\ \cmidrule(r){3-5}
+		& & Fixed to Beliefs & Fixed by Data & Free \\ \midrule
+		\multirow{3}{*}[-.25cm]{\rotatebox{90}{Model Parameters}} %
+		& Shared across~trees             & Na\"ive (a) & - & - \\ \cmidrule(r){2-5}
+		& Class \hphantom{.....} specific & Reasonable  & Empirical Bayes I & Hierarchical Bayes 1 \\ \cmidrule(r){2-5}
+		& Function \hphantom{..} specific & -           & Empirical Bayes II & Full Bayesian \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+\end{minipage}
+\begin{minipage}[m]{.28\linewidth}
+\begin{enumerate}
+	\item[(a)] Included in the paper.
+	\item 
+	\item[(b)] Ideal, but hard to make work (data issues)
+\end{enumerate}
+\end{minipage}
+
+
+
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -360,26 +375,26 @@ data from PantherDB with GO annotations and fit a large pooled model.
 	
 	
 	
-	Sample of annotations (first 10 in a single tree)
+	Sample of annotations (first 10 in a single tree, Phosphoserine Phosphatase [PTHR10000])
 	
 	\small
 	
 	\begin{table}[ht]
 		\centering
-		\begin{tabular}{rrlll}
+		\begin{tabular}{rrll}
 			\toprule
-			& branch\_length & type & ancestor & duplication \\ 
+			Internal id & Branch Length & type & ancestor \\ 
 			\midrule
-			AN0 &  & S & LUCA & FALSE \\ 
-			AN1 & 0.06 & S & Archaea-Eukaryota & FALSE \\ 
-			AN2 & 0.24 & S & Eukaryota & FALSE \\ 
-			AN3 & 0.44 & S & Unikonts & FALSE \\ 
-			AN4 & 0.42 & S & Opisthokonts & FALSE \\ 
-			AN6 & 0.68 & D &  & TRUE \\ 
-			AN9 & 0.79 & S & Amoebozoa & FALSE \\ 
-			AN10 & 0.18 & D &  & TRUE \\ 
-			AN15 & 0.57 & S & Dictyostelium & FALSE \\ 
-			AN18 & 0.52 & S & Alveolata-Stramenopiles & FALSE \\ 
+			AN0 &  & S & LUCA \\ 
+			AN1 & 0.06 & S & Archaea-Eukaryota \\ 
+			AN2 & 0.24 & S & Eukaryota \\ 
+			AN3 & 0.44 & S & Unikonts \\ 
+			AN4 & 0.42 & S & Opisthokonts \\ 
+			AN6 & 0.68 & D &  \\ 
+			AN9 & 0.79 & S & Amoebozoa \\ 
+			AN10 & 0.18 & D &  \\ 
+			AN15 & 0.57 & S & Dictyostelium \\ 
+			AN18 & 0.52 & S & Alveolata-Stramenopiles \\ 
 			\bottomrule
 		\end{tabular}
 	\end{table}
@@ -521,11 +536,11 @@ numerical underflow issues, WIP)
 				$\pi$ & 0.79 & 0.71 & 0.88 & 0.52 \\ \midrule
 				Trees & 141 & 74 & 45 & 22 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the by-aspect model} \\
-				AUC & - & 0.77 & \hlcAlt{3}{0.83} & 0.53 \\ 
-				MAE & - & 0.34 & \hlcAlt{3}{0.26} & 0.50 \\ 
+				AUC & - & \hlcAlt{2}{0.77} & \hlcAlt{3}{0.83} & 0.53 \\ 
+				MAE & - & \hlcAlt{2}{0.34} & \hlcAlt{3}{0.26} & 0.50 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the pooled-data model} \\
-				AUC & - & 0.77 & 0.75 & 0.75 \\ 
-				MAE & - & 0.35 & 0.34 & 0.37 \\ 
+				AUC & - & \hlcAlt{2}{0.77} & 0.75 & 0.75 \\ 
+				MAE & - & \hlcAlt{2}{0.35} & 0.34 & 0.37 \\ 
 				\bottomrule
 		\end{tabular}}
 		%\caption[Parameter estimates comparing pooled-data vs by-type]{MCMC estimates for experimentally annotated trees. The first column shows the estimates under the pooled-data model in \ref{tab:pooled-experimentally-annotated}, while the following three columns report the estimates obtained when fitting the model using a pooled-data approach, but doing so by type of annotation. Readers should be aware that the estimation process of the fourth column, \textit{cellular component}, did not fully converge, likely due to sparsity of annotations within that category.}
@@ -534,8 +549,8 @@ numerical underflow issues, WIP)
 	\end{minipage}
 \hfill
 \begin{minipage}[t]{.44\linewidth}
-	Previously, joint estimates out-performed one-at-a-time
-	\begin{itemize}
+	Previously, joint estimates out-performed one-at-a-time\pause
+	\begin{itemize}[<+->]
 		\item \textbf{Molecular Function} No change.
 		\item \textbf{Biological Process} Significantly better.
 		\item \textbf{Cellular Component} does not converge.
@@ -879,7 +894,7 @@ Other features
 	\end{minipage}
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}[t, label=ergmitoexperiment]
 	\frametitle{Simulation Study}
 
 	\begin{minipage}[t]{.3\linewidth}
@@ -899,8 +914,10 @@ Other features
 			ttriads & [-0.05, -0.03] & [-0.22, -0.16] & [-0.15, 0.48] \\ 
 			\bottomrule
 		\end{tabular}
-		\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
+%		\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
 	\end{table}
+
+\hfill\hyperlink{ergmito-bias}{\beamergotobutton{alt take}}
 	\end{minipage}
 \end{frame}
 
@@ -1013,15 +1030,16 @@ Other features
 		\scalebox{.65}{
 			\begin{tabular}{l c c c c c c }
 				\toprule
-				& (1) & (2) & (3) & (4) & (5) & (4b) \\
+				& (1) & (2) & (3) & \hlcAlt{4}{(4)} & (5) & \hlcAlt{4}{(4b)} \\
 				\midrule
-				edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
+				\hlcAlt{2}{edges}                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
 				& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
-				ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
+				\hlcAlt{2}{ttriads}                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
 				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
-				Homophily (gender)                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+%				\only<3>{\rowcolor{gray!50}} %
+\hlcAlt{3}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
 				& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
-				$\text{edges} \times \isone{n = 5}$       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
+				\hlcAlt{2}{$\text{edges} \times \isone{n = 5}$}       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
 				& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
 				$(\text{Homophily})^{1/2}$                &               &               & $0.54$        &               &               &               \\
 				&               &               & $(1.32)$      &               &               &               \\
@@ -1036,7 +1054,7 @@ Other features
 				BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
 				Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
 				Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
-				N replicates                              &               &               &               &               &               & 1000          \\ \bottomrule
+				N replicates                              &               &               &               &               &               & \hlcAlt{4}{1000}          \\ \bottomrule
 				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
 				\end{tabular}}
 			\label{tab:ci-ergm-full}
@@ -1044,10 +1062,11 @@ Other features
 \end{minipage}
 \hfill
 \begin{minipage}[c]{.28\linewidth}
-	\begin{enumerate}
-	\item Structural terms \textit{edges}, \textit{ttriads}, and \textit{edges FE} significant across.
-	\item No support for gender homophily, but evidence of females sending more ties.
-	\item The bootstrap stage took roughly 0.08 seconds per iteration (support already computed).
+	\pause
+	\begin{enumerate}[<+->]
+	\item \alert<2>{Structural terms are significant across models.}
+	\item \alert<3>{No support for gender homophily, but evidence of females sending more ties.}
+	\item \alert<4>{The bootstrap stage took roughly 0.08 seconds per iteration (support already computed).}
 	\end{enumerate}
 \end{minipage}
 	
@@ -1055,6 +1074,7 @@ Other features
 \end{frame}
 
 \begin{frame}
+	\frametitle{Small teams: Goodness-of-fit}
 	\begin{figure}[!p]
 		\centering
 		\footnotesize
@@ -1447,7 +1467,7 @@ We performed a simulation study with the following features:
 \includegraphics[width=.6\linewidth]{bias-02-various-sizes-4-5-ttriad.pdf}
 \end{figure}
 
-\vfill\hfill \hyperlink{ergmitoexperiment}{\beamerreturnbutton{go back}}
+%\vfill\hfill \hyperlink{ergmitoexperiment}{\beamerreturnbutton{go back}}
 
 \end{frame}
 
