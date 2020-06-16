@@ -2,8 +2,6 @@
 
 % \transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
-%\mode<handout>
-
 % Some important packages
 \usepackage{epstopdf}
 \hypersetup{colorlinks=false, allcolors=purple}
@@ -339,7 +337,7 @@ Ways to pool the data
 		& & \multicolumn{3}{c}{Type of Prior} \\ \cmidrule(r){3-5}
 		& & Fixed to Beliefs & Fixed by Data & Free \\ \midrule
 		\multirow{3}{*}[-.25cm]{\rotatebox{90}{Model Parameters}} %
-		& Shared across~trees             & Na\"ive (a) & - & - \\ \cmidrule(r){2-5}
+		& Shared across~trees             & Na\"ive (a) & - 	& - \\ \cmidrule(r){2-5}
 		& Class \hphantom{.....} specific & Reasonable  & Empirical Bayes I & Hierarchical Bayes 1 \\ \cmidrule(r){2-5}
 		& Function \hphantom{..} specific & -           & Empirical Bayes II & Full Bayesian \\
 		\bottomrule
@@ -567,12 +565,13 @@ numerical underflow issues, WIP)
 	\frametitle{Example 1: Good quality prediction}
 	
 \begin{minipage}[m]{.3\linewidth}
+	\small
 %	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
 	\textbf{MAE:} 0.34 \\
 	\textbf{AUC:} 0.91 \\
 	\textbf{Type:} Molecular Function\\
 	\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
-	\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (\href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
+	\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
 \end{minipage}
 \begin{minipage}[m]{.65\linewidth}
 	\def\tmpwdth{.9\linewidth}
@@ -587,19 +586,36 @@ numerical underflow issues, WIP)
 	}
 	
 \end{minipage}
-
-
 \end{frame}
 
-\begin{frame}
-	\frametitle{Example 2: Poor quality prediction}
+
+\begin{frame}[t]
+	\frametitle{Example 2: Bad quality prediction}
 	
-	\begin{figure}
-		\centering
-		\includegraphics[width=.6\linewidth]{example-trees-bad1-loo-annotated.pdf}
-%		\caption[Example of Poor Predictions]{\textit{Low accuracy predictions}. The first set of annotations, first column, shows the experimental annotations of the term GO:0004571 for PTHR45679. The second column shows the 95\% C.I. of the predicted annotations using leave-one-out. Bars closer to the left are colored red to indicate that lack of function is suggested,  while bars closer to  the right are colored blue to indicate function is suggested. Depth of color corresponds to strength of inference.  The AUC for this analysis is 0.33 and the Mean Absolute Error is 0.52.}
-		\label{fig:featured-bad1}
-	\end{figure}
+	\begin{minipage}[m]{.3\linewidth}
+		\small
+		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+		\textbf{MAE:} 0.52 \\
+		\textbf{AUC:} 0.33 \\
+		\textbf{Type:} Molecular Function\\
+		\textbf{Name:} mannosyl-oligosaccharide 1,2-alpha-mannosidase activity\\
+		\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0004571}{\alert{GO:0004571}} involved in synthesis of glycoproteins (\href{https://en.wikipedia.org/wiki/Mannosyl-oligosaccharide_1,2-alpha-mannosidase}{\alert{wiki}} and \href{https://en.wikipedia.org/wiki/Glycoprotein}{\alert{examples}}).
+	\end{minipage}
+	\begin{minipage}[m]{.65\linewidth}
+		\def\tmpwdth{.9\linewidth}
+		\mode<beamer>{
+			\centering
+			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-1.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}}
+		}
+		
+		\mode<handout>{
+			\centering
+			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}
+		}
+		
+	\end{minipage}
+	
+	
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -660,7 +676,7 @@ numerical underflow issues, WIP)
 	}
 	
 	\pause
-	In SIFTER, for modelling 3 functions (with offsprings conditionally independent), we need $2^{2\times 3} = 64$ parameters.
+	Modeling the full Markov transition matrix would take $2^3 \times 2^6 = 512$ parameters.
 	
 \end{frame}
 
@@ -692,6 +708,92 @@ of size 300, we take about 5 minutes.
 \end{frame}
 
 
+% ------------------------------------------------------------------------------
+\section{Chapter 3: Discrete Exponential Family Models}
+% \frame{\frametitle{Contents}\tableofcontents}
+
+\begin{frame}[t]
+	\usebeamertemplate{section intro}{}{}
+	\textcolor{uscgold}{
+		\Large {\bf Discrete Exponential Family Models} \vskip0.25em
+%		\large \textit{Joint with}: Andrew Slaughter and Kayla de la Haye
+	}
+\end{frame}
+
+\begin{frame}[t]
+
+\frametitle{Canonical Equation}
+
+\begin{figure}
+	\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
+\end{figure}
+
+%\begin{center}
+%\begin{equation*}
+%\Prcond{\Graph = \graph}{X = x} = \frac{%
+%\exp{\t{\beta}\s{\graph, x}} %
+%}{%
+%\sum_{\graph'\in\GRAPH} \exp{\t{\beta}\s{\graph', x}} %
+%},\quad \forall \graph\in\GRAPH
+%\end{equation*}
+%\end{center}
+
+\vfill
+
+\begin{minipage}[m]{.45\linewidth}
+
+\begin{itemize}
+	\item<2-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
+	\item<3-> Focused on vector of sufficient statistics $\s{\graph,x}$ (not the edges themselves) \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[m]{.45\linewidth}
+	\begin{figure}[!htbp]
+		\centering
+		\includegraphics<4->[width=.8\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}
+%		\caption[Simple graphs: A ring and a Kite]{Although these two networks may look very different, \textit{a ring} and \textit{a kite}, under the Bernoulli, also known as Erd\H{o}s-R\'enyi, random graph model, both are equally likely, as the only sufficient statistic for this model is the number of observed ties, which is five in both cases.}
+		\label{fig:ring-and-kite}
+	\end{figure}
+\end{minipage}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Asymptotic Behavior of ERGMs}
+
+\begin{itemize}
+\item In the case that $s_l = \s{\graph, x}$ is on the boundary: $s_l \to \pm\infty$
+\item Since the support space of $\s{\graph, x}\in\SUFF$ is bounded, e.g. \# edges $\in [0,n\times (n - 1)]$, we have: 
+
+\begin{equation*}
+\lim_{\theta_l\to\infty}\loglik{\theta}, \quad %
+\lim_{\theta_l\to\infty}\nabla\loglik{\theta}, \quad %
+\lim_{\theta_l\to\infty}\mathbf{H}\left(\theta\right)
+\end{equation*}
+log-likelihood, its gradient, and hessian are finite.
+\item The direct implication is that, while $\s{\graph, x}$ is on the boundary, the MLE for the other statistics exists.\footnote{\cite{Handcock2003} briefly mentions this}
+\item All equations ultimately involve realizations of $\s{\graph', x}$ that equal $s_l$, relevant in: Simulations, Bootstrapping, etc.
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Conditional Distribution}
+
+\begin{equation*}
+\Prcond{\sufstats{\Graph}_k = s_k}{\sufstats{\Graph}_l = s_l, \theta} = %
+\frac{%
+	\exp{\transpose{\theta}_{-l}\sufstats{\graph}_{-l}}
+}{%
+	\sum_{\graph': \sufstats{\graph'}_l = \sufstats{\graph}_l}\exp{\transpose{\theta}_{-l}\sufstats{\graph'}_{-l}}
+}\tag{3.5}
+\end{equation*}
+
+
+\end{frame}
 
 % ------------------------------------------------------------------------------
 \section{Paper 2: Exponential Random Graph Models for Small Networks}
@@ -722,19 +824,6 @@ govern social networks
 \end{frame}
 
 % ------------------------------------------------------------------------------
-\begin{frame}[label=ergmeq]
-\frametitle{ERGMs (cont'd)}
-\begin{figure}
-\centering
-\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
-\end{figure}
-
-\uncover<2->{The normalizing constant has $2^{n(n-1)}$ terms!}
-
-% \vfill\hfill \hyperlink{ergmterms}{\beamergotobutton{more on terms}}
-\end{frame}
-
-% ------------------------------------------------------------------------------
 \begin{frame}[label=ergmterms]
 
 {\bf\color{suffstat} Sufficient statistics} have various forms
@@ -758,55 +847,6 @@ govern social networks
 % \vfill\hfill \hyperlink{ergmeq}{\beamerreturnbutton{go back}}
 \end{frame}
 
-% ------------------------------------------------------------------------------
-\begin{frame}[label=art]
-\frametitle{ERGMs: State of the Art}
-\pause
-Medium-large (dozens to a couple of thousand vertices) networks
-
-\begin{itemize}
-\item Markov Chain Monte Carlo (MCMC) based approaches like MC-MLE or Robbins-Monro Stochastic Approximation. \hyperlink{mcmle}{\beamergotobutton{details}}
-\item Maximum Pseudo Likelihood (MPLE)
-\end{itemize}\pause
-
-large-huge networks (up to millions of vertices)
-
-\begin{itemize}
-\item Parametric bootstrap
-\item Conditional joint estimation (like snowball sampling, a.k.a. divide and conquer)
-\item Equilibrium Expectation Algorithm (millions of vertices)
-\end{itemize}\pause
-
-All of these methods are approximations!
-
-\end{frame}
-
-% ------------------------------------------------------------------------------
-\begin{frame}[c]
-\frametitle{Do we care about small networks?}
-
-\begin{minipage}{.40\linewidth}
-We see small networks everywhere\pause
-
-\begin{itemize}[<+->]
-\item Families and friends
-\item Small teams
-\item Egocentric networks
-\item Online networks (sometimes)
-\item etc.
-\end{itemize}
-\end{minipage}
-\hfill
-\uncover<7->{
-\begin{minipage}{.55\linewidth}
-\centering\large
-Small networks come in samples
-\includegraphics[width=.85\linewidth]{plot-graph-4-1.pdf}
-% \includegraphics[width=.95\linewidth]{american-chopper-argument-ergmitos.png}
-\end{minipage}
-}
-\end{frame}
-
 % % ------------------------------------------------------------------------------
 % \begin{frame}
 % \frametitle{ERGMs for Small Networks}
@@ -820,60 +860,6 @@ Small networks come in samples
 % \end{itemize}
 % 
 % \end{frame}
-
-% ------------------------------------------------------------------------------
-\begin{frame}[label=ergmito]
-\frametitle{ERGMs for Small Networks}
-
-\uncover<3->{
-\begin{figure}
-\centering
-\includegraphics[width=.5\linewidth]{parts-of-ergm.pdf}
-\end{figure}
-}
-
-\begin{itemize}[<+->]
-
-\item In the case of small-enough networks, computation of the likelihood becomes
-computationally feasible.
-
-\item This allow us to directly compute {\bf\color{normconst} the normalizing constant}.\pause
-
-\item Using the exact likelihood opens a huge window of methodological-possibilities.
-
-\item We implemented this and more in the \ergmitopkg{} R package % \hyperlink{ergmitopkg}{\beamergotobutton{more}}
-\end{itemize}
-
-
-\end{frame}
-
-
-% ------------------------------------------------------------------------------
-\begin{frame}[label=ergmitopkg]
-\frametitle{The \ergmitopkg{}}
-
-In general
-
-\begin{itemize}
-\item Implements estimation of ERGMs using exact statistics for small networks.
-\item Meta-programming allows specifying likelihood (and gradient) functions for
-pooled models.% (\includegraphics[width=.05\linewidth]{plot-graph-4-1.pdf}).
-\item Includes tools for simulating and post-estimation checks.
-\item Getting ready for CRAN!
-\end{itemize}\pause
-
-Other features
-
-\begin{itemize}
-% \item Computes support of Pr using \texttt{ergm::ergm.allstats}
-\item Vectorized calculation of sufficient statistics.
-\item Scales up nicely (hundreds of small networks) saving space and computation (when possible).
-\item Highly tested (90\% coverage with more than one hundred tests).
-\end{itemize}
-
-% \vfill\hfill \hyperlink{ergmito}{\beamerreturnbutton{go back}}
-
-\end{frame}
 
 % Simulation study -------------------------------------------------------------
 

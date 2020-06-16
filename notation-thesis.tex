@@ -10,7 +10,18 @@
 % DELETED!
 \newcommand{\sufstats}[1]{s\left(#1\right)}
 \renewcommand{\exp}[1]{\mbox{exp}\left\{#1\right\}}
+\renewcommand{\log}[1]{\mbox{log}\left\{#1\right\}}
 \newcommand{\transpose}[1]{{#1}^\mathbf{t}}
+\renewcommand{\t}[1]{\transpose{#1}}
+
+\newcommand{\s}[1]{\sufstats{#1}}
+\newcommand{\SUFF}{\mathcal{S}}
+\newcommand{\Suff}{\mathbf{S}}
+\newcommand{\suff}{\mathbf{s}}
+
+\renewcommand{\beta}{\theta}
+\newcommand{\weight}{\mathbf{w}}
+\newcommand{\Weight}{\mathbf{W}}
 
 % Objects
 % DELETED!
@@ -39,10 +50,6 @@
 \definecolor{USCGold}{HTML}{FFCC00}
 \definecolor{USCGray}{HTML}{CCCCCC}
 
-% To use the function \sout
-\usepackage{ulem}
-\usepackage{tabularx, booktabs}
-
 % \bibliography{bibliography.bib}
 
 \def\ergmito{ERGM\textit{ito}}
@@ -58,6 +65,9 @@
 \renewcommand{\exp}[1]{\mbox{exp}\left\{#1\right\}}
 
 \newcommand{\Likelihood}[2]{\text{L}\left(#1 \left|\vphantom{#1}#2\right.\right)}
+
+\newcommand{\loglik}[1]{l\left(#1\right)}
+
 
 % Mathematical Annotation -------------------------------
 % Modify this so that it matches the P01 convention overall
