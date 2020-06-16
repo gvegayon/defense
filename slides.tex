@@ -10,6 +10,7 @@
 \usepackage{tabularx,multirow}
 \usepackage{makecell} % For makecell within tables
 \usepackage{geometry}
+\usepackage{fancybox}
 \usepackage{algorithm2e}
 \usepackage{amsmath, amssymb}
 \input{notation-thesis.tex}
@@ -58,9 +59,9 @@ Complex Systems}}
 \usepackage{pgfpages}
 % \setbeameroption{show notes on second screen}
 
-\newcommand{\hlc}[2]{{\only<#1>{\cellcolor{gray!50} #2}}}
+\newcommand{\hlc}[2]{{\only<#1>{\cellcolor{gray!50}#2}}}
 \newcommand{\nhlc}[2]{{\only<#1>{#2}}}
-\newcommand{\hlcAlt}[2]{\alt<#1>{\cellcolor{gray!50} #2}{#2}}
+\newcommand{\hlcAlt}[2]{\alt<#1>{\cellcolor{gray!50}#2}{#2}}
 
 \begin{document}
 
@@ -191,21 +192,7 @@ GWAS to treatment.)
 nowadays we build trees based on genetic distances between species.
 }
 
-% ------------------------------------------------------------------------------
-\begin{frame}[t]
-\frametitle{Phylogenetic Trees: The PANTHER classification system}
-\begin{minipage}{.4\linewidth}
-\pause\small
-\begin{itemize}[<+->]
-\item The PANTHER project (part of GO) provides information about evolutionary structure of 1.7 million
-genes
-\item These genes are grouped in 15,524 phylogenetic trees (families)
-\item A single family can host multiple species
-\end{itemize}
-\end{minipage}
-\hfill
 
-\end{frame}
 
 \note[enumerate]{
 \item Here we have an example of a (simulated) phylogenetic tree.
@@ -271,37 +258,32 @@ estimate of the annotation (yes/no).
 }
 
 % ------------------------------------------------------------------------------
-\begin{frame}[label=aphylographicalview]
+\begin{frame}[label=aphylographicalview,c]
 \frametitle{An evolutionary model of gene functions}
-
+\def\shadowsize{2pt}
 \definecolor{rootnode}{RGB}{0,159,211}
 \definecolor{innernode}{RGB}{90,159,89}
 \definecolor{leafnode}{RGB}{255,107,0}
 
-\begin{minipage}{.48\linewidth}
-\begin{itemize}
-	\item<2-> \textcolor{rootnode}{Initial (spontaneous) gain of function}.
-	\item<3-> \textcolor{innernode}{Loss/gain of offspring depends on: (a) the state of their parents ({\bf Markov process}), and (b) the type of node \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}
-	\item<4-> \textcolor{leafnode}{We control for human error.}
-\end{itemize}
-\end{minipage}
-%
-\begin{minipage}{.50\linewidth}
+\begin{minipage}[m]{.60\linewidth}
 \begin{figure}
 	\footnotesize
 	\centering
 	\def\svgwidth{.9\linewidth}
-	\input{fig/aphylo.pdf_tex}
+	\mode<beamer>{
+	\only<1>{\input{fig/phylo-model-0.pdf_tex}}\only<2>{\input{fig/phylo-model-1.pdf_tex}}\only<3>{\input{fig/phylo-model-2a.pdf_tex}}\only<4>{\input{fig/phylo-model-2b.pdf_tex}}\only<5>{\input{fig/phylo-model.pdf_tex}}
+	}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
 \end{figure}
 \end{minipage}
-
-\vspace{1.5cm}
-
-\uncover<5->{We implemented the model using Felsenstein's' pruning algorithm (linear complexity) in the
-R package \aphylopkg{}.} % \hyperlink{aphylopkg}{\beamergotobutton{more}}.}
-
-\vfill\hfill \hyperlink{other-models}{\beamergotobutton{other models}}
-\hyperlink{aphyloalgorithmicview}{\beamergotobutton{other view}}
+\hfill
+\begin{minipage}[m]{.38\linewidth}
+	\pause
+	\begin{itemize}
+		\item \textcolor{rootnode}{Spontaneous gain of function}.\pause
+		\item \textcolor{innernode}{Loss\pause{} and gain depend on: (a) state of the parent, and (b) the type of event (duplication or speciation)\hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}\pause
+		\item \textcolor{leafnode}{Incomplete data and possibly faulty observed data}
+	\end{itemize}
+\end{minipage}
 
 \end{frame}
 
@@ -322,7 +304,7 @@ cluster with the R package slurmR (described in the document).
 data from PantherDB with GO annotations and fit a large pooled model.
 }
 
-
+% ------------------------------------------------------------------------------
 \begin{frame}[t]
 	\frametitle{Phylogenetics Modeling: Extension 1}
 
@@ -357,6 +339,28 @@ Ways to pool the data
 
 \end{frame}
 
+% ------------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Phylogenetics Modeling: Extension II}
+
+\mode<beamer>{
+\begin{figure}
+	\includegraphics<1>[width=.6\linewidth]{phylo-model-overview-1.pdf}\includegraphics<2>[width=.6\linewidth]{phylo-model-overview-2.pdf}\includegraphics<3>[width=.6\linewidth]{phylo-model-overview.pdf}
+\end{figure}
+}
+
+\mode<handout>{
+\begin{figure}
+	\includegraphics[width=.6\linewidth]{phylo-model-overview.pdf}
+\end{figure}
+}
+
+
+\end{frame}
+
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 \section{Data}
 
