@@ -214,20 +214,6 @@ to happen at this stage.
 \end{itemize}
 }
 
-%
-\frame{
-\centering
-\Large
-We can use \vspace{.5cm}
-
-\textcolor{usccardinal}{ {\Huge evolutionary trees}} \vspace{.5cm}
-
-to inform a model for predicting \vspace{.5cm}
-
- \textcolor{usccardinal}{{ \Huge genetic annotations!}}
-}
-
-
 
 \note[enumerate]{
 
@@ -271,7 +257,7 @@ estimate of the annotation (yes/no).
 	\centering
 	\def\svgwidth{.9\linewidth}
 	\mode<beamer>{
-	\only<1>{\input{fig/phylo-model-0.pdf_tex}}\only<2>{\input{fig/phylo-model-1.pdf_tex}}\only<3>{\input{fig/phylo-model-2a.pdf_tex}}\only<4>{\input{fig/phylo-model-2b.pdf_tex}}\only<5>{\input{fig/phylo-model.pdf_tex}}
+	\only<1>{\input{fig/phylo-model-0.pdf_tex}}\only<2>{\input{fig/phylo-model-1.pdf_tex}}\only<3>{\input{fig/phylo-model-2a.pdf_tex}}\only<4-5>{\input{fig/phylo-model-2b.pdf_tex}}\only<6>{\input{fig/phylo-model.pdf_tex}}
 	}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
 \end{figure}
 \end{minipage}
@@ -280,7 +266,7 @@ estimate of the annotation (yes/no).
 	\pause
 	\begin{itemize}
 		\item \textcolor{rootnode}{Spontaneous gain of function}.\pause
-		\item \textcolor{innernode}{Loss\pause{} and gain depend on: (a) state of the parent, and (b) the type of event (duplication or speciation)\hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}\pause
+		\item \textcolor{innernode}{Loss\pause{} and gain \pause depend on: (a) state of the parent, and (b) the type of event (duplication or speciation)\hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}\pause
 		\item \textcolor{leafnode}{Incomplete data and possibly faulty observed data}
 	\end{itemize}
 \end{minipage}
@@ -447,52 +433,7 @@ Ways to pool the data
 \end{frame}
 
 
-% ------------------------------------------------------------------------------
-%\begin{frame}[t]
-%\frametitle{Prediction with real data}
-%
-%\begin{minipage}{.39\linewidth}
-%\begin{table}[ht]
-%\centering
-%\scalebox{0.7}{
-%\begin{tabular}{ll*{2}{m{0.3\linewidth}<\centering}}
-%  \toprule
-% & & \multicolumn{2}{c}{Prior} \\
-% & & Uniform & Beta  \\ 
-%  \midrule
-%  \multicolumn{2}{l}{Mislab. prob.} \\
-%  & $\psi_0$ & 0.23 & 0.25 \\ 
-%  & $\psi_1$ & 0.01 & 0.01 \\ 
-%  \multicolumn{2}{l}{\textcolor<4->{usccardinal}{\textbf<4->{Gain/Loss at dupl.}}} \\
-%  & $\mu_{d0}$ & 0.97 & 0.96 \\ 
-%  & $\mu_{d1}$ & 0.52 & 0.58 \\ 
-%  \multicolumn{2}{l}{\textcolor<4->{usccardinal}{\textbf<4->{Gain/Loss at spec.}}} \\
-%  & $\mu_{s0}$ & 0.05 & 0.06 \\ 
-%  & $\mu_{s1}$ & 0.01 & 0.02 \\ 
-%  \multicolumn{2}{l}{Root node} \\
-%  & $\pi$ & 0.81 & 0.45  \\ 
-%\midrule 
-%\multicolumn{2}{l}{Leave-one-out AUC} \\
-%  & Mean & 0.69 & 0.67 \\
-%  & Median & 0.81 & 0.75 \\
-%   \bottomrule
-%\end{tabular}
-%}
-%\caption{Parameter estimates using different priors.} 
-%\end{table}
-%%
-%\end{minipage}
-%\begin{minipage}{.59\linewidth}
-%\begin{itemize}[<+->]
-%\item 141 pooled functions (trees) with 7,388 genes with 0/1 annotations.
-%\item Parameter estimates are actually probabilities.
-%\item Data driven results (uninformative prior).
-%\item \textcolor{usccardinal}{Biologically meaningful results.}
-%\item Took about 5 minutes each.
-%\end{itemize}
-%\end{minipage}
-%
-%\end{frame}
+
 
 \note[enumerate]{
 \item The data used here corresponds to a subset of the trees.
@@ -581,7 +522,7 @@ numerical underflow issues, WIP)
 	\def\tmpwdth{.9\linewidth}
 	\mode<beamer>{
 		\centering
-		\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
+		\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
 	}
 	
 	\mode<handout>{
@@ -609,7 +550,7 @@ numerical underflow issues, WIP)
 		\def\tmpwdth{.9\linewidth}
 		\mode<beamer>{
 			\centering
-			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-1.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}}
+			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}}
 		}
 		
 		\mode<handout>{
@@ -618,6 +559,25 @@ numerical underflow issues, WIP)
 		}
 		
 	\end{minipage}
+	
+	
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Phylogenetics Modeling: Extension II}
+	
+	\mode<beamer>{
+		\begin{figure}
+			\includegraphics<1>[width=.6\linewidth]{phylo-model-overview-1.pdf}\includegraphics<2>[width=.6\linewidth]{phylo-model-overview-2.pdf}\includegraphics<3>[width=.6\linewidth]{phylo-model-overview.pdf}
+		\end{figure}
+	}
+	
+	\mode<handout>{
+		\begin{figure}
+			\includegraphics[width=.6\linewidth]{phylo-model-overview.pdf}
+		\end{figure}
+	}
 	
 	
 \end{frame}
@@ -682,33 +642,6 @@ numerical underflow issues, WIP)
 	\pause
 	Modeling the full Markov transition matrix would take $2^3 \times 2^6 = 512$ parameters.
 	
-\end{frame}
-
-
-% ------------------------------------------------------------------------------
-\begin{frame}[t]
-\frametitle{Paper 1: On the prediction of gene functions using phylogenetic trees}
-
-{\bf \large Key takeaways}
-\begin{beamercolorbox}[dp=1ex]{conclusions}
-\begin{itemize}
-\item A parsimonious model for predicting gene functions using phylogenetics.
-\item Computationally scalable. SIFTER (our benchmark)
-would take about 66 years (yes, years) to estimate a model for 100 families
-of size 300, we take about 5 minutes.
-\item Meaningful biological results.
-\item Preliminary accuracy results comparable to state-of-the-art phylo-based models.
-\end{itemize}
-\end{beamercolorbox}\pause
-
-{\bf \large Challenges}
-\begin{beamercolorbox}[dp=1ex]{conclusions}
-\begin{itemize}
-\item Offspring are conditional independent on their parent and\pause{}
-\item Functions evolve independently. \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}
-\end{itemize}
-\end{beamercolorbox}
-
 \end{frame}
 
 
@@ -1020,31 +953,31 @@ govern social networks
 		\scalebox{.65}{
 			\begin{tabular}{l c c c c c c }
 				\toprule
-				& (1) & (2) & (3) & \hlcAlt{4}{(4)} & (5) & \hlcAlt{4}{(4b)} \\
+				& (1) & (2) & (3) & \hlcAlt{5}{(4)} & (5) & \hlcAlt{5}{(4b)} \\
 				\midrule
 				\hlcAlt{2}{edges}                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
 				& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
 				\hlcAlt{2}{ttriads}                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
 				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
 %				\only<3>{\rowcolor{gray!50}} %
-\hlcAlt{3}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+\hlcAlt{4}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
 				& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
 				\hlcAlt{2}{$\text{edges} \times \isone{n = 5}$}       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
 				& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
 				$(\text{Homophily})^{1/2}$                &               &               & $0.54$        &               &               &               \\
 				&               &               & $(1.32)$      &               &               &               \\
-				Sender (female)                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
+				\hlcAlt{4}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
 				&               &               &               & $(0.18)$      &               & $(0.18)$      \\
 				Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
 				&               &               &               &               & $(0.18)$      &               \\
-				\textit{Constraint (offset)} \\
+				\hlcAlt{3}{\textit{Constraint (offset)}} \\
 				\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
 				\midrule
 				AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
 				BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
 				Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
 				Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
-				N replicates                              &               &               &               &               &               & \hlcAlt{4}{1000}          \\ \bottomrule
+				N replicates                              &               &               &               &               &               & \hlcAlt{5}{1000}          \\ \bottomrule
 				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
 				\end{tabular}}
 			\label{tab:ci-ergm-full}
@@ -1052,11 +985,12 @@ govern social networks
 \end{minipage}
 \hfill
 \begin{minipage}[c]{.28\linewidth}
-	\pause
+	\pause\small
 	\begin{enumerate}[<+->]
 	\item \alert<2>{Structural terms are significant across models.}
-	\item \alert<3>{No support for gender homophily, but evidence of females sending more ties.}
-	\item \alert<4>{The bootstrap stage took roughly 0.08 seconds per iteration (support already computed).}
+	\item \alert<3>{Using offset terms, we can constrain the support.}
+	\item \alert<4>{No support for gender homophily, but evidence of females sending more ties.}
+	\item \alert<5>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
 	\end{enumerate}
 \end{minipage}
 	
@@ -1072,34 +1006,6 @@ govern social networks
    \input{fig/ci-ergmito-gof-full.pdf_tex}
 		\label{fig:ci-gof-full}
 	\end{figure}
-\end{frame}
-
-% ------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Paper 2: Exponential Random Graph Models for Small Networks}
-
-{\bf \large Key takeaways}\pause
-\setbeamercolor{conclusions}{bg=usclightgray!60!white, fg=uscdarkgray}
-\begin{beamercolorbox}[dp=1ex]{conclusions}
-\begin{itemize}
-\item New extension of ERGMs using exact statistics for small networks
-(families, teams, etc.)\pause
-\item Performance: Same (un)bias, Lower Type I error rates, (way) faster.\pause
-\item Opens the door the new methods, e.g. Mixed effects, LRT, etc.
-\end{itemize}
-\end{beamercolorbox}
-
-\vfill\pause
-
-{\bf \large Challenges}
-\begin{beamercolorbox}[dp=1ex]{conclusions}
-\begin{itemize}
-\item Computationally, we can do better in terms of speed/memory.\pause
-\item Have a good way of assessing goodness-of-fit.\pause
-\item Explore extending this method for (very) large networks.
-\end{itemize}
-\end{beamercolorbox}
-
 \end{frame}
 
 % ------------------------------------------------------------------------------
