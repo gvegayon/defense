@@ -1021,64 +1021,87 @@ govern social networks
 }
 \end{frame}
 
-% ------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Future Research: phylogenetic models}
 
-\begin{itemize}
-\item Make the model hierarchical when pooling trees\pause
-\begin{itemize}
-\item Different mutation rates per class of tree/function
-\item Can be complicated to fit/justify (how many classes?)
-\end{itemize}\pause
-\item Use a framework similar to Exponential Random Graph Models:\pause
-
-$$
-\Prcond{\Ann=\{\ann{n1}, \ann{n2},\dots\}}{\ann{\parent{n1, \dots}}} = \frac{\exp{\mu^{T} s(\mathbf{x}|\ann{\parent{\cdot}})}}{\sum_{\mathbf{x}'}\exp{\mu^{T} s(\mathbf{x}'|\ann{\parent{\cdot}})}}
-$$
-
-\begin{itemize}
-\item A generalization of the model.
-\item Extends to account for joint dist of functions+siblings.
-\item Can incorporate additional information such as branch lengths.
-\item Yet computationally more compact compared to SIFTER (finite number of parameters).
-\end{itemize}
-\end{itemize}
-
-
-\end{frame}
-
-% ------------------------------------------------------------------------------
-
-% ------------------------------------------------------------------------------
-\begin{frame}[t]
-\frametitle{Future Research: ERGMitos}
-
-{\bf Goodness-of-fit}\pause
-\begin{itemize}
-\item Is something that will need to be addressed at some point.\pause
-\item The problem is not easy as we need to deal a discrete distribution.\pause
-\item Two key questions: What sufficient statistic to look at? what test?
-\end{itemize}
-
-\pause {\bf ERGMs for large networks} \pause
-\begin{itemize}
-\item There is still no standard way to estimate ERGMs for large networks.\pause
-\item Most attempts are still depending on simulation methods.\pause
-\item We could use the Snowball Sampling framework together with ERGMitos.\pause{}
-(... I would call this ERGMote)
-\end{itemize}
-
-\end{frame}
 
 \frame{
-\begin{figure}[!hbtp]
+\begin{figure}
 	\centering
-	\includegraphics[width = .6\linewidth]{max-out-stats.pdf}
+	\def\svgwidth{.6\linewidth}
+	\input{fig/max-out-stats.pdf_tex}
+%	\includegraphics[width = .6\linewidth]{max-out-stats.pdf}
 	%\caption[Examples of Networks with Saturated Statistics]{Networks with saturated statistics. All three networks have five vertices composed of two females (black vertices) and three males (gray vertices). Network (a) shows the required set of ties to saturate the \textit{Mutuals} and \textit{Transitive Triads} sufficient statistics, which actually coincides with a fully connected graph, containing $(5\times 4)/2 = 10$ mutual ties and $5 \times 4 \times 3 = 60$ transitive triads. Graph (b) shows the required configuration to saturate the \textit{Gender-Homophily} sufficient statistic, containing $3\times 2 + 2\times 1 = 8$ homophilic ties. Graph (c) shows the minimum arrangement to saturate the \textit{Gender-Receiver Effect} statistic, also having $4 + 4 = 8$ ties (so each female receives 4 ties).}
 	\label{fig:maxout-gof-chapter}
 \end{figure}
 }
+
+%--------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{Conditional Probability: Transitive Triads}
+\begin{minipage}[m]{.7\linewidth}
+\begin{figure}
+	\centering
+	\def\svgwidth{.95\linewidth}
+	\input{fig/conditional-prob-ttriad.pdf_tex}
+\end{figure}
+\end{minipage}
+\begin{minipage}[b]{.28\linewidth}
+	\begin{figure}
+	\includegraphics[width=.3\linewidth]{ttriad.pdf}
+	\end{figure}
+	\begin{itemize}
+		\item a
+		\item b
+	\end{itemize}
+\end{minipage}
+
+\end{frame}
+
+%--------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{Conditional Probability: Mutual Ties}
+	\begin{minipage}[b]{.28\linewidth}
+		\begin{figure}
+			\includegraphics[width=.3\linewidth]{mutual.pdf}
+		\end{figure}
+		
+		\begin{itemize}
+			\item a
+			\item b
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[m]{.7\linewidth}
+		\begin{figure}
+			\centering
+			\def\svgwidth{.95\linewidth}
+			\input{fig/conditional-prob-mutuals.pdf_tex}
+		\end{figure}
+	\end{minipage}
+	
+\end{frame}
+
+%--------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{Conditional Probability: Homophily}
+	\begin{minipage}[m]{.7\linewidth}
+		\begin{figure}
+			\centering
+			\def\svgwidth{.95\linewidth}
+			\input{fig/conditional-prob-homophily.pdf_tex}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[b]{.28\linewidth}
+	\begin{figure}
+		\includegraphics[width=.3\linewidth]{homophily.pdf}
+	\end{figure}
+	
+	\begin{itemize}
+		\item a
+		\item b
+	\end{itemize}
+\end{minipage}
+
+	
+\end{frame}
 
 % % ------------------------------------------------------------------------------
 \begin{frame}[t]
