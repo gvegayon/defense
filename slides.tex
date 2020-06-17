@@ -912,16 +912,46 @@ govern social networks
 			\centering
 			%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
 			\small
-			\def\svgwidth{.95\linewidth}
+			\def\svgwidth{.9\linewidth}
 			\input{fig/time.pdf_tex}
 		\end{figure}
 	\end{minipage}
 \end{frame}
 
 % ------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{ERGMitos: Featured Application}
+	
+	\begin{minipage}[t]{.38\linewidth}
+		\small
+	\noindent \textbf{Sample}
+	\pause
+	\begin{itemize}
+		\item 31 mixed-gender teams (4-5 members).\pause
+		\item University students.\pause
+		\item Don't know each other.\pause
+		\item At least one female/male per team.\pause
+	\end{itemize}
+	\noindent \textbf{Experiment}\pause
+	\begin{itemize}
+		\item Complete 1 hour of group tasks.\pause
+		\item Captured network data using name generator survey: \textit{Who did you go to for advice, information or help to complete the group task?}
+	\end{itemize}
+	\end{minipage}
+\hfill
+	\begin{minipage}[t]{.6\linewidth}
+		\centering
+		\uncover<9->{
+		\begin{figure}
+			\includegraphics[width=.99\linewidth]{ci-ergm-all-nets.pdf}
+		\end{figure}
+		\only{\Large Is Gender Homophily \textit{a} feature of these graphs?}
+		}
+	\end{minipage}
+	
+\end{frame}
 
-
-
+% ------------------------------------------------------------------------------
 \begin{frame}
 	% latex table generated in R 3.6.3 by xtable 1.8-4 package
 	% Mon Apr 27 23:32:51 2020
@@ -1036,44 +1066,24 @@ govern social networks
 
 %--------------------------------------------------------------------------------
 \begin{frame}[c]
-	\frametitle{Conditional Probability: Transitive Triads}
-\begin{minipage}[m]{.7\linewidth}
-\begin{figure}
-	\centering
-	\def\svgwidth{.95\linewidth}
-	\input{fig/conditional-prob-ttriad.pdf_tex}
-\end{figure}
-\end{minipage}
-\begin{minipage}[b]{.28\linewidth}
-	\begin{figure}
-	\includegraphics[width=.3\linewidth]{ttriad.pdf}
-	\end{figure}
-	\begin{itemize}
-		\item a
-		\item b
-	\end{itemize}
-\end{minipage}
-
-\end{frame}
-
-%--------------------------------------------------------------------------------
-\begin{frame}[c]
 	\frametitle{Conditional Probability: Mutual Ties}
 	\begin{minipage}[b]{.28\linewidth}
 		\begin{figure}
 			\includegraphics[width=.3\linewidth]{mutual.pdf}
 		\end{figure}
 		
-		\begin{itemize}
-			\item a
-			\item b
+		\begin{itemize}[<+->]
+			\item Better predicted by other Markov structures.
+			\item Non-Markov structures = poor prediction.
+			\item No big impact of prevalence ($\theta_{\mbox{mutual}}$).
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[m]{.7\linewidth}
+	\begin{minipage}[b]{.7\linewidth}
 		\begin{figure}
 			\centering
 			\def\svgwidth{.95\linewidth}
-			\input{fig/conditional-prob-mutuals.pdf_tex}
+			\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-mutuals-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-mutuals.pdf_tex}}}
+			\mode<handout>{\input{fig/conditional-prob-mutuals.pdf_tex}}
 		\end{figure}
 	\end{minipage}
 	
@@ -1082,26 +1092,56 @@ govern social networks
 %--------------------------------------------------------------------------------
 \begin{frame}[c]
 	\frametitle{Conditional Probability: Homophily}
-	\begin{minipage}[m]{.7\linewidth}
+	\begin{minipage}[b]{.7\linewidth}
 		\begin{figure}
 			\centering
 			\def\svgwidth{.95\linewidth}
-			\input{fig/conditional-prob-homophily.pdf_tex}
+			\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-homophily-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-homophily.pdf_tex}}}
+			\mode<handout>{\input{fig/conditional-prob-homophily.pdf_tex}}
 		\end{figure}
 	\end{minipage}
 	\begin{minipage}[b]{.28\linewidth}
-	\begin{figure}
-		\includegraphics[width=.3\linewidth]{homophily.pdf}
-	\end{figure}
+		\begin{figure}
+			\includegraphics[width=.3\linewidth]{homophily.pdf}
+		\end{figure}
+		
+		\begin{itemize}[<+->]
+			\item No structure has high predictive power.
+			\item Almost zero association with Receiver Effect.
+			\item Prevalence ($\theta_{\mbox{homophily}}$) has no effect.
+		\end{itemize}
+	\end{minipage}
 	
-	\begin{itemize}
-		\item a
-		\item b
-	\end{itemize}
-\end{minipage}
-
 	
 \end{frame}
+
+%--------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{Conditional Probability: Transitive Triads}
+\begin{minipage}[b]{.28\linewidth}
+	\begin{figure}
+		\includegraphics[width=.3\linewidth]{ttriad.pdf}
+	\end{figure}
+	\begin{itemize}[<+->]
+		\item Better predicted by Markov Structures.
+		\item Non-Markov structures provide a ``decent'' prediction.
+		\item Prevalence ($\theta_{\mbox{triads}}$) narrows CI.
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[b]{.7\linewidth}
+\begin{figure}
+	\centering
+	\def\svgwidth{.95\linewidth}
+	\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-ttriad-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-ttriad.pdf_tex}}}
+	\mode<handout>{\input{fig/conditional-prob-ttriad.pdf_tex}}
+\end{figure}
+\end{minipage}
+
+\end{frame}
+
+
+
+
 
 % % ------------------------------------------------------------------------------
 \begin{frame}[t]
