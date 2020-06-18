@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169, 9pt]{beamer}
+\documentclass[aspectratio=169, 9pt, handout]{beamer}
 
 % \transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
@@ -21,6 +21,13 @@
 \addbibresource{bibliography-extra.bib}
 \addbibresource{bibliography.bib}
 % \renewcommand{\bibsection}{\subsubsection*{\bibname } }
+
+% Neat trick to change the mode mid-presentation
+% https://tex.stackexchange.com/questions/91691/beamer-set-mode-mid-presentation?rq=1
+\makeatletter
+\newcommand\changemode[1]{%
+	\gdef\beamer@currentmode{#1}}
+\makeatother
 
 
 % Styles
@@ -92,7 +99,7 @@ bioinformatics and social network analysis}
 \frame{\frametitle{Contents}\tableofcontents}
 
 % ------------------------------------------------------------------------------
-\section{Paper 1: On the prediction of gene functions using phylogenetic trees}
+\section{On the prediction of gene functions using phylogenetic trees}
 
 \begin{frame}[t]
 \usebeamertemplate{section intro}{}{}
@@ -275,7 +282,7 @@ estimate of the annotation (yes/no).
 \end{frame}
 
 %--------------------------------------------------------------------------------
-\newcommand{\byside}[2]{\begin{minipage}[t]{.3\linewidth}%
+\newcommand{\byside}[2]{\begin{minipage}[t]{.24\linewidth}%
 		\centering%
 		\shadowbox{\Large #1}\hfill\\%
 		#2%
@@ -286,6 +293,9 @@ estimate of the annotation (yes/no).
 	\byside{Large scale}{%
 		Pooled-data model including hundreds of trees (thousands of genes) fitted within minutes.%
 	}\hfill
+	\byside{Data driven}{%
+		Uninformative (unif) priors provided the highest accuracy results%
+	}\hfill
 	\byside{Aligned with priors}{%
 		Gains and losses are more likely to happen at \alert{duplication} events.%
 	}\hfill
@@ -294,7 +304,7 @@ estimate of the annotation (yes/no).
 
 %--------------------------------------------------------------------------------
 \begin{frame}[t, label=phylo-good]
-	\frametitle{Example 1: Good quality prediction}
+	\frametitle{Example on Panther family PTHR11258}
 	
 	\begin{minipage}[m]{.3\linewidth}
 		\small
@@ -447,193 +457,14 @@ data from PantherDB with GO annotations and fit a large pooled model.
 
 
 
-% ------------------------------------------------------------------------------
-\begin{frame}
-	\frametitle{Phylogenetics Modeling: Extension II}
-	
-	\mode<beamer>{
-		\begin{figure}
-			\includegraphics<1>[width=.6\linewidth]{phylo-model-overview-1.pdf}\includegraphics<2>[width=.6\linewidth]{phylo-model-overview-2.pdf}\includegraphics<3>[width=.6\linewidth]{phylo-model-overview.pdf}
-		\end{figure}
-	}
-	
-	\mode<handout>{
-		\begin{figure}
-			\includegraphics[width=.6\linewidth]{phylo-model-overview.pdf}
-		\end{figure}
-	}
-	
-	
-\end{frame}
 
-% ------------------------------------------------------------------------------
-\begin{frame}[t]
-	\frametitle{Future Research: phylogenetic models}
-	
-	Imagine that we have 3 functions (rows) and that each node has 2 siblings (columns)
-	
-	\mode<beamer>{
-		\begin{table}
-			\begin{tabular}{llcc}
-				\toprule
-				& & \multicolumn{2}{c}{\bf Transitions to} \\
-				& & Case 1 & Case 2 \\ \cmidrule(r){3-4}
-				\multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 1\end{array}\right]$} & 
-				$\left[\begin{array}{cc} %
-				0 & \nhlc{1-2}{1}\hlc{3-5}{1}\nhlc{6-}{1} \\ %
-				1 & \nhlc{1-3}{0}\hlc{4-5}{0}\nhlc{6-}{0} \\ %
-				1 & \nhlc{1-3}{0}\hlc{4}{1}\nhlc{5-}{1} %
-				\end{array}\right]$ & 
-				$\left[\begin{array}{cc} %
-				0 & \nhlc{-2}{1}\nhlc{4}{1}\hlc{3}{1}\hlc{5}{1}\nhlc{6-}{1} \\ %
-				\nhlc{-5}{1}\hlc{6}{1}\nhlc{7-}{1} & \nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0}\\ %
-				\nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0} & \nhlc{1-5}{1}\hlc{6}{1}\nhlc{7-}{1}%
-				\end{array}\right]$ \pause \\ \midrule 
-				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \pause \\ 
-				& \# Gains (Neofunctionalization) & 1 & 1 \pause \\
-				& Only one offspring changes (yes/no) & 1 & 0 \pause \\
-				& \# Changes (gain+loss) & 2 & 3 \pause \\
-				& Subfunctionalization (yes/no) & 0 & 1 \\ \bottomrule
-			\end{tabular}
-		\end{table}
-	}
-	\mode<handout>{
-		\begin{table}
-			\begin{tabular}{llcc}
-				\toprule
-				& & \multicolumn{2}{c}{\bf Transitions to} \\
-				& & Case 1 & Case 2 \\ \cmidrule(r){3-4}
-				\multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 1\end{array}\right]$} & 
-				$\left[\begin{array}{cc} %
-				0 & 1 \\ %
-				1 & 0 \\ %
-				1 & 1 %
-				\end{array}\right]$ & 
-				$\left[\begin{array}{cc} %
-				0 & 1 \\ %
-				1 & 0\\ %
-				0 & 1%
-				\end{array}\right]$ \\ \midrule 
-				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \\ 
-				& \# Neofunctionalizations & 1 & 1  \\
-				& Only one offspring changes (yes/no) & 1 & 0 \\
-				& \# Changes (gain+loss) & 2 & 3 \\
-				& Subfunctionalizations (yes/no) & 0 & 1 \\ \bottomrule
-			\end{tabular}
-		\end{table}
-	}
-	
-	\pause
-	Modeling the full Markov transition matrix would take $2^3 \times 2^6 = 512$ parameters.
-	
-\end{frame}
+
+
+
 
 
 % ------------------------------------------------------------------------------
-\section{Chapter 3: Discrete Exponential Family Models}
-% \frame{\frametitle{Contents}\tableofcontents}
-
-\begin{frame}[t]
-	\usebeamertemplate{section intro}{}{}
-	\textcolor{uscgold}{
-		\Large {\bf Discrete Exponential Family Models} \vskip0.25em
-%		\large \textit{Joint with}: Andrew Slaughter and Kayla de la Haye
-	}
-\end{frame}
-
-\begin{frame}[t]
-
-\frametitle{Discrete Exponential-Family Models}
-
-\begin{figure}
-	\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
-\end{figure}
-
-%\begin{center}
-%\begin{equation*}
-%\Prcond{\Graph = \graph}{X = x} = \frac{%
-%\exp{\t{\beta}\s{\graph, x}} %
-%}{%
-%\sum_{\graph'\in\GRAPH} \exp{\t{\beta}\s{\graph', x}} %
-%},\quad \forall \graph\in\GRAPH
-%\end{equation*}
-%\end{center}
-
-\vfill
-
-\begin{minipage}[m]{.45\linewidth}
-
-\begin{itemize}
-	\item<2-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
-	\item<3-> Focused on vector of sufficient statistics $\s{\graph,x}$ (not the edges themselves) \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}
-\end{itemize}
-\end{minipage}\hfill
-\begin{minipage}[m]{.45\linewidth}
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics<4->[width=.8\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}
-%		\caption[Simple graphs: A ring and a Kite]{Although these two networks may look very different, \textit{a ring} and \textit{a kite}, under the Bernoulli, also known as Erd\H{o}s-R\'enyi, random graph model, both are equally likely, as the only sufficient statistic for this model is the number of observed ties, which is five in both cases.}
-		\label{fig:ring-and-kite}
-	\end{figure}
-\end{minipage}
-
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Asymptotic Behavior of ERGMs}
-
-\begin{itemize}
-\item In the case that $s_l = \s{\graph, x}$ is on the boundary: $s_l \to \pm\infty$\pause
-\item Since the support space of $\s{\graph, x}\in\SUFF$ is bounded, e.g. \# edges $\in [0,n\times (n - 1)]$, we have: \pause
-
-\begin{equation*}
-\lim_{\theta_l\to\infty}\loglik{\theta}, \quad %
-\lim_{\theta_l\to\infty}\nabla\loglik{\theta}, \quad %
-\lim_{\theta_l\to\infty}\mathbf{H}\left(\theta\right)
-\end{equation*}
-log-likelihood, its gradient, and hessian are finite.\pause
-\item The direct implication is that, while $\s{\graph, x}$ is on the boundary, the MLE for the other statistics exists.\footnote{\cite{Handcock2003} briefly mentions this}\pause
-\item All equations ultimately involve realizations of $\s{\graph', x}$ that equal $s_l$, relevant in: Simulations, Bootstrapping, etc.
-\end{itemize}
-
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Conditional Graph Distributions}
-
-\begin{itemize}
-	\item Long history in (soc.) network science.\pause
-	\item Common usage: Hypothesis test prevalence of a feature.\pause{}
-	\begin{center}\it
-	Is the observed count of XYZ within the expected in a \alert{Bernoulli graph}? \\ \pause{}
-	Are statistics A, B, and C different from \alert{graphs with 5 triangles}?
-	\end{center}
-	\item Different names, same thing, e.g. CUG tests and rewiring algorithms.\pause
-	\item $\{\mbox{CUG}, \mbox{Rewiring}\}\subset \mbox{ERGM}$\pause
-	\item We can talk about \textit{Conditional} ERGMs.
-	
-	\begin{equation*}
-	\Prcond{\sufstats{\Graph}_k = s_k}{\sufstats{\Graph}_l = s_l, \theta} = %
-	\frac{%
-		\exp{\transpose{\theta}_{-l}\sufstats{\graph}_{-l}}
-	}{%
-		\sum_{\graph': \sufstats{\graph'}_l = \sufstats{\graph}_l}\exp{\transpose{\theta}_{-l}\sufstats{\graph'}_{-l}}
-	}\tag{Eq in 3.5 thesis}
-	\end{equation*}
-	\pause In this equation, the marginal distribution of $\s{\graph}_k$ is orthogonal (independent) from $\theta_l$.
-	
-	
-\end{itemize}
-
-
-
-\end{frame}
-
-% ------------------------------------------------------------------------------
-\section{Paper 2: Exponential Random Graph Models for Small Networks}
+\section{Exponential Random Graph Models for Small Networks}
 % \frame{\frametitle{Contents}\tableofcontents}
 
 \begin{frame}[t]
@@ -649,15 +480,55 @@ log-likelihood, its gradient, and hessian are finite.\pause
 
 Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
-\begin{itemize}[<+->]
-\item Statistical models of (social) networks
-\item In simple terms: statistical inference on what network patterns/structures/motifs
-govern social networks
+\begin{itemize}
+\item Statistical models of (social) networks.\pause
+\item Not about individual ties, but about structures:\pause
 \begin{figure}
 \includegraphics[width=.6\linewidth]{friendly-terms.pdf}
 \end{figure}
 \end{itemize}
 
+\end{frame}
+
+\begin{frame}[t,label=discrete-exponential]
+	
+	\frametitle{Discrete Exponential-Family Models}
+	
+	\begin{figure}
+		\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
+	\end{figure}
+	
+	%\begin{center}
+	%\begin{equation*}
+	%\Prcond{\Graph = \graph}{X = x} = \frac{%
+	%\exp{\t{\beta}\s{\graph, x}} %
+	%}{%
+	%\sum_{\graph'\in\GRAPH} \exp{\t{\beta}\s{\graph', x}} %
+	%},\quad \forall \graph\in\GRAPH
+	%\end{equation*}
+	%\end{center}
+	
+	\vfill
+	
+	\begin{minipage}[m]{.45\linewidth}
+		
+		\begin{itemize}
+			\item<2-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
+			\item<3-> Focused on vector of sufficient statistics $\s{\graph,x}$ (not the edges themselves) \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}
+		\end{itemize}
+	\end{minipage}\hfill
+	\begin{minipage}[m]{.45\linewidth}
+		\begin{figure}[!htbp]
+			\centering
+			\includegraphics<4->[width=.8\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}
+			%		\caption[Simple graphs: A ring and a Kite]{Although these two networks may look very different, \textit{a ring} and \textit{a kite}, under the Bernoulli, also known as Erd\H{o}s-R\'enyi, random graph model, both are equally likely, as the only sufficient statistic for this model is the number of observed ties, which is five in both cases.}
+			\label{fig:ring-and-kite}
+		\end{figure}
+	\end{minipage}
+	
+	
+	\vfill\hfill\hyperlink{discrete-exponential-theory}{\beamergotobutton{more theory}}
+	
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -700,13 +571,27 @@ govern social networks
 
 \begin{frame}[c,label=ergmito-checklist]
 \frametitle{Overview of ERGMito}
-\fbox{\uncover<2->{{\huge $\checkmark$}}} Higher convergence rate.\\
-\fbox{\uncover<3->{{\huge $\checkmark$}}} Lower Type-I error rate.\\
-\fbox{\uncover<4->{{\huge $\checkmark$}}} Smaller Bias.\\
-\fbox{\uncover<5->{{\huge $\checkmark$}}} Improved power levels.\\
-\fbox{\uncover<6->{{\huge $\checkmark$}}} Faster.\\
-\fbox{\uncover<7->{{\huge $\checkmark$}}} More flexible.
+\begin{minipage}[m]{.28\linewidth}
+	\fbox{\uncover<2->{{\large $\checkmark$}}} Higher convergence rate.\\
+	\fbox{\uncover<3->{{\large $\checkmark$}}} Lower Type-I error rate.\\
+	\fbox{\uncover<4->{{\large $\checkmark$}}} Smaller Bias.\\
+	\fbox{\uncover<5->{{\large $\checkmark$}}} Improved power levels.\\
+	\fbox{\uncover<6->{{\large $\checkmark$}}} Faster.\\
+	\fbox{\uncover<7->{{\large $\checkmark$}}} More flexible.
+\end{minipage}
+\hfill
+\begin{minipage}[m]{.34\linewidth}
+	\centering
+	\includegraphics[width=.99\linewidth]{ergmito-page-cran.png}
+\end{minipage}
+\hfill
+\begin{minipage}[m]{.34\linewidth}
+	\centering
+	\includegraphics[width=.99\linewidth]{ergmito-page-github.png}
+\end{minipage}
+
 \vfill\hfill\hyperlink{ergmito-simulations}{\beamergotobutton{more}}
+
 \end{frame}
 
 
@@ -904,7 +789,147 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 \end{frame}
 
 
-% % ------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+	\usebeamertemplate{section intro}{}{}
+	\textcolor{uscgold}{
+		\Large {\bf Extending Phylogenetic Modeling with ERGMs}
+	}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Phylogenetics Modeling Strategies}
+	
+	\mode<beamer>{
+		\begin{figure}
+			\includegraphics<1>[width=.6\linewidth]{phylo-model-overview-1.pdf}\includegraphics<2>[width=.6\linewidth]{phylo-model-overview-2.pdf}\includegraphics<3>[width=.6\linewidth]{phylo-model-overview.pdf}
+		\end{figure}
+	}
+	
+	\mode<handout>{
+		\begin{figure}
+			\includegraphics[width=.6\linewidth]{phylo-model-overview.pdf}
+		\end{figure}
+	}
+	
+	
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[t]
+	\frametitle{Future Research: phylogenetic models}
+	
+	Imagine that we have 3 functions (rows) and that each node has 2 siblings (columns)
+	
+	\mode<beamer>{
+		\begin{table}
+			\begin{tabular}{llcc}
+				\toprule
+				& & \multicolumn{2}{c}{\bf Transitions to} \\
+				& & Case 1 & Case 2 \\ \cmidrule(r){3-4}
+				\multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 1\end{array}\right]$} & 
+				$\left[\begin{array}{cc} %
+				0 & \nhlc{1-2}{1}\hlc{3-5}{1}\nhlc{6-}{1} \\ %
+				1 & \nhlc{1-3}{0}\hlc{4-5}{0}\nhlc{6-}{0} \\ %
+				1 & \nhlc{1-3}{0}\hlc{4}{1}\nhlc{5-}{1} %
+				\end{array}\right]$ & 
+				$\left[\begin{array}{cc} %
+				0 & \nhlc{-2}{1}\nhlc{4}{1}\hlc{3}{1}\hlc{5}{1}\nhlc{6-}{1} \\ %
+				\nhlc{-5}{1}\hlc{6}{1}\nhlc{7-}{1} & \nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0}\\ %
+				\nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0} & \nhlc{1-5}{1}\hlc{6}{1}\nhlc{7-}{1}%
+				\end{array}\right]$ \pause \\ \midrule 
+				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \pause \\ 
+				& \# Gains (Neofunctionalization) & 1 & 1 \pause \\
+				& Only one offspring changes (yes/no) & 1 & 0 \pause \\
+				& \# Changes (gain+loss) & 2 & 3 \pause \\
+				& Subfunctionalization (yes/no) & 0 & 1 \\ \bottomrule
+			\end{tabular}
+		\end{table}
+	}
+	\mode<handout>{
+		\begin{table}
+			\begin{tabular}{llcc}
+				\toprule
+				& & \multicolumn{2}{c}{\bf Transitions to} \\
+				& & Case 1 & Case 2 \\ \cmidrule(r){3-4}
+				\multicolumn{2}{r}{\textbf{Parent} $\begin{array}{c}\mbox{A} \\ \mbox{B} \\ \mbox{C}\end{array}\left[\begin{array}{c}0 \\ 1 \\ 1\end{array}\right]$} & 
+				$\left[\begin{array}{cc} %
+				0 & 1 \\ %
+				1 & 0 \\ %
+				1 & 1 %
+				\end{array}\right]$ & 
+				$\left[\begin{array}{cc} %
+				0 & 1 \\ %
+				1 & 0\\ %
+				0 & 1%
+				\end{array}\right]$ \\ \midrule 
+				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \\ 
+				& \# Neofunctionalizations & 1 & 1  \\
+				& Only one offspring changes (yes/no) & 1 & 0 \\
+				& \# Changes (gain+loss) & 2 & 3 \\
+				& Subfunctionalizations (yes/no) & 0 & 1 \\ \bottomrule
+			\end{tabular}
+		\end{table}
+	}
+	
+	\pause
+	Modeling the full Markov transition matrix would take $2^3 \times 2^6 = 512$ parameters.
+	
+\end{frame}
+
+
+\section{Connecting the dots: Phylogenetic Modeling with ERGMs}
+
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+	\usebeamertemplate{section intro}{}{}
+	\textcolor{uscgold}{
+		\Large {\bf Connecting the dots: Phylogenetic Modeling with ERGMs}
+	}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+	\centering
+	\mode<beamer>{\scalebox{1.5}{
+			\only<1>{barray}\only<2->{\Huge{}{\color{usccardinal}Barr}\small{}a\Huge{}{\color{usccardinal}y}\normalsize}:
+	}}\mode<handout>{\Huge{}{\color{usccardinal}Barr}\small{}a\Huge{}{\color{usccardinal}y}\normalsize}
+	
+	\scalebox{1.5}{C++ header-only library for counting structures in binary arrays}
+	\pause
+	\vfill\raggedright {\footnotesize \href{https://en.wikipedia.org/wiki/The_Sniffing_Accountant}{``The Sniffing Accountant'' (Seinfeld, Season 5, Episode 4)}}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{Barry: your go-to \textit{motif} accountant}
+	\centering
+\begin{minipage}[m]{.33\linewidth}
+	\small
+\begin{itemize}
+	\item<1-> Sparse matrix represented using double hashmaps (fast row/column access).
+	\item<2-> Template implementation for flexible weights and metadata.
+	\item<3-> Full enumeration of array powersets.
+	\item<4-> Fast counting using change statistics.
+	\item<5-> Calculation of support for sufficient stats.
+\end{itemize}
+\only<1->{\url{https://USCbiostats.github.io/binaryarrays}}
+\end{minipage}\hfill
+\begin{minipage}[m]{.65\linewidth}
+	\begin{figure}
+	\begin{minipage}[m]{.49\linewidth}
+		\uncover<6->{\includegraphics[width=.99\linewidth]{barray-phylo.png}}
+	\end{minipage}
+	\begin{minipage}[m]{.49\linewidth}
+		\uncover<7->{\includegraphics[width=.99\linewidth]{barray-network.png}}
+	\end{minipage}
+	\uncover<6->{\caption{Screenshots from the project's website on GitHub.}}
+	\end{figure}
+\end{minipage}
+\end{frame}
+
+% ------------------------------------------------------------------------------
 \begin{frame}[t]
 \frametitle{Concluding Remarks}
 
@@ -938,7 +963,8 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 }
 \end{frame}
 
-% % ------------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------------
 \begin{frame}
 \maketitle
 \begin{center}
@@ -963,6 +989,8 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 % ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
+\changemode{handout}
+
 \begin{frame}[label=aphylo-goexample]
 \frametitle{The Gene Ontology Project}
 
@@ -1001,6 +1029,7 @@ these are part of the same evolutionary tree!}
 \def\tmpwidth{.30\linewidth}
 \begin{table}
 \footnotesize
+\mode<beamer>{
 \begin{tabular}{*{2}{m{\tmpwidth}<\centering}}
 \only<1>{\includegraphics[width=.95\linewidth]{cat.jpg}} %
   \only<2->{\includegraphics[width=.4\linewidth]{cat.jpg}} \linebreak Felis catus pthr10037 & %
@@ -1009,6 +1038,15 @@ these are part of the same evolutionary tree!}
 \only<1>{\includegraphics[width=.725\linewidth]{horse.jpg}} %
   \only<2->{\includegraphics[width=.4\linewidth]{horse.jpg}} \linebreak Equus caballus pthr24356
 \end{tabular}
+}
+\mode<handout>{
+	\begin{tabular}{*{2}{m{\tmpwidth}<\centering}}
+		\includegraphics[width=.4\linewidth]{cat.jpg} \linebreak Felis catus pthr10037 & %
+		\includegraphics[width=1\linewidth]{Oryzias_latipes.jpg} \linebreak Oryzias latipes \textbf{pthr11521} \\ %
+		\includegraphics[width=1\linewidth]{Anole_Lizard.jpg} \linebreak Anolis carolinensis \textbf{pthr11521} & %
+		\includegraphics[width=.4\linewidth]{horse.jpg} \linebreak Equus caballus pthr24356
+	\end{tabular}
+}
 \end{table}
 
 \vfill \hfill \hyperlink{geneontology}{\beamerreturnbutton{go back}}
@@ -1228,6 +1266,61 @@ There various approaches for this, some to highlight
 		\centering
 		\includegraphics[width=.7\linewidth]{distribution-annotation-type.pdf}
 	\end{figure}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\begin{frame}[label=discrete-exponential-theory]
+	\frametitle{Asymptotic Behavior of ERGMs}
+	
+	\begin{itemize}
+		\item In the case that $s_l = \s{\graph, x}$ is on the boundary: $s_l \to \pm\infty$\pause
+		\item Since the support space of $\s{\graph, x}\in\SUFF$ is bounded, e.g. \# edges $\in [0,n\times (n - 1)]$, we have: \pause
+		
+		\begin{equation*}
+		\lim_{\theta_l\to\infty}\loglik{\theta}, \quad %
+		\lim_{\theta_l\to\infty}\nabla\loglik{\theta}, \quad %
+		\lim_{\theta_l\to\infty}\mathbf{H}\left(\theta\right)
+		\end{equation*}
+		log-likelihood, its gradient, and hessian are finite.\pause
+		\item The direct implication is that, while $\s{\graph, x}$ is on the boundary, the MLE for the other statistics exists.\footnote{\cite{Handcock2003} briefly mentions this}\pause
+		\item All equations ultimately involve realizations of $\s{\graph', x}$ that equal $s_l$, relevant in: Simulations, Bootstrapping, etc.
+	\end{itemize}
+	
+	\vfill\hfill\hyperlink{discrete-exponential}{\beamerreturnbutton{go back}}
+	
+\end{frame}
+
+
+%-------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Conditional Graph Distributions}
+	
+	\begin{itemize}
+		\item Long history in (soc.) network science.\pause
+		\item Common usage: Hypothesis test prevalence of a feature.\pause{}
+		\begin{center}\it
+			Is the observed count of XYZ within the expected in a \alert{Bernoulli graph}? \\ \pause{}
+			Are statistics A, B, and C different from \alert{graphs with 5 triangles}?
+		\end{center}
+		\item Different names, same thing, e.g. CUG tests and rewiring algorithms.\pause
+		\item $\{\mbox{CUG}, \mbox{Rewiring}\}\subset \mbox{ERGM}$\pause
+		\item We can talk about \textit{Conditional} ERGMs.
+		
+		\begin{equation*}
+		\Prcond{\sufstats{\Graph}_k = s_k}{\sufstats{\Graph}_l = s_l, \theta} = %
+		\frac{%
+			\exp{\transpose{\theta}_{-l}\sufstats{\graph}_{-l}}
+		}{%
+			\sum_{\graph': \sufstats{\graph'}_l = \sufstats{\graph}_l}\exp{\transpose{\theta}_{-l}\sufstats{\graph'}_{-l}}
+		}\tag{Eq in 3.5 thesis}
+		\end{equation*}
+		\pause In this equation, the marginal distribution of $\s{\graph}_k$ is orthogonal (independent) from $\theta_l$.
+		
+		
+	\end{itemize}
+	
+	\vfill\hfill\hyperlink{discrete-exponential}{\beamerreturnbutton{go back}}
+	
 \end{frame}
 
 % Simulation study -------------------------------------------------------------
