@@ -257,7 +257,7 @@ estimate of the annotation (yes/no).
 	\centering
 	\def\svgwidth{.9\linewidth}
 	\mode<beamer>{
-	\only<1>{\input{fig/phylo-model-0.pdf_tex}}\only<2>{\input{fig/phylo-model-1.pdf_tex}}\only<3>{\input{fig/phylo-model-2a.pdf_tex}}\only<4-5>{\input{fig/phylo-model-2b.pdf_tex}}\only<6>{\input{fig/phylo-model.pdf_tex}}
+	\only<1>{\input{fig/phylo-model-0.pdf_tex}}\only<2>{\input{fig/phylo-model-0b.pdf_tex}}\only<3>{\input{fig/phylo-model-0c.pdf_tex}}\only<4>{\input{fig/phylo-model-1.pdf_tex}}\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}\only<7>{\input{fig/phylo-model-2b.pdf_tex}}\only<8>{\input{fig/phylo-model.pdf_tex}}
 	}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
 \end{figure}
 \end{minipage}
@@ -265,13 +265,63 @@ estimate of the annotation (yes/no).
 \begin{minipage}[m]{.38\linewidth}
 	\pause
 	\begin{itemize}
-		\item \textcolor{rootnode}{Spontaneous gain of function}.\pause
-		\item \textcolor{innernode}{Loss\pause{} and gain \pause depend on: (a) state of the parent, and (b) the type of event (duplication or speciation)\hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}\pause
-		\item \textcolor{leafnode}{Incomplete data and possibly faulty observed data}
+		\item \textcolor{rootnode}{Root has the function.}\pause[4]
+		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}.}\pause
+		\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
+		\item Only a fraction of annotations is known.
 	\end{itemize}
 \end{minipage}
 
 \end{frame}
+
+%--------------------------------------------------------------------------------
+\newcommand{\byside}[2]{\begin{minipage}[t]{.3\linewidth}%
+		\centering%
+		\shadowbox{\Large #1}\hfill\\%
+		#2%
+	\end{minipage}}
+\begin{frame}[c,label=phylo-old-results]
+	\frametitle{Results from the first version}
+	\centering
+	\byside{Large scale}{%
+		Pooled-data model including hundreds of trees (thousands of genes) fitted within minutes.%
+	}\hfill
+	\byside{Aligned with priors}{%
+		Gains and losses are more likely to happen at \alert{duplication} events.%
+	}\hfill
+	\byside{High Accuracy}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC}
+\end{frame}
+
+%--------------------------------------------------------------------------------
+\begin{frame}[t, label=phylo-good]
+	\frametitle{Example 1: Good quality prediction}
+	
+	\begin{minipage}[m]{.3\linewidth}
+		\small
+		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+		\textbf{MAE:} 0.34 \\
+		\textbf{AUC:} 0.91 \\
+		\textbf{Type:} Molecular Function\\
+		\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
+		\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
+		\vfill
+		\hyperlink{phylo-bad}{\beamerbutton{see a bad one}}
+	\end{minipage}
+	\begin{minipage}[m]{.65\linewidth}
+		\def\tmpwdth{.9\linewidth}
+		\mode<beamer>{
+			\centering
+			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
+		}
+		
+		\mode<handout>{
+			\centering
+			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
+		}
+		
+	\end{minipage}
+\end{frame}
+
 
 \note[enumerate]{
 \item In the version of the qual document you saw an implementation of the model
@@ -290,157 +340,48 @@ cluster with the R package slurmR (described in the document).
 data from PantherDB with GO annotations and fit a large pooled model.
 }
 
+
+
 % ------------------------------------------------------------------------------
-\begin{frame}[t]
-	\frametitle{Phylogenetics Modeling: Extension 1}
+\begin{frame}[c]
+	\frametitle{Phylogenetics Modeling: Pooled-data models}
 
-\begin{minipage}[m]{.7\linewidth}
-
-Ways to pool the data
+\begin{minipage}[m]{.6\linewidth}
 
 \begin{table}
 	\footnotesize
 	\centering
 	\begin{tabular}{lm{.15\linewidth}*{3}{m{.15\linewidth}<\centering}}\toprule
 		& & \multicolumn{3}{c}{Type of Prior} \\ \cmidrule(r){3-5}
-		& & Fixed to Beliefs & Fixed by Data & Free \\ \midrule
+		& & Fixed to Beliefs & Empirical & Free \\ \midrule
 		\multirow{3}{*}[-.25cm]{\rotatebox{90}{Model Parameters}} %
-		& Shared across~trees             & Na\"ive (a) & - 	& - \\ \cmidrule(r){2-5}
-		& Class \hphantom{.....} specific & Reasonable  & Empirical Bayes I & Hierarchical Bayes 1 \\ \cmidrule(r){2-5}
-		& Function \hphantom{..} specific & -           & Empirical Bayes II & Full Bayesian \\
+		& Shared across~trees             & \hlc{2-}{ } & - 	& - \\ \cmidrule(r){2-5}
+		& Class \hphantom{.....} specific & \hlc{3-}{ }  & \hlc{4-}{ } & \hlc{4-}{ } \\ \cmidrule(r){2-5}
+		& Function \hphantom{..} specific & -           & \hlc{5-}{ } & \hlc{5-}{ } \\
 		\bottomrule
 	\end{tabular}
+	\caption{Ways to fit pooled-data models.}
 \end{table}
 \end{minipage}
-\begin{minipage}[m]{.28\linewidth}
+\begin{minipage}[m]{.38\linewidth}
 \begin{enumerate}
-	\item[(a)] Included in the paper.
-	\item 
-	\item[(b)] Ideal, but hard to make work (data issues)
+	\item<2-> Featured in the first version of the model.
+	\item<3-> (new) Improves accuracy (sometimes).
+	\item<4-> (new) Hard to fit and no significant improvement (yet).
+	\item<5-> To-be-attempted.
 \end{enumerate}
 \end{minipage}
 
-
-
-
-\end{frame}
-
-% ------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Phylogenetics Modeling: Extension II}
-
-\mode<beamer>{
-\begin{figure}
-	\includegraphics<1>[width=.6\linewidth]{phylo-model-overview-1.pdf}\includegraphics<2>[width=.6\linewidth]{phylo-model-overview-2.pdf}\includegraphics<3>[width=.6\linewidth]{phylo-model-overview.pdf}
-\end{figure}
-}
-
-\mode<handout>{
-\begin{figure}
-	\includegraphics[width=.6\linewidth]{phylo-model-overview.pdf}
-\end{figure}
-}
-
+\uncover<6->{All methods are now available in the \texttt{aphylo} package: \texttt{aphylo\_mle}, \texttt{aphylo\_mcmc}, and \texttt{aphylo\_hier}.}
 
 \end{frame}
+
 
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
-\section{Data}
 
-\begin{frame}
-	\usebeamertemplate{section intro}{}{}
-	\textcolor{uscgold}{
-		\Large {\bf Data} \vskip0.25em
-		\large Phylogenetic trees and Experimental Annotations
-	}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Data: Phylogenetic trees}
-	
-	
-	
-	Sample of annotations (first 10 in a single tree, Phosphoserine Phosphatase [PTHR10000])
-	
-	\small
-	
-	\begin{table}[ht]
-		\centering
-		\begin{tabular}{rrll}
-			\toprule
-			Internal id & Branch Length & type & ancestor \\ 
-			\midrule
-			AN0 &  & S & LUCA \\ 
-			AN1 & 0.06 & S & Archaea-Eukaryota \\ 
-			AN2 & 0.24 & S & Eukaryota \\ 
-			AN3 & 0.44 & S & Unikonts \\ 
-			AN4 & 0.42 & S & Opisthokonts \\ 
-			AN6 & 0.68 & D &  \\ 
-			AN9 & 0.79 & S & Amoebozoa \\ 
-			AN10 & 0.18 & D &  \\ 
-			AN15 & 0.57 & S & Dictyostelium \\ 
-			AN18 & 0.52 & S & Alveolata-Stramenopiles \\ 
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	
-\end{frame}
-
-\begin{frame}
-	\frametitle{Data: Node type (events)}
-	\begin{figure}
-		\centering
-		\includegraphics[width=.7\linewidth]{distribution-event-type.pdf}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Data: Annotations (example)}
-	
-	This is the first 10 of $\sim$ 400,000 experimental annotations used:
-	
-	\footnotesize
-	\begin{table}[ht]
-		\centering
-		\begin{tabular}{rllll}
-			\toprule
-			& Family & Id & GO term & Qualifier \\ 
-			\midrule
-			1 & PTHR12345 & HUMAN$|$HGNC=15756$|$UniProtKB=Q9H190 & GO:0005546 &  \\ 
-			2 & PTHR11361 & HUMAN$|$HGNC=7325$|$UniProtKB=P43246 & GO:0016887 & CONTRIBUTES\_TO \\ 
-			3 & PTHR10782 & MOUSE$|$MGI=MGI=3040693$|$UniProtKB=Q6P1E1 & GO:0045582 &  \\ 
-			4 & PTHR23086 & ARATH$|$TAIR=AT3G09920$|$UniProtKB=Q8L850 & GO:0006520 &  \\ 
-			5 & PTHR32061 & RAT$|$RGD=619819$|$UniProtKB=Q9EPI6 & GO:0043197 &  \\ 
-			6 & PTHR46870 & ARATH$|$TAIR=AT3G46870$|$UniProtKB=Q9STF9 & GO:1990825 &  \\ 
-			7 & PTHR15204 & MOUSE$|$MGI=MGI=1919439$|$UniProtKB=Q9Z1R2 & GO:0045861 &  \\ 
-			8 & PTHR22928 & DROME$|$FlyBase=FBgn0050085$|$UniProtKB=Q9XZ34 & GO:0030174 &  \\ 
-			9 & PTHR35972 & HUMAN$|$HGNC=34401$|$UniProtKB=A2RU48 & GO:0005515 &  \\ 
-			10 & PTHR10133 & DROME$|$FlyBase=FBgn0002905$|$UniProtKB=O18475 & GO:0097681 &  \\ 
-			\bottomrule
-		\end{tabular}
-	\end{table}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Data: Experimental Annotations}
-	\begin{figure}
-		\centering
-		\includegraphics[width=.7\linewidth]{distribution-annotation-type.pdf}
-	\end{figure}
-\end{frame}
-
-
-
-
-\note[enumerate]{
-\item The data used here corresponds to a subset of the trees.
-\item Right now, the main criteria was: (1) must have at least one annotation
-of each type, and (2) must not have large sets of siblings (this due to
-numerical underflow issues, WIP)
-}
 
 \begin{frame}[t]
 	\frametitle{Overview of Prediction Results}
@@ -504,64 +445,7 @@ numerical underflow issues, WIP)
 
 \end{frame}
 
-\section{abc}
 
-\begin{frame}[t]
-	\frametitle{Example 1: Good quality prediction}
-	
-\begin{minipage}[m]{.3\linewidth}
-	\small
-%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
-	\textbf{MAE:} 0.34 \\
-	\textbf{AUC:} 0.91 \\
-	\textbf{Type:} Molecular Function\\
-	\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
-	\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
-\end{minipage}
-\begin{minipage}[m]{.65\linewidth}
-	\def\tmpwdth{.9\linewidth}
-	\mode<beamer>{
-		\centering
-		\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
-	}
-	
-	\mode<handout>{
-		\centering
-		\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
-	}
-	
-\end{minipage}
-\end{frame}
-
-
-\begin{frame}[t]
-	\frametitle{Example 2: Bad quality prediction}
-	
-	\begin{minipage}[m]{.3\linewidth}
-		\small
-		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
-		\textbf{MAE:} 0.52 \\
-		\textbf{AUC:} 0.33 \\
-		\textbf{Type:} Molecular Function\\
-		\textbf{Name:} mannosyl-oligosaccharide 1,2-alpha-mannosidase activity\\
-		\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0004571}{\alert{GO:0004571}} involved in synthesis of glycoproteins (\href{https://en.wikipedia.org/wiki/Mannosyl-oligosaccharide_1,2-alpha-mannosidase}{\alert{wiki}} and \href{https://en.wikipedia.org/wiki/Glycoprotein}{\alert{examples}}).
-	\end{minipage}
-	\begin{minipage}[m]{.65\linewidth}
-		\def\tmpwdth{.9\linewidth}
-		\mode<beamer>{
-			\centering
-			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}}
-		}
-		
-		\mode<handout>{
-			\centering
-			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}
-		}
-		
-	\end{minipage}
-	
-	
-\end{frame}
 
 % ------------------------------------------------------------------------------
 \begin{frame}
@@ -659,7 +543,7 @@ numerical underflow issues, WIP)
 
 \begin{frame}[t]
 
-\frametitle{Canonical Equation}
+\frametitle{Discrete Exponential-Family Models}
 
 \begin{figure}
 	\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
@@ -701,16 +585,16 @@ numerical underflow issues, WIP)
 \frametitle{Asymptotic Behavior of ERGMs}
 
 \begin{itemize}
-\item In the case that $s_l = \s{\graph, x}$ is on the boundary: $s_l \to \pm\infty$
-\item Since the support space of $\s{\graph, x}\in\SUFF$ is bounded, e.g. \# edges $\in [0,n\times (n - 1)]$, we have: 
+\item In the case that $s_l = \s{\graph, x}$ is on the boundary: $s_l \to \pm\infty$\pause
+\item Since the support space of $\s{\graph, x}\in\SUFF$ is bounded, e.g. \# edges $\in [0,n\times (n - 1)]$, we have: \pause
 
 \begin{equation*}
 \lim_{\theta_l\to\infty}\loglik{\theta}, \quad %
 \lim_{\theta_l\to\infty}\nabla\loglik{\theta}, \quad %
 \lim_{\theta_l\to\infty}\mathbf{H}\left(\theta\right)
 \end{equation*}
-log-likelihood, its gradient, and hessian are finite.
-\item The direct implication is that, while $\s{\graph, x}$ is on the boundary, the MLE for the other statistics exists.\footnote{\cite{Handcock2003} briefly mentions this}
+log-likelihood, its gradient, and hessian are finite.\pause
+\item The direct implication is that, while $\s{\graph, x}$ is on the boundary, the MLE for the other statistics exists.\footnote{\cite{Handcock2003} briefly mentions this}\pause
 \item All equations ultimately involve realizations of $\s{\graph', x}$ that equal $s_l$, relevant in: Simulations, Bootstrapping, etc.
 \end{itemize}
 
@@ -718,16 +602,32 @@ log-likelihood, its gradient, and hessian are finite.
 \end{frame}
 
 \begin{frame}
-\frametitle{Conditional Distribution}
+\frametitle{Conditional Graph Distributions}
 
-\begin{equation*}
-\Prcond{\sufstats{\Graph}_k = s_k}{\sufstats{\Graph}_l = s_l, \theta} = %
-\frac{%
-	\exp{\transpose{\theta}_{-l}\sufstats{\graph}_{-l}}
-}{%
-	\sum_{\graph': \sufstats{\graph'}_l = \sufstats{\graph}_l}\exp{\transpose{\theta}_{-l}\sufstats{\graph'}_{-l}}
-}\tag{3.5}
-\end{equation*}
+\begin{itemize}
+	\item Long history in (soc.) network science.\pause
+	\item Common usage: Hypothesis test prevalence of a feature.\pause{}
+	\begin{center}\it
+	Is the observed count of XYZ within the expected in a \alert{Bernoulli graph}? \\ \pause{}
+	Are statistics A, B, and C different from \alert{graphs with 5 triangles}?
+	\end{center}
+	\item Different names, same thing, e.g. CUG tests and rewiring algorithms.\pause
+	\item $\{\mbox{CUG}, \mbox{Rewiring}\}\subset \mbox{ERGM}$\pause
+	\item We can talk about \textit{Conditional} ERGMs.
+	
+	\begin{equation*}
+	\Prcond{\sufstats{\Graph}_k = s_k}{\sufstats{\Graph}_l = s_l, \theta} = %
+	\frac{%
+		\exp{\transpose{\theta}_{-l}\sufstats{\graph}_{-l}}
+	}{%
+		\sum_{\graph': \sufstats{\graph'}_l = \sufstats{\graph}_l}\exp{\transpose{\theta}_{-l}\sufstats{\graph'}_{-l}}
+	}\tag{Eq in 3.5 thesis}
+	\end{equation*}
+	\pause In this equation, the marginal distribution of $\s{\graph}_k$ is orthogonal (independent) from $\theta_l$.
+	
+	
+\end{itemize}
+
 
 
 \end{frame}
@@ -798,125 +698,18 @@ govern social networks
 % 
 % \end{frame}
 
-% Simulation study -------------------------------------------------------------
-
-\begin{frame}[t]
-	\frametitle{Simulation Study}
-
-	\begin{minipage}[t]{.3\linewidth}
-		\begin{enumerate}
-			\item \alert{\bf Higher convergence rate}
-		\end{enumerate}
-	\end{minipage}
-\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
-	\begin{figure}
-	\centering
-		%\caption[Distribution of Converged and Non-converged Fits]{\label{fig:failed}Distribution of the average sufficient statistics per sample. Since samples can contain networks of sizes four and five, we have re-scaled the sufficient statistics counts by each network size's corresponding maximum value so these range from zero to one. Most of the cases in which methods failed to converge happened in scenarios where either all the graphs in the sample were fully connected or there was no transitive triad; exactly the cases that we excluded for the reminder of the analysis.}
-		\includegraphics[width=.9\linewidth]{failed.pdf}
-	\end{figure}
-	\end{minipage}
+\begin{frame}[c,label=ergmito-checklist]
+\frametitle{Overview of ERGMito}
+\fbox{\uncover<2->{{\huge $\checkmark$}}} Higher convergence rate.\\
+\fbox{\uncover<3->{{\huge $\checkmark$}}} Lower Type-I error rate.\\
+\fbox{\uncover<4->{{\huge $\checkmark$}}} Smaller Bias.\\
+\fbox{\uncover<5->{{\huge $\checkmark$}}} Improved power levels.\\
+\fbox{\uncover<6->{{\huge $\checkmark$}}} Faster.\\
+\fbox{\uncover<7->{{\huge $\checkmark$}}} More flexible.
+\vfill\hfill\hyperlink{ergmito-simulations}{\beamergotobutton{more}}
 \end{frame}
 
-\begin{frame}[t, label=ergmitoexperiment]
-	\frametitle{Simulation Study}
 
-	\begin{minipage}[t]{.3\linewidth}
-		\begin{enumerate}
-			\item Higher convergence rate
-			\item \alert{\bf Smaller Bias}
-		\end{enumerate}
-	\end{minipage}
-\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
-		\begin{table}
-		\centering
-		\begin{tabular}{rccc}
-			\toprule
-			& MLE & MC-MLE & RM \\ 
-			\midrule
-			edges & [0.27, 0.36] & [1.23, 1.65] & [0.55, 1.54] \\ 
-			ttriads & [-0.05, -0.03] & [-0.22, -0.16] & [-0.15, 0.48] \\ 
-			\bottomrule
-		\end{tabular}
-%		\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
-	\end{table}
-
-\hfill\hyperlink{ergmito-bias}{\beamergotobutton{alt take}}
-	\end{minipage}
-\end{frame}
-
-\begin{frame}[t]
-	\frametitle{Simulation Study}
-	
-	\begin{minipage}[t]{.3\linewidth}
-		\begin{enumerate}
-			\item Higher convergence rate
-			\item Smaller Bias
-			\item \alert{\bf Higher power}
-		\end{enumerate}
-	\end{minipage}
-\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
-		\begin{figure}
-			\centering
-			%		\caption[Empirical Power by Sample and Effect Size]{\label{fig:power}Empirical power by dataset size and effect size (the later considering only magnitude), for ERGM and \ergmito{} estimation methods. Power increases for both MC-MLE (ERGM) and MLE (\ergmito{}) with increases in the size of the dataset and effect size. There are indistinguishable differences in power between the two estimation methods.}
-			\includegraphics[width=.95\linewidth]{power.pdf}
-		\end{figure}
-	\end{minipage}
-\end{frame}
-
-\begin{frame}[t]
-	\frametitle{Simulation Study}
-	
-	\begin{minipage}[t]{.3\linewidth}
-		\begin{enumerate}
-			\item Higher convergence rate
-			\item Smaller Bias
-			\item Higher power
-			\item \alert{\bf Smaller Type I Error}
-		\end{enumerate}
-	\end{minipage}
-\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
-		\begin{table}
-			\centering\small
-			\begin{tabular}{*{2}{m{.1\linewidth}<\centering}*{5}{c}}
-				\toprule & & \multicolumn{3}{c}{P(Type I error)} & \multicolumn{2}{c}{$\chi^2$ (vs MLE)}\\ \cmidrule(r){3-5} \cmidrule(r){6-7}
-				Sample size & N. Sims. & MLE & MC-MLE & RM & MC-MLE & RM \\ 
-				\midrule
-				5 & 4,325 & 0.066 & 0.086 & 0.086 & 11.36 *** & 11.36 *** \\ 
-				10 & 4,677 & 0.063 & 0.078 & 0.073 & 8.44 *** & 3.73 * \\ 
-				15 & 4,818 & 0.060 & 0.072 & 0.063 & 5.50 ** & 0.41  \\ 
-				20 & 4,889 & 0.054 & 0.065 & 0.061 & 5.30 ** & 2.05  \\ 
-				30 & 4,946 & 0.053 & 0.059 & 0.055 & 1.60  & 0.07  \\ 
-				50 & 4,987 & 0.053 & 0.055 & 0.047 & 0.16  & 1.67  \\ 
-				100 & 4,999 & 0.054 & 0.054 & 0.050 & 0.00  & 0.81  \\ 
-				\bottomrule
-			\end{tabular}
-			%		\caption[Empirical Type I Error Rates]{\label{tab:typeI}Empirical Type I error rates. The $\chi^2$ statistic is from a 2-sample test for equality of proportions, and the significance levels are given by *** $p < 0.01$, ** $p < 0.05$, and * $p < 0.10$.} 
-		\end{table}
-	\end{minipage}
-\end{frame}
-
-\begin{frame}[t]
-	\frametitle{Simulation Study}
-	
-	\begin{minipage}[t]{.3\linewidth}
-		\begin{enumerate}
-			\item Higher convergence rate
-			\item Smaller Bias
-			\item Higher power
-			\item Smaller Type I Error
-			\item \alert{\bf Elapsed time}
-		\end{enumerate}
-	\end{minipage}
-\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
-		\begin{figure}
-			\centering
-			%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
-			\small
-			\def\svgwidth{.9\linewidth}
-			\input{fig/time.pdf_tex}
-		\end{figure}
-	\end{minipage}
-\end{frame}
 
 % ------------------------------------------------------------------------------
 \begin{frame}[c]
@@ -951,29 +744,7 @@ govern social networks
 	
 \end{frame}
 
-% ------------------------------------------------------------------------------
-\begin{frame}
-	% latex table generated in R 3.6.3 by xtable 1.8-4 package
-	% Mon Apr 27 23:32:51 2020
-	\begin{table}[!htbp]
-		\centering
-		\begin{tabular}{*{3}{c}*{3}{m{.15\linewidth}<\centering}}
-			\toprule
-			(1) & (2) & (3) & (4) & (5) & (6) \\
-			Size ($n$) & edges & ttriads & $\text{edges}\times\isone{n = 5}$ & $\text{ttriads}\times\isone{n = 5}$ & $\text{edges}\times\log{1/n}$ \\ 
-			\midrule
-			4 &  10 &  14 &   0 &   0 & -13.86 \\ 
-			4 &   6 &   2 &   0 &   0 & -8.32 \\ 
-			4 &   4 &   0 &   0 &   0 & -5.55 \\ 
-			5 &   6 &   1 &   6 &   1 & -9.66 \\ 
-			5 &   8 &   8 &   8 &   8 & -12.88 \\ 
-			5 &   6 &   2 &   6 &   2 & -9.66 \\ 
-			\multicolumn{6}{c}{\dots\textit{25 more rows}\dots} \\
-			\bottomrule
-		\end{tabular}
-		\caption[Example of Observed Sufficient Statistics for the Applied Example]{\label{tab:example-suffstats}Example of observed sufficient statistics for the team advice networks. Pooled-data ERGMs have multiple observed sufficient statistics (also known as target statistics). Furthermore, as shown here, we can manipulate common statistics as \textit{edges} (2) and \textit{ttriads} (3) to include, e.g. interaction effects (4) and (5), or more complex transformations, e.g. (6).}
-	\end{table}
-\end{frame}
+
 
 \begin{frame}
 
@@ -1042,19 +813,28 @@ govern social networks
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
-\section{Future Research}
+\section{Goodness-of-fit for Small Networks}
 
 \begin{frame}[c]
 \usebeamertemplate{section intro}{}{}
 \textcolor{uscgold}{
-\Large {\bf Future Research}
+\Large {\bf Goodness-of-fit for Small Networks}
 }
 \end{frame}
 
 
 
-\frame{
+\begin{frame}
+	\frametitle{Goodness-of-fit: Conditional Distributions}
+	\begin{itemize}
+		\item The current Goodness-of-fit (GOF) for ERGMs does not fit ERGMitos.\pause
+		\item First attempt to approach the problem: Conditional Distributions.\pause
+		\item Idea: Knowing how one structure predicts the other helps selecting the right benchmark.\pause
+		\item Brief study: Analyze the prediction capability that \textbf{Mutuals}, \textbf{Transitive Triads}, \textbf{Homophily}, and Receiver Effect terms have on each other.
+	\end{itemize}
+	
 \begin{figure}
+	
 	\centering
 	\def\svgwidth{.6\linewidth}
 	\input{fig/max-out-stats.pdf_tex}
@@ -1062,62 +842,17 @@ govern social networks
 	%\caption[Examples of Networks with Saturated Statistics]{Networks with saturated statistics. All three networks have five vertices composed of two females (black vertices) and three males (gray vertices). Network (a) shows the required set of ties to saturate the \textit{Mutuals} and \textit{Transitive Triads} sufficient statistics, which actually coincides with a fully connected graph, containing $(5\times 4)/2 = 10$ mutual ties and $5 \times 4 \times 3 = 60$ transitive triads. Graph (b) shows the required configuration to saturate the \textit{Gender-Homophily} sufficient statistic, containing $3\times 2 + 2\times 1 = 8$ homophilic ties. Graph (c) shows the minimum arrangement to saturate the \textit{Gender-Receiver Effect} statistic, also having $4 + 4 = 8$ ties (so each female receives 4 ties).}
 	\label{fig:maxout-gof-chapter}
 \end{figure}
-}
-
-%--------------------------------------------------------------------------------
-\begin{frame}[c]
-	\frametitle{Conditional Probability: Mutual Ties}
-	\begin{minipage}[b]{.28\linewidth}
-		\begin{figure}
-			\includegraphics[width=.3\linewidth]{mutual.pdf}
-		\end{figure}
-		
-		\begin{itemize}[<+->]
-			\item Better predicted by other Markov structures.
-			\item Non-Markov structures = poor prediction.
-			\item No big impact of prevalence ($\theta_{\mbox{mutual}}$).
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}[b]{.7\linewidth}
-		\begin{figure}
-			\centering
-			\def\svgwidth{.95\linewidth}
-			\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-mutuals-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-mutuals.pdf_tex}}}
-			\mode<handout>{\input{fig/conditional-prob-mutuals.pdf_tex}}
-		\end{figure}
-	\end{minipage}
-	
 \end{frame}
 
-%--------------------------------------------------------------------------------
 \begin{frame}[c]
-	\frametitle{Conditional Probability: Homophily}
-	\begin{minipage}[b]{.7\linewidth}
-		\begin{figure}
-			\centering
-			\def\svgwidth{.95\linewidth}
-			\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-homophily-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-homophily.pdf_tex}}}
-			\mode<handout>{\input{fig/conditional-prob-homophily.pdf_tex}}
-		\end{figure}
-	\end{minipage}
-	\begin{minipage}[b]{.28\linewidth}
-		\begin{figure}
-			\includegraphics[width=.3\linewidth]{homophily.pdf}
-		\end{figure}
-		
-		\begin{itemize}[<+->]
-			\item No structure has high predictive power.
-			\item Almost zero association with Receiver Effect.
-			\item Prevalence ($\theta_{\mbox{homophily}}$) has no effect.
-		\end{itemize}
-	\end{minipage}
-	
-	
+Using the conditional ERGM probabilities described earlier on, I obtained the expected values of ttriads (and other statistics) when conditioning on edge counts, mutuals, homophily, and sender effect.
 \end{frame}
 
+
+
 %--------------------------------------------------------------------------------
-\begin{frame}[c]
-	\frametitle{Conditional Probability: Transitive Triads}
+\begin{frame}[c,label=conditional-transitivity]
+	\frametitle{Conditional Distribution: Transitive Triads}
 \begin{minipage}[b]{.28\linewidth}
 	\begin{figure}
 		\includegraphics[width=.3\linewidth]{ttriad.pdf}
@@ -1136,11 +871,37 @@ govern social networks
 	\mode<handout>{\input{fig/conditional-prob-ttriad.pdf_tex}}
 \end{figure}
 \end{minipage}
-
+\vfill\hfill
+\hyperlink{conditional-mutual}{\beamergotobutton{more examples}}
 \end{frame}
 
 
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+\frametitle{GOF for Small Networks}
 
+
+\begin{enumerate}
+	\item Markov structures (involve two or more ties) are better predictors of each other.
+	\item \textit{Miopic} terms: fast saturation implies poor information, e.g. homophily and receiver effect saturate at 8/20 ties:
+	\begin{figure}
+	\centering
+	{\footnotesize\def\svgwidth{.5\linewidth}
+	\input{fig/max-out-stats.pdf_tex}
+	}
+	\end{figure}
+	\vspace{.5cm}
+	\item Not only GOF:
+	\begin{itemize}
+		\item \textbf{Co-linearity} how much correlated are A and B?
+		\item \textbf{Parsimony} improve prediction while keeping the number of terms small.
+		\item \textbf{The right permutation} Evaluate how stringent a permutation test would be.
+	\end{itemize}
+\end{enumerate}
+
+
+
+\end{frame}
 
 
 % % ------------------------------------------------------------------------------
@@ -1254,6 +1015,37 @@ these are part of the same evolutionary tree!}
 
 \end{frame}
 
+\begin{frame}[t,label=phylo-bad]
+	\frametitle{Example 2: Bad quality prediction}
+	
+	\begin{minipage}[m]{.3\linewidth}
+		\small
+		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+		\textbf{MAE:} 0.52 \\
+		\textbf{AUC:} 0.33 \\
+		\textbf{Type:} Molecular Function\\
+		\textbf{Name:} mannosyl-oligosaccharide 1,2-alpha-mannosidase activity\\
+		\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0004571}{\alert{GO:0004571}} involved in synthesis of glycoproteins (\href{https://en.wikipedia.org/wiki/Mannosyl-oligosaccharide_1,2-alpha-mannosidase}{\alert{wiki}} and \href{https://en.wikipedia.org/wiki/Glycoprotein}{\alert{examples}}).
+		
+		\hyperlink{phylo-good}{\beamerreturnbutton{go back}}
+	\end{minipage}
+	\begin{minipage}[m]{.65\linewidth}
+		\def\tmpwdth{.9\linewidth}
+		\mode<beamer>{
+			\centering
+			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}}
+		}
+		
+		\mode<handout>{
+			\centering
+			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-bad1-loo-annotated.pdf}
+		}
+		
+	\end{minipage}
+	
+	
+\end{frame}
+
 
 % ------------------------------------------------------------------------------
 \begin{frame}[label=other-models]
@@ -1365,8 +1157,227 @@ There various approaches for this, some to highlight
 
 \end{frame}
 
+% ------------------------------------------------------------------------------
+\begin{frame}[label=phylo-data]
+	\frametitle{Data: Phylogenetic trees}
+	
+	Sample of annotations (first 10 in a single tree, Phosphoserine Phosphatase [PTHR10000])
+	
+	\small
+	
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{rrll}
+			\toprule
+			Internal id & Branch Length & type & ancestor \\ 
+			\midrule
+			AN0 &  & S & LUCA \\ 
+			AN1 & 0.06 & S & Archaea-Eukaryota \\ 
+			AN2 & 0.24 & S & Eukaryota \\ 
+			AN3 & 0.44 & S & Unikonts \\ 
+			AN4 & 0.42 & S & Opisthokonts \\ 
+			AN6 & 0.68 & D &  \\ 
+			AN9 & 0.79 & S & Amoebozoa \\ 
+			AN10 & 0.18 & D &  \\ 
+			AN15 & 0.57 & S & Dictyostelium \\ 
+			AN18 & 0.52 & S & Alveolata-Stramenopiles \\ 
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+\end{frame}
 
+\begin{frame}
+	\frametitle{Data: Node type (events)}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.7\linewidth]{distribution-event-type.pdf}
+	\end{figure}
+\end{frame}
 
+\begin{frame}
+	\frametitle{Data: Annotations (example)}
+	
+	This is the first 10 of $\sim$ 400,000 experimental annotations used:
+	
+	\footnotesize
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{rllll}
+			\toprule
+			& Family & Id & GO term & Qualifier \\ 
+			\midrule
+			1 & PTHR12345 & HUMAN$|$HGNC=15756$|$UniProtKB=Q9H190 & GO:0005546 &  \\ 
+			2 & PTHR11361 & HUMAN$|$HGNC=7325$|$UniProtKB=P43246 & GO:0016887 & CONTRIBUTES\_TO \\ 
+			3 & PTHR10782 & MOUSE$|$MGI=MGI=3040693$|$UniProtKB=Q6P1E1 & GO:0045582 &  \\ 
+			4 & PTHR23086 & ARATH$|$TAIR=AT3G09920$|$UniProtKB=Q8L850 & GO:0006520 &  \\ 
+			5 & PTHR32061 & RAT$|$RGD=619819$|$UniProtKB=Q9EPI6 & GO:0043197 &  \\ 
+			6 & PTHR46870 & ARATH$|$TAIR=AT3G46870$|$UniProtKB=Q9STF9 & GO:1990825 &  \\ 
+			7 & PTHR15204 & MOUSE$|$MGI=MGI=1919439$|$UniProtKB=Q9Z1R2 & GO:0045861 &  \\ 
+			8 & PTHR22928 & DROME$|$FlyBase=FBgn0050085$|$UniProtKB=Q9XZ34 & GO:0030174 &  \\ 
+			9 & PTHR35972 & HUMAN$|$HGNC=34401$|$UniProtKB=A2RU48 & GO:0005515 &  \\ 
+			10 & PTHR10133 & DROME$|$FlyBase=FBgn0002905$|$UniProtKB=O18475 & GO:0097681 &  \\ 
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data: Experimental Annotations}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.7\linewidth]{distribution-annotation-type.pdf}
+	\end{figure}
+\end{frame}
+
+% Simulation study -------------------------------------------------------------
+
+\begin{frame}[t,label=ergmito-simulations]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item \alert{\bf Higher convergence rate}
+		\end{enumerate}
+		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
+	\end{minipage}
+	\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
+		\begin{figure}
+			\centering
+			%\caption[Distribution of Converged and Non-converged Fits]{\label{fig:failed}Distribution of the average sufficient statistics per sample. Since samples can contain networks of sizes four and five, we have re-scaled the sufficient statistics counts by each network size's corresponding maximum value so these range from zero to one. Most of the cases in which methods failed to converge happened in scenarios where either all the graphs in the sample were fully connected or there was no transitive triad; exactly the cases that we excluded for the reminder of the analysis.}
+			\includegraphics[width=.9\linewidth]{failed.pdf}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}[t, label=ergmitoexperiment]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item \alert{\bf Smaller Bias}
+		\end{enumerate}
+		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
+	\end{minipage}
+	\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
+		\begin{table}
+			\centering
+			\begin{tabular}{rccc}
+				\toprule
+				& MLE & MC-MLE & RM \\ 
+				\midrule
+				edges & [0.27, 0.36] & [1.23, 1.65] & [0.55, 1.54] \\ 
+				ttriads & [-0.05, -0.03] & [-0.22, -0.16] & [-0.15, 0.48] \\ 
+				\bottomrule
+			\end{tabular}
+			\caption[Empirical Biases per Method]{\label{tab:empirical-bias-sim}Empirical bias. Each cell shows the 95\% confidence interval of each methods' empirical bias.} 
+		\end{table}
+		
+		\hfill\hyperlink{ergmito-bias}{\beamergotobutton{alt take}}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item Smaller Bias
+			\item \alert{\bf Higher power}
+		\end{enumerate}
+		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
+	\end{minipage}
+	\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
+		\begin{figure}
+			\centering
+			%		\caption[Empirical Power by Sample and Effect Size]{\label{fig:power}Empirical power by dataset size and effect size (the later considering only magnitude), for ERGM and \ergmito{} estimation methods. Power increases for both MC-MLE (ERGM) and MLE (\ergmito{}) with increases in the size of the dataset and effect size. There are indistinguishable differences in power between the two estimation methods.}
+			\includegraphics[width=.95\linewidth]{power.pdf}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item Smaller Bias
+			\item Higher power
+			\item \alert{\bf Smaller Type I Error}
+		\end{enumerate}
+		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
+	\end{minipage}
+	\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
+		\begin{table}
+			\centering\small
+			\begin{tabular}{*{2}{m{.1\linewidth}<\centering}*{5}{c}}
+				\toprule & & \multicolumn{3}{c}{P(Type I error)} & \multicolumn{2}{c}{$\chi^2$ (vs MLE)}\\ \cmidrule(r){3-5} \cmidrule(r){6-7}
+				Sample size & N. Sims. & MLE & MC-MLE & RM & MC-MLE & RM \\ 
+				\midrule
+				5 & 4,325 & 0.066 & 0.086 & 0.086 & 11.36 *** & 11.36 *** \\ 
+				10 & 4,677 & 0.063 & 0.078 & 0.073 & 8.44 *** & 3.73 * \\ 
+				15 & 4,818 & 0.060 & 0.072 & 0.063 & 5.50 ** & 0.41  \\ 
+				20 & 4,889 & 0.054 & 0.065 & 0.061 & 5.30 ** & 2.05  \\ 
+				30 & 4,946 & 0.053 & 0.059 & 0.055 & 1.60  & 0.07  \\ 
+				50 & 4,987 & 0.053 & 0.055 & 0.047 & 0.16  & 1.67  \\ 
+				100 & 4,999 & 0.054 & 0.054 & 0.050 & 0.00  & 0.81  \\ 
+				\bottomrule
+			\end{tabular}
+			%		\caption[Empirical Type I Error Rates]{\label{tab:typeI}Empirical Type I error rates. The $\chi^2$ statistic is from a 2-sample test for equality of proportions, and the significance levels are given by *** $p < 0.01$, ** $p < 0.05$, and * $p < 0.10$.} 
+		\end{table}
+	\end{minipage}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Simulation Study}
+	
+	\begin{minipage}[t]{.3\linewidth}
+		\begin{enumerate}
+			\item Higher convergence rate
+			\item Smaller Bias
+			\item Higher power
+			\item Smaller Type I Error
+			\item \alert{\bf Elapsed time}
+		\end{enumerate}
+		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
+	\end{minipage}
+	\hfill\begin{minipage}[t]{.65\linewidth}%\vspace{-.75cm}
+		\begin{figure}
+			\centering
+			%	\caption[Distribution of Elapsed Time]{\label{fig:elapsedtime}Distribution of elapsed time (in seconds) for the estimation process for MC-MLE (ERGM) versus MLE (using \ergmito{}). Overall, the MLE implementation is orders of magnitude faster compared to the time required by the MC-MLE implementation to do the parameter estimation.}
+			\small
+			\def\svgwidth{.9\linewidth}
+			\input{fig/time.pdf_tex}
+		\end{figure}
+	\end{minipage}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[label=example-data-ergm]
+	% latex table generated in R 3.6.3 by xtable 1.8-4 package
+	% Mon Apr 27 23:32:51 2020
+	\begin{table}[!htbp]
+		\centering
+		\begin{tabular}{*{3}{c}*{3}{m{.15\linewidth}<\centering}}
+			\toprule
+			(1) & (2) & (3) & (4) & (5) & (6) \\
+			Size ($n$) & edges & ttriads & $\text{edges}\times\isone{n = 5}$ & $\text{ttriads}\times\isone{n = 5}$ & $\text{edges}\times\log{1/n}$ \\ 
+			\midrule
+			4 &  10 &  14 &   0 &   0 & -13.86 \\ 
+			4 &   6 &   2 &   0 &   0 & -8.32 \\ 
+			4 &   4 &   0 &   0 &   0 & -5.55 \\ 
+			5 &   6 &   1 &   6 &   1 & -9.66 \\ 
+			5 &   8 &   8 &   8 &   8 & -12.88 \\ 
+			5 &   6 &   2 &   6 &   2 & -9.66 \\ 
+			\multicolumn{6}{c}{\dots\textit{25 more rows}\dots} \\
+			\bottomrule
+		\end{tabular}
+		\caption[Example of Observed Sufficient Statistics for the Applied Example]{\label{tab:example-suffstats}Example of observed sufficient statistics for the team advice networks. Pooled-data ERGMs have multiple observed sufficient statistics (also known as target statistics). Furthermore, as shown here, we can manipulate common statistics as \textit{edges} (2) and \textit{ttriads} (3) to include, e.g. interaction effects (4) and (5), or more complex transformations, e.g. (6).}
+	\end{table}
+\end{frame}
 
 
 % ------------------------------------------------------------------------------
@@ -1428,6 +1439,58 @@ We performed a simulation study with the following features:
 
 %\vfill\hfill \hyperlink{ergmitoexperiment}{\beamerreturnbutton{go back}}
 
+\end{frame}
+
+%--------------------------------------------------------------------------------
+\begin{frame}[c,label=conditional-mutuals]
+	\frametitle{Conditional Distribution: Mutual Ties}
+	\begin{minipage}[b]{.28\linewidth}
+		\begin{figure}
+			\includegraphics[width=.3\linewidth]{mutual.pdf}
+		\end{figure}
+		
+		\begin{itemize}[<+->]
+			\item Better predicted by other Markov structures.
+			\item Non-Markov structures = poor prediction.
+			\item No big impact of prevalence ($\theta_{\mbox{mutual}}$).
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[b]{.7\linewidth}
+		\begin{figure}
+			\centering
+			\def\svgwidth{.95\linewidth}
+			\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-mutuals-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-mutuals.pdf_tex}}}
+			\mode<handout>{\input{fig/conditional-prob-mutuals.pdf_tex}}
+		\end{figure}
+	\end{minipage}
+	\vfill\hfill
+	\hyperlink{conditional-transitivity}{\beamerreturnbutton{go back}}
+\end{frame}
+
+%--------------------------------------------------------------------------------
+\begin{frame}[c,label=conditional-homophily]
+	\frametitle{Conditional Distribution: Homophily}
+	\begin{minipage}[b]{.7\linewidth}
+		\begin{figure}
+			\centering
+			\def\svgwidth{.95\linewidth}
+			\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-homophily-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-homophily.pdf_tex}}}
+			\mode<handout>{\input{fig/conditional-prob-homophily.pdf_tex}}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[b]{.28\linewidth}
+		\begin{figure}
+			\includegraphics[width=.3\linewidth]{homophily.pdf}
+		\end{figure}
+		
+		\begin{itemize}[<+->]
+			\item No structure has high predictive power.
+			\item Almost zero association with Receiver Effect.
+			\item Prevalence ($\theta_{\mbox{homophily}}$) has no effect.
+		\end{itemize}
+	\end{minipage}
+	\vfill\hfill
+	\hyperlink{conditional-transitivity}{\beamerreturnbutton{go back}}
 \end{frame}
 
 \end{document}

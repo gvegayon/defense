@@ -1,4 +1,4 @@
-%% Creator: Inkscape 1.0 (4035a4f, 2020-05-01), www.inkscape.org
+%% Creator: Inkscape 1.0 (1.0+r73+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'phylo-model.pdf' (pdf, eps, ps)
 %%
@@ -63,10 +63,9 @@
     \put(0.65409784,0.08636527){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Function is absent\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{phylo-model.pdf}}%
     \put(0.65409787,0.01749509){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Function is present\end{tabular}}}}%
-    \put(0.16115643,0.37621674){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{innernode}{$\loss$}}\end{tabular}}}}%
-    \put(0.46175715,0.28780196){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{innernode}{$\gain$}}\end{tabular}}}}%
-    \put(0.82084265,0.73096298){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{leafnode}{$\misszero$}}\end{tabular}}}}%
-    \put(0.82084265,0.37602871){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{leafnode}{$\missone$}}\end{tabular}}}}%
+    \put(0.16115643,0.37621674){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{innernode}{$\gain$}}\end{tabular}}}}%
+    \put(0.46175715,0.28780196){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{innernode}{$\loss$}}\end{tabular}}}}%
+    \put(0.82084265,0.37602871){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{leafnode}{$\misszero$}}\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{phylo-model.pdf}}%
     \put(0.0694898,0.643148){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{rootnode}{$\pi$}}\end{tabular}}}}%
     \put(0.93556847,0.50621088){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\Huge{?}}\end{tabular}}}}%
