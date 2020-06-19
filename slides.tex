@@ -178,20 +178,18 @@ including: experimentally, human curated information, and machine inferred.
 GWAS to treatment.)
 }
 
-
-
-% ------------------------------------------------------------------------------
-\begin{frame}
-
-\begin{figure}
-\centering
-{\footnotesize
-\def\svgwidth{.7\linewidth}
-\input{fig/Phylogenetic_tree-wiki.pdf_tex}
-}
-\caption{A phylogenetic tree of living things, based on RNA data and proposed by Carl Woese, showing the separation of bacteria, archaea, and eukaryotes (\href{https://en.wikipedia.org/wiki/File:Phylogenetic_tree.svg}{wiki})}
-\end{figure}
-\end{frame}
+%% ------------------------------------------------------------------------------
+%\begin{frame}
+%
+%\begin{figure}
+%\centering
+%{\footnotesize
+%\def\svgwidth{.7\linewidth}
+%\input{fig/Phylogenetic_tree-wiki.pdf_tex}
+%}
+%\caption{A phylogenetic tree of living things, based on RNA data and proposed by Carl Woese, showing the separation of bacteria, archaea, and eukaryotes (\href{https://en.wikipedia.org/wiki/File:Phylogenetic_tree.svg}{wiki})}
+%\end{figure}
+%\end{frame}
 
 \note[enumerate]{
 \item Phylogenetic trees show evolutionary relationships between species
@@ -818,7 +816,7 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 
 % ------------------------------------------------------------------------------
 \begin{frame}[t]
-	\frametitle{Future Research: phylogenetic models}
+	\frametitle{What Drives Evolution}
 	
 	Imagine that we have 3 functions (rows) and that each node has 2 siblings (columns)
 	
@@ -873,8 +871,36 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 		\end{table}
 	}
 	
-	\pause
-	Modeling the full Markov transition matrix would take $2^3 \times 2^6 = 512$ parameters.
+%	\pause
+%	Modeling the full Markov transition matrix would take $2^3 \times 2^6 = 512$ parameters.
+	
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+	\frametitle{What Drives Evolution: a game changer}
+	
+	\begin{minipage}[m]{.59\linewidth}
+		In a model with 3 functions and 2 offspring per node
+		\begin{itemize}
+			\item Full Markov transition matrix: $2^3 \times 2^6 = 512$
+			\item Using sufficient statistics:
+			\begin{itemize}
+				\item[] Pairwise co-evolution: 3 terms,
+				\item[]	Pairwise Neofunctionalization: 3 terms,
+				\item[] Pairwise Subfunctionalization: 3 terms,
+				\item[] Function specific gain: 3 terms,
+				\item[] Function specific loss: 3 terms,
+				\item[Total:] 15 parameters. 
+			\end{itemize}
+		\end{itemize}
+	\end{minipage}\hfill
+	\begin{minipage}[m]{.39\linewidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.99\linewidth]{phylo-model-overview.pdf}
+		\end{figure}
+	\end{minipage}
 	
 \end{frame}
 
@@ -930,37 +956,95 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 \end{frame}
 
 % ------------------------------------------------------------------------------
+\newcommand{\ultima}[3]{\begin{minipage}[t]{#1\linewidth}%
+		\begin{center}\shadowbox{#2}\end{center}\vspace{-.75cm}\hfill%	
+
+		\small#3\normalsize\end{minipage}%
+	}
 \begin{frame}[t]
 \frametitle{Concluding Remarks}
 
-% \large {\bf Accomplished so far}
-\begin{itemize}[<+->]
-\item Paper 1: Phylogenetic models of gene functional evolution
-  \begin{itemize}
-  \item Parsimonious and biologically meaningful.
-  \item Computationally scalable.
-  \item Performance comparable to state-of-the-art alternatives.
-  \item \textbf{Next steps:} Use ERGMs framework to break assumptions.
-  \end{itemize}
-\item Paper 2: ERGMs for small networks
-  \begin{itemize}
-  \item An extension to a well studied models for social networks.
-  \item Small size allows exact calculations.
-  \item Opens the door to a large set of methodological innovations.
-  \item \textbf{Next steps:} GOF or extensions to large networks?
-  \end{itemize}
+\color<2>{gray}
+\ultima{.3}{Before my dissertation}{%
+	\textbf{Gene functions}
+	\begin{itemize}
+		\item ``Small scale''.
+		\item Detached from theory.
+	\end{itemize}
+	
+	\textbf{ERGMs}
+	\begin{itemize}
+		\item Only approximations.
+		\item Small networks: underlooked.
+		\item ``Static'' approach.
+	\end{itemize}
+}\color<2->{black}\hfill
+\ultima{.3}{After my dissertation}{%
+	\textbf{Predicting gene functions}
+	\begin{itemize}
+		\item Scale-up the problem.
+		\item Data-driven models.
+		\item New ways to look at phylo data.
+	\end{itemize}
+
+	\textbf{ERGMs}
+	\begin{itemize}
+		\item Small $=$ complex.
+		\item Exact $=$ Explosion of methods
+	\end{itemize}
+}\hfill
+\ultima{.39}{Products}{
+\textbf{Publications}
+
+6 journal publications (\tiny Journal of Open Source Software, Stata Journal, Journal of health and social behavior, Translational behavioral medicine, Social Science \& Medicine\small) \textbf{+2 on the queue}
+
+\textbf{Published software}
+\begin{itemize}
+\item ergmito \includegraphics[width=.3\linewidth]{cran-downloads-ergmito.pdf}
+\item slurmR \includegraphics[width=.3\linewidth]{cran-downloads-slurmr.pdf}
+\item fmcmc \includegraphics[width=.3\linewidth]{cran-downloads-fmcmc.pdf}
+\item netdiffuseR \includegraphics[width=.3\linewidth]{cran-downloads-netdiffuser.pdf}
 \end{itemize}
 
-\vfill
-\footnotesize 
-\uncover<11->{{\bf Accomplishments during the development of this work}
-\begin{beamercolorbox}{conclusions}
-\begin{itemize}
-\item 6 journal publications (Journal of Open Source Software, Stata Journal, Journal of health and social behavior, Translational behavioral medicine, Social Science \& Medicine)
-\item 11 packages/libraries built (ergmito, similR, gnet, fmcmc, slurmR, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG)
-\end{itemize}
-\end{beamercolorbox}
+\textbf{Other tools}\\
+similR, gnet, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG, and {\large \textbf{Barry}}
+
 }
+
+%
+
+%\begin{itemize}
+%	content...
+%\end{itemize}
+%
+%% \large {\bf Accomplished so far}
+%\begin{itemize}[<+->]
+%\item Paper 1: Phylogenetic models of gene functional evolution
+%  \begin{itemize}
+%  \item Parsimonious and biologically meaningful.
+%  \item Computationally scalable.
+%  \item Performance comparable to state-of-the-art alternatives.
+%  \item \textbf{Next steps:} Use ERGMs framework to break assumptions.
+%  \end{itemize}
+%\item Paper 2: ERGMs for small networks
+%  \begin{itemize}
+%  \item An extension to a well studied models for social networks.
+%  \item Small size allows exact calculations.
+%  \item Opens the door to a large set of methodological innovations.
+%  \item \textbf{Next steps:} GOF or extensions to large networks?
+%  \end{itemize}
+%\end{itemize}
+%
+%\vfill
+%\footnotesize 
+%\uncover<11->{{\bf Accomplishments during the development of this work}
+%\begin{beamercolorbox}{conclusions}
+%\begin{itemize}
+%\item 6 journal publications (Journal of Open Source Software, Stata Journal, Journal of health and social behavior, Translational behavioral medicine, Social Science \& Medicine)
+%\item 11 packages/libraries built (ergmito, similR, gnet, fmcmc, slurmR, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG)
+%\end{itemize}
+%\end{beamercolorbox}
+%}
 \end{frame}
 
 
