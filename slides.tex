@@ -366,34 +366,28 @@ data from PantherDB with GO annotations and fit a large pooled model.
 
 % ------------------------------------------------------------------------------
 \begin{frame}[c]
-	\frametitle{Phylogenetics Modeling: Pooled-data models}
+	\frametitle{Phylogenetics Modeling: Pooling data}
 
-\begin{minipage}[m]{.6\linewidth}
-
-\begin{table}
-	\footnotesize
-	\centering
-	\begin{tabular}{lm{.15\linewidth}*{3}{m{.15\linewidth}<\centering}}\toprule
-		& & \multicolumn{3}{c}{Type of Prior} \\ \cmidrule(r){3-5}
-		& & Fixed to Beliefs & Empirical & Free \\ \midrule
-		\multirow{3}{*}[-.25cm]{\rotatebox{90}{Model Parameters}} %
-		& Shared across~trees             & \hlc{2-}{ } & - 	& - \\ \cmidrule(r){2-5}
-		& Class \hphantom{.....} specific & \hlc{3-}{ }  & \hlc{4-}{ } & \hlc{4-}{ } \\ \cmidrule(r){2-5}
-		& Function \hphantom{..} specific & -           & \hlc{5-}{ } & \hlc{5-}{ } \\
-		\bottomrule
-	\end{tabular}
-	\caption{Ways to fit pooled-data models.}
-\end{table}
+\begin{minipage}[m]{.5\linewidth}
+\begin{figure}
+	\mode<beamer>{
+	\includegraphics<1-2>[width=.8\linewidth]{phylo-bayes-a.pdf}%
+	\includegraphics<3>[width=.8\linewidth]{phylo-bayes-b.pdf}%
+	\includegraphics<4>[width=.8\linewidth]{phylo-bayes-c.pdf}%
+	\includegraphics<5->[width=.8\linewidth]{phylo-bayes.pdf}
+	}%
+\mode<handout>{\includegraphics<5>[width=.8\linewidth]{phylo-bayes.pdf}}
+\end{figure}
 \end{minipage}
-\begin{minipage}[m]{.38\linewidth}
+\begin{minipage}[m]{.48\linewidth}
 \begin{enumerate}
-	\item<2-> Featured in the first version of the model.
-	\item<3-> (new) Improves accuracy (sometimes).
-	\item<4-> (new) Hard to fit and no significant improvement (yet).
-	\item<5-> To-be-attempted.
+	\item[(a)]<2-> Featured in the first version of the model.
+	\item[(b)]<3-> ``Full glory'' Hierarchical Bayes (1,001 parameters for the 141 functions).
+	\item[(c)]<4-> Distilled version (a), improves accuracy.
+	\item[(d)]<5-> Model estimated for Molecular Function (using Empirical Bayes) without significant improvements.
 \end{enumerate}
 \end{minipage}
-
+\vfill
 \uncover<6->{All methods are now available in the \texttt{aphylo} package: \texttt{aphylo\_mle}, \texttt{aphylo\_mcmc}, and \texttt{aphylo\_hier}.}
 
 \end{frame}
@@ -405,7 +399,7 @@ data from PantherDB with GO annotations and fit a large pooled model.
 % ------------------------------------------------------------------------------
 
 
-\begin{frame}[c]
+\begin{frame}[c,label=phylo-table]
 	\frametitle{Overview of Prediction Results}
 	
 	\begin{minipage}[m]{.55\linewidth}
@@ -476,6 +470,8 @@ Molecular function & $\neq$ & Biological Process &  ? & Cellular Component
 \end{table}
 \normalsize
 
+	\only<1->{\vfill\hfill\hyperlink{phylo-data}{\beamergotobutton{data}}}
+
 \end{minipage}
 	
 
@@ -532,13 +528,13 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\begin{itemize}
 			\item<2-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
 			\item<3-> Focused on sufficient statistics $\s{\graph,x}$ \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}.
-			\item<5-> Most (all) applications use \textbf{approximations}.
 		\end{itemize}
+	 \uncover<5->{\LARGE Most (all) applications use \textbf{approximations}.\normalsize}
 	\end{minipage}\hfill
 	\begin{minipage}[m]{.44\linewidth}
 		\begin{figure}[!htbp]
 			\centering
-			\includegraphics<4->[width=.9\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}
+			\uncover<4->{\includegraphics[width=.9\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}}
 			%		\caption[Simple graphs: A ring and a Kite]{Although these two networks may look very different, \textit{a ring} and \textit{a kite}, under the Bernoulli, also known as Erd\H{o}s-R\'enyi, random graph model, both are equally likely, as the only sufficient statistic for this model is the number of observed ties, which is five in both cases.}
 			\label{fig:ring-and-kite}
 		\end{figure}
@@ -634,7 +630,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 
 
-\begin{frame}
+\begin{frame}[label=ergmito-table]
 
 \begin{minipage}[c]{.7\linewidth}
 	\begin{table}
@@ -683,6 +679,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\end{enumerate}
 \end{minipage}
 	
+	\vfill\hfill\hyperlink{example-data-ergm}{\beamergotobutton{data}}
 	
 \end{frame}
 
@@ -738,12 +735,12 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\large\alert{How much Term B can tell us about Term A?}\normalsize\pause
 	
 	\begin{itemize}
-		\item<2-> High predictive power (Term A $\perp$ Term B):
+		\item<2-> High predictive power (Term A $|$ Term B):
 		\begin{itemize}
 			\item<3-> Stepped slope.
 			\item<3-> Narrow Confidence Interval (CI).
 		\end{itemize}
-		\item<4-> Low predictive power (Term A $\perp$ Term C):
+		\item<4-> Low predictive power (Term A $|$ Term C):
 		\begin{itemize}
 			\item<5-> Positive slope (both increase b/c density increases).
 			\item<5-> Large CI.
@@ -771,26 +768,35 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 
 %--------------------------------------------------------------------------------
-\begin{frame}[c,label=conditional-transitivity]
+\begin{frame}[t,label=conditional-transitivity]
 	\frametitle{Conditional Distribution: Transitive Triads}
-\begin{minipage}[b]{.28\linewidth}
+
+\begin{minipage}[t]{.75\linewidth}
+\begin{figure}
+	\centering
+	\hspace{-1.1cm}
+	\def\svgwidth{1.05\linewidth}
+	\mode<beamer>{%
+		\only<1>{\phantom{\input{fig/conditional-prob-ttriad-0a.pdf_tex}}}%
+		\only<2>{\input{fig/conditional-prob-ttriad-0a.pdf_tex}}%
+		\only<3>{\input{fig/conditional-prob-ttriad-0b.pdf_tex}}%
+		\only<4>{\input{fig/conditional-prob-ttriad-0c.pdf_tex}}%
+		\only<5>{\input{fig/conditional-prob-ttriad-0d.pdf_tex}}%
+		\only<6->{\input{fig/conditional-prob-ttriad.pdf_tex}}}
+	\mode<handout>{\input{fig/conditional-prob-ttriad.pdf_tex}}
+\end{figure}
+\end{minipage}\hfill
+\begin{minipage}[t]{.23\linewidth}
+	\small
 	\begin{figure}
 		\includegraphics[width=.3\linewidth]{ttriad.pdf}
 	\end{figure}
-	\begin{itemize}[<+->]
-		\item Better predicted by Markov Structures.
-		\item Non-Markov structures provide a ``decent'' prediction.
-		\item Prevalence ($\theta_{\mbox{triads}}$) narrows CI.
+	\begin{itemize}
+		\item<7-> Edge count and mutuality are good predictors of transitivity.
+		\item<8-> Prevalence ($\theta_{\mbox{triads}}$) narrows the confidence intervals.
 	\end{itemize}
 \end{minipage}
-\begin{minipage}[b]{.7\linewidth}
-\begin{figure}
-	\centering
-	\def\svgwidth{.95\linewidth}
-	\mode<beamer>{\only<1-2>{\input{fig/conditional-prob-ttriad-1.pdf_tex}}\only<3->{\input{fig/conditional-prob-ttriad.pdf_tex}}}
-	\mode<handout>{\input{fig/conditional-prob-ttriad.pdf_tex}}
-\end{figure}
-\end{minipage}
+
 \vfill\hfill
 \hyperlink{conditional-mutual}{\beamergotobutton{more examples}}
 \end{frame}
@@ -839,9 +845,16 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \begin{frame}
 	\frametitle{Phylogenetics Modeling Strategies}
 	
+	\begin{minipage}[m]{.3\linewidth}
+	How to model the event?
+	\begin{figure}
+	\includegraphics[width=.9\linewidth]{phylo-model-overview-legend.pdf}
+	\end{figure}
+	\end{minipage}\hfill
 	\begin{minipage}[m]{.69\linewidth}
 	\mode<beamer>{
 		\begin{figure}
+			\phantom{\includegraphics<1>[width=.9\linewidth]{phylo-model-overview-1.pdf}}%
 			\includegraphics<2>[width=.9\linewidth]{phylo-model-overview-1.pdf}%
 			\includegraphics<3>[width=.9\linewidth]{phylo-model-overview-2.pdf}%
 			\includegraphics<4>[width=.9\linewidth]{phylo-model-overview.pdf}
@@ -854,9 +867,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\end{figure}
 	}
 	\end{minipage}
-	\begin{minipage}[m]{.3\linewidth}
-		\includegraphics[width=.9\linewidth]{phylo-model-overview-legend.pdf}
-	\end{minipage}
+
 		
 \end{frame}
 
@@ -1319,7 +1330,7 @@ There various approaches for this, some to highlight
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	
+	\vfill\hfill\hyperlink{phylo-table}{\beamerreturnbutton{go back}}
 \end{frame}
 
 \begin{frame}
@@ -1328,6 +1339,7 @@ There various approaches for this, some to highlight
 		\centering
 		\includegraphics[width=.7\linewidth]{distribution-event-type.pdf}
 	\end{figure}
+	\vfill\hfill\hyperlink{phylo-table}{\beamerreturnbutton{go back}}
 \end{frame}
 
 \begin{frame}
@@ -1355,6 +1367,7 @@ There various approaches for this, some to highlight
 			\bottomrule
 		\end{tabular}
 	\end{table}
+	\vfill\hfill\hyperlink{phylo-table}{\beamerreturnbutton{go back}}
 \end{frame}
 
 \begin{frame}
@@ -1363,6 +1376,7 @@ There various approaches for this, some to highlight
 		\centering
 		\includegraphics[width=.7\linewidth]{distribution-annotation-type.pdf}
 	\end{figure}
+	\vfill\hfill\hyperlink{phylo-table}{\beamerreturnbutton{go back}}
 \end{frame}
 
 %-------------------------------------------------------------------------------
@@ -1458,7 +1472,6 @@ There various approaches for this, some to highlight
 	\vfill\hfill\begin{minipage}[t]{.65\linewidth}\vspace{-.75cm}
 		\begin{figure}
 			\centering
-			%\caption[Distribution of Converged and Non-converged Fits]{\label{fig:failed}Distribution of the average sufficient statistics per sample. Since samples can contain networks of sizes four and five, we have re-scaled the sufficient statistics counts by each network size's corresponding maximum value so these range from zero to one. Most of the cases in which methods failed to converge happened in scenarios where either all the graphs in the sample were fully connected or there was no transitive triad; exactly the cases that we excluded for the reminder of the analysis.}
 			\includegraphics[width=.9\linewidth]{failed.pdf}
 		\end{figure}
 	\end{minipage}
@@ -1573,7 +1586,7 @@ There various approaches for this, some to highlight
 \begin{frame}[label=example-data-ergm]
 	% latex table generated in R 3.6.3 by xtable 1.8-4 package
 	% Mon Apr 27 23:32:51 2020
-	\begin{table}[!htbp]
+	\begin{table}
 		\centering
 		\begin{tabular}{*{3}{c}*{3}{m{.15\linewidth}<\centering}}
 			\toprule
@@ -1591,6 +1604,7 @@ There various approaches for this, some to highlight
 		\end{tabular}
 		\caption[Example of Observed Sufficient Statistics for the Applied Example]{\label{tab:example-suffstats}Example of observed sufficient statistics for the team advice networks. Pooled-data ERGMs have multiple observed sufficient statistics (also known as target statistics). Furthermore, as shown here, we can manipulate common statistics as \textit{edges} (2) and \textit{ttriads} (3) to include, e.g. interaction effects (4) and (5), or more complex transformations, e.g. (6).}
 	\end{table}
+\vfill\hfill\hyperlink{ergmito-table}{\beamerreturnbutton{go back}}
 \end{frame}
 
 
@@ -1656,20 +1670,20 @@ We performed a simulation study with the following features:
 \end{frame}
 
 %--------------------------------------------------------------------------------
-\begin{frame}[c,label=conditional-mutuals]
+\begin{frame}[c,label=conditional-mutual]
 	\frametitle{Conditional Distribution: Mutual Ties}
-	\begin{minipage}[b]{.28\linewidth}
+	\begin{minipage}[b]{.23\linewidth}
 		\begin{figure}
 			\includegraphics[width=.3\linewidth]{mutual.pdf}
 		\end{figure}
-		
+		\small
 		\begin{itemize}[<+->]
 			\item Better predicted by other Markov structures.
 			\item Non-Markov structures = poor prediction.
 			\item No big impact of prevalence ($\theta_{\mbox{mutual}}$).
 		\end{itemize}
 	\end{minipage}
-	\begin{minipage}[b]{.7\linewidth}
+	\begin{minipage}[b]{.75\linewidth}
 		\begin{figure}
 			\centering
 			\def\svgwidth{.95\linewidth}
@@ -1684,7 +1698,7 @@ We performed a simulation study with the following features:
 %--------------------------------------------------------------------------------
 \begin{frame}[c,label=conditional-homophily]
 	\frametitle{Conditional Distribution: Homophily}
-	\begin{minipage}[b]{.7\linewidth}
+	\begin{minipage}[b]{.75\linewidth}
 		\begin{figure}
 			\centering
 			\def\svgwidth{.95\linewidth}
@@ -1692,11 +1706,11 @@ We performed a simulation study with the following features:
 			\mode<handout>{\input{fig/conditional-prob-homophily.pdf_tex}}
 		\end{figure}
 	\end{minipage}
-	\begin{minipage}[b]{.28\linewidth}
+	\begin{minipage}[b]{.23\linewidth}
 		\begin{figure}
 			\includegraphics[width=.3\linewidth]{homophily.pdf}
 		\end{figure}
-		
+		\small
 		\begin{itemize}[<+->]
 			\item No structure has high predictive power.
 			\item Almost zero association with Receiver Effect.

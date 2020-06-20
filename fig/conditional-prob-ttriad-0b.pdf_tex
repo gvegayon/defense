@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.0 (1.0+r73+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'conditional-prob-ttriad.pdf' (pdf, eps, ps)
+%% Accompanies image file 'conditional-prob-ttriad-0b.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -53,8 +53,6 @@
   \begin{picture}(1,0.57211532)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{conditional-prob-ttriad.pdf}}%
-    \put(0.29216954,0.55088582){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\theta_{\mbox{triads}} = 0$\end{tabular}}}}%
-    \put(0.78733665,0.55088582){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\theta_{\mbox{triads}} = 1$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{conditional-prob-ttriad-0b.pdf}}%
   \end{picture}%
 \endgroup%

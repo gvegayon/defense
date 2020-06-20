@@ -91,8 +91,8 @@
      inkscape:window-maximized="1"
      inkscape:window-y="27"
      inkscape:window-x="67"
-     inkscape:window-height="1025"
-     inkscape:window-width="1853"
+     inkscape:window-height="713"
+     inkscape:window-width="1293"
      inkscape:snap-center="false"
      inkscape:snap-object-midpoints="true"
      inkscape:snap-bbox-midpoints="true"
@@ -109,7 +109,7 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="227.7916"
+     inkscape:cy="224.76114"
      inkscape:cx="234.04594"
      inkscape:zoom="0.9899495"
      inkscape:pageshadow="2"
@@ -263,7 +263,7 @@
          y="188.1001"
          x="80.882767"
          id="tspan933-1"
-         sodipodi:role="line">Offspring 1</tspan></text>
+         sodipodi:role="line">Sibling 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
@@ -274,7 +274,7 @@
          id="tspan933-1-5"
          x="80.882767"
          y="232.2345"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Offspring 1</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Sibling 2</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 0.4052982,246.94621 c 2.122659,-8.31831 15.8965038,-6.518 17.1829738,-12.62859"
