@@ -89,9 +89,9 @@ bioinformatics and social network analysis}
 
 \begin{itemize}[<+->]
 \item We live in a non-{\it IID} world.
-\item In some times, the cannot understand a process unless we look at it as a whole.
+\item Some times, the cannot understand a process unless we look at it as a whole.
 \item There's a reason why we usually assume {\it IID}.
-\item {\it Modern} (as of today) computational tools help us coping with that.
+\item {\it Modern} (as of today) computational tools help us cope with that.
 \end{itemize}
 \end{frame}
 
@@ -99,12 +99,12 @@ bioinformatics and social network analysis}
 \frame{\frametitle{Contents}\tableofcontents}
 
 % ------------------------------------------------------------------------------
-\section{On the prediction of gene functions using phylogenetic trees}
+\section{On the Prediction of Gene Functions Using Phylogenetic Trees}
 
 \begin{frame}[t]
 \usebeamertemplate{section intro}{}{}
 \textcolor{uscgold}{
-\Large {\bf On the prediction of gene functions using phylogenetic trees} \vskip0.25em
+\Large {\bf On the Prediction of Gene Functions Using Phylogenetic Trees} \vskip0.25em
 \large \textit{Joint with}: Paul D Thomas, Paul Marjoram, Huaiyu Mi, Duncan Thomas, and John Morrison
 }
 \end{frame}
@@ -156,7 +156,7 @@ use this information towards
 \item Roughly half of human genes ($\sim$ 10,000 / 20,000) have some
 form of annotation.
 \item We know something of less than 10\% of known genes (near 1.7M). % 40610
-\item An important effort of the GO has to do with phylogenetics...
+%\item An important effort of the GO has to do with phylogenetics...
 \end{itemize}
 
 \vfill
@@ -273,7 +273,7 @@ estimate of the annotation (yes/no).
 		\item \textcolor{rootnode}{Root has the function.}\pause[4]
 		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}.})\pause
 		\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
-		\item Only a fraction of annotations is known.
+		\item Only a fraction of the genes has some form of annotation.
 	\end{itemize}
 \end{minipage}
 
@@ -340,7 +340,7 @@ estimate of the annotation (yes/no).
 	\byside{Intuitive}{%
 		Gains and losses are more likely to happen at \alert{duplication} events.%
 	}\hfill\pause
-	\byside{High Accuracy}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC}
+	\byside{High Accuracy}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC.}
 \end{frame}
 
 
@@ -453,7 +453,7 @@ data from PantherDB with GO annotations and fit a large pooled model.
 	\begin{itemize}
 		\item \textbf{Molecular Function} No change.\pause
 		\item \textbf{Biological Process} Significantly better.\pause
-		\item \textbf{Cellular Component} does not converge.\pause
+		\item \textbf{Cellular Component} Does not converge.\pause
 	\end{itemize}
 
 
@@ -465,7 +465,7 @@ data from PantherDB with GO annotations and fit a large pooled model.
 		m{.22\linewidth}<\centering m{.03\linewidth}<\centering%
 		m{.25\linewidth}<\centering%
 	}
-Molecular function & $\neq$ & Biological Process &  ? & Cellular Component
+Molecular Function & $\neq$ & Biological Process &  ? & Cellular Component
 \end{tabular}
 \end{table}
 \normalsize
@@ -498,6 +498,31 @@ Molecular function & $\neq$ & Biological Process &  ? & Cellular Component
 }
 \end{frame}
 
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
+\frametitle{Social Networks}
+
+\begin{minipage}[m]{.3\linewidth}
+	\begin{itemize}
+		\item<2-> If COVID-19 has taught us something is that networks matter.
+		\item<3-> And specially small networks: Families, teams, friends, etc. \uncover<4->{The cornerstone of larger social systems.}
+		\item<5-> We can study networks using ERGMs.
+	\end{itemize}
+\vfill
+\uncover<1->{\tiny \textbf{Data:} Friendship network of a UK university faculty from \textbf{igraphdata}. \textbf{Viz:} R package \textbf{netplot} (yours truly, \href{https://github.com/usccana/netplot}{github.com/usccana/netplot})\normalsize}
+\end{minipage}\hfill
+\begin{minipage}[m]{.69\linewidth}
+\begin{figure}
+	\centering
+	\includegraphics<1->[height=.85\textheight]{ukfaculty-igraph.pdf}
+\end{figure}
+
+\end{minipage}
+
+
+\end{frame}
+
+%-------------------------------------------------------------------------------
 \begin{frame}
 \frametitle{What are Exponential Random Graph Models}
 
@@ -526,8 +551,8 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\begin{minipage}[m]{.55\linewidth}
 		
 		\begin{itemize}
-			\item<2-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
-			\item<3-> Focused on sufficient statistics $\s{\graph,x}$ \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}.
+			\item<2-> Focused on sufficient statistics $\s{\graph,x}$ \uncover<3->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}.
+			\item<4-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
 		\end{itemize}
 	 \uncover<5->{\LARGE Most (all) applications use \textbf{approximations}.\normalsize}
 	\end{minipage}\hfill
@@ -622,7 +647,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\begin{figure}
 			\includegraphics[width=.99\linewidth]{ci-ergm-all-nets.pdf}
 		\end{figure}
-		\only{\Large Is Gender Homophily \textit{a} feature of these graphs?}
+		\uncover<10->{\Large Is Gender Homophily a feature of these graphs?}
 		}
 	\end{minipage}
 	
@@ -638,31 +663,31 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\scalebox{.65}{
 			\begin{tabular}{l c c c c c c }
 				\toprule
-				& (1) & (2) & (3) & \hlcAlt{5}{(4)} & (5) & \hlcAlt{5}{(4b)} \\
+				& (1) & (2) & (3) & \hlcAlt{6}{(4)} & (5) & \hlcAlt{6}{(4b)} \\
 				\midrule
-				\hlcAlt{2}{edges}                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
+				edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
 				& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
-				\hlcAlt{2}{ttriads}                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
+				ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
 				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
 %				\only<3>{\rowcolor{gray!50}} %
-\hlcAlt{4}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+\hlcAlt{5}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
 				& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
 				\hlcAlt{2}{$\text{edges} \times \isone{n = 5}$}       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
 				& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
-				$(\text{Homophily})^{1/2}$                &               &               & $0.54$        &               &               &               \\
+				\hlcAlt{3}{$(\text{Homophily})^{1/2}$}                &               &               & $0.54$        &               &               &               \\
 				&               &               & $(1.32)$      &               &               &               \\
-				\hlcAlt{4}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
+				\hlcAlt{5}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
 				&               &               &               & $(0.18)$      &               & $(0.18)$      \\
 				Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
 				&               &               &               &               & $(0.18)$      &               \\
-				\hlcAlt{3}{\textit{Constraint (offset)}} \\
+				\hlcAlt{4}{\textit{Constraint (offset)}} \\
 				\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
 				\midrule
 				AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
 				BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
 				Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
 				Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
-				N replicates                              &               &               &               &               &               & \hlcAlt{5}{1000}          \\ \bottomrule
+				N replicates                              &               &               &               &               &               & \hlcAlt{6}{1000}          \\ \bottomrule
 				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
 				\end{tabular}}
 			\label{tab:ci-ergm-full}
@@ -672,10 +697,11 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \begin{minipage}[c]{.28\linewidth}
 	\pause\small
 	\begin{enumerate}[<+->]
-	\item \alert<2>{Structural terms are significant across models.}
-	\item \alert<3>{Using offset terms, we can constrain the support.}
-	\item \alert<4>{No support for gender homophily, but evidence of females sending more ties.}
-	\item \alert<5>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
+	\item \alert<2>{Interaction effects: seemingly included.}
+	\item \alert<3>{Transformed variables: also easy to add.}
+	\item \alert<4>{Using offset terms, we can constrain the support.}
+	\item \alert<5>{No support for gender homophily, but evidence of females sending more ties.}
+	\item \alert<6>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
 	\end{enumerate}
 \end{minipage}
 	
@@ -714,7 +740,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\begin{itemize}
 		\item The current Goodness-of-fit (GOF) for ERGMs does not fit ERGMitos.\pause
 		\item First attempt to approach the problem: Conditional Distributions.\pause
-		\item Idea: Knowing how one structure predicts the other helps selecting the right benchmark.\pause
+		\item Idea: Knowing how one structure predicts the other helps select the right benchmark.\pause
 		\item Brief study: Analyze the prediction capability that \textbf{Mutuals}, \textbf{Transitive Triads}, \textbf{Homophily}, and \textbf{Receiver Effect} terms have on each other.\pause
 	\end{itemize}
 	
@@ -819,8 +845,8 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\vspace{.5cm}
 	\item Not only GOF:
 	\begin{itemize}
-		\item \textbf{Co-linearity} how much correlated are A and B?
-		\item \textbf{Parsimony} improve prediction while keeping the number of terms small.
+		\item \textbf{Co-linearity} How correlated are A and B?
+		\item \textbf{Parsimony} Improve prediction while keeping the number of terms small.
 		\item \textbf{The right permutation} Evaluate how stringent a permutation test would be.
 	\end{itemize}
 \end{enumerate}
@@ -831,13 +857,13 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 
 
-\section{Connecting the dots: Phylogenetic Modeling with ERGMs}
+\section{Connecting the Dots: Phylogenetic Modeling with ERGMs}
 
 %-------------------------------------------------------------------------------
 \begin{frame}[c]
 	\usebeamertemplate{section intro}{}{}
 	\textcolor{uscgold}{
-		\Large {\bf Connecting the dots: Phylogenetic Modeling with ERGMs}
+		\Large {\bf Connecting the Dots: Phylogenetic Modeling with ERGMs}
 	}
 \end{frame}
 
@@ -846,7 +872,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\frametitle{Phylogenetics Modeling Strategies}
 	
 	\begin{minipage}[m]{.3\linewidth}
-	How to model the event?
+
 	\begin{figure}
 	\includegraphics[width=.9\linewidth]{phylo-model-overview-legend.pdf}
 	\end{figure}
@@ -962,13 +988,13 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \end{frame}
 
 
-\section{Next steps}
+\section{Next Steps}
 
 %-------------------------------------------------------------------------------
 \begin{frame}[c]
 	\usebeamertemplate{section intro}{}{}
 	\textcolor{uscgold}{
-		\Large {\bf Next steps}
+		\Large {\bf Next Steps}
 	}
 \end{frame}
 
@@ -1196,7 +1222,7 @@ these are part of the same evolutionary tree!}
 % ------------------------------------------------------------------------------
 \begin{frame}[label=other-models]
 \frametitle{Predicting gene functions}
-There various approaches for this, some to highlight
+There are various approaches for this, some to highlight
 \begin{itemize}%[<+->]
 \item Text analysis like in \cite{Pesaranghader2016}
 \item Protein-protein interaction networks like in \cite{Oliver2000,Piovesan2015}.
@@ -1266,7 +1292,7 @@ There various approaches for this, some to highlight
 		\hspace{2mm}Unif. prior &  - & - & \cellcolor{red!25}[\hphantom{-}0.06,\hphantom{-}0.09] \\ 
 		\bottomrule
 	\end{tabular}
-	\caption[Differences in Mean Absolute Error]{Differences in Mean Absolute Error [MAE]. Each cell shows the 95\% confidence interval for the difference in MAE resulting from two methods (row method minus column method). Cells are color coded blue when the method on that row has a significantly small MAE than the method on that column; Conversely, cells are colored red when the method in that column outperforms the method in that row.  Overall, predictions calculated using the parameter estimates from \textit{pooled-data} predictions outperform \textit{one-at-a-time}.}
+	\caption[Differences in Mean Absolute Error]{Differences in Mean Absolute Error [MAE]. Each cell shows the 95\% confidence interval for the difference in MAE resulting from two methods (row method minus column method). Cells are color coded blue when the method on that row has a significantly smaller MAE than the method on that column; Conversely, cells are colored red when the method in that column outperforms the method in that row.  Overall, predictions calculated using the parameter estimates from \textit{pooled-data} predictions outperform \textit{one-at-a-time}.}
 	\label{tab:vs-accuracy}
 \end{table}
 
@@ -1450,7 +1476,7 @@ There various approaches for this, some to highlight
 			\includegraphics[width=\fig1width]{fourcycle.pdf} & Four Cycle\linebreak[4]$\sum_{i\neq j \neq k \neq l}y_{ij}y_{jk}y_{kl}y_{li}$  \\
 			\bottomrule
 		\end{tabular}
-		\caption[Example of Graph Sufficient Statistics]{Besides of the common edge count statistic (number of ties in a graph), ERGMs allow measuring other more complex structures that can be captured as sufficient statistics. }
+		\caption[Example of Graph Sufficient Statistics]{Besides the common edge count statistic (number of ties in a graph), ERGMs allow measuring other more complex structures that can be captured as sufficient statistics. }
 		\label{fig:ergm-structs}
 		\normalsize
 	\end{figure}
@@ -1483,7 +1509,7 @@ There various approaches for this, some to highlight
 	\begin{minipage}[t]{.3\linewidth}
 		\begin{enumerate}
 			\item Higher convergence rate
-			\item \alert{\bf Smaller Bias}
+			\item \alert{\bf Smaller bias}
 		\end{enumerate}
 		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
 	\end{minipage}
@@ -1511,7 +1537,7 @@ There various approaches for this, some to highlight
 	\begin{minipage}[t]{.3\linewidth}
 		\begin{enumerate}
 			\item Higher convergence rate
-			\item Smaller Bias
+			\item Smaller bias
 			\item \alert{\bf Higher power}
 		\end{enumerate}
 		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
@@ -1531,9 +1557,9 @@ There various approaches for this, some to highlight
 	\begin{minipage}[t]{.3\linewidth}
 		\begin{enumerate}
 			\item Higher convergence rate
-			\item Smaller Bias
+			\item Smaller bias
 			\item Higher power
-			\item \alert{\bf Smaller Type I Error}
+			\item \alert{\bf Smaller type I error}
 		\end{enumerate}
 		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
 	\end{minipage}
@@ -1564,9 +1590,9 @@ There various approaches for this, some to highlight
 	\begin{minipage}[t]{.3\linewidth}
 		\begin{enumerate}
 			\item Higher convergence rate
-			\item Smaller Bias
+			\item Smaller bias
 			\item Higher power
-			\item Smaller Type I Error
+			\item Smaller type I error
 			\item \alert{\bf Elapsed time}
 		\end{enumerate}
 		\vfill\hyperlink{ergmito-checklist}{\beamerreturnbutton{return}}
@@ -1609,35 +1635,6 @@ There various approaches for this, some to highlight
 
 
 % ------------------------------------------------------------------------------
-\begin{frame}[label=mcmle]
-\frametitle{ERGMs: The MC-MLE approach}
-
-One of the most popular methods for estimating ERGMs is the MC-MLE approach (citations here)
-
-This consists on the following steps
-
-\begin{enumerate}
-\item Start from a sensible guess on what should be the population parameters
-(usually done using pseudo-MLE estimation)
-\item While the algorithm doesn't converge, do:
-  \begin{enumerate}
-  \item Simulate a stream of networks with the current state of the parameter,
-  $\theta_t$
-  \item Using the law of large numbers, approximate the ratio of likelihoods 
-  based on the parameter $\theta_t$, this is the objective function
-  \item Update the parameter by a Newton-Raphson step
-  \item Next iteration
-  \end{enumerate}
-\end{enumerate}
-
-\vfill\hfill \hyperlink{art}{\beamerreturnbutton{go back}}
-
-
-\end{frame}
-
-
-
-% ------------------------------------------------------------------------------
 \begin{frame}[label=ergmitodgp]
 \frametitle{Paper 2 Simulation Studies}
 
@@ -1651,21 +1648,6 @@ We performed a simulation study with the following features:
 \end{itemize}
 
 \vfill\hfill\hyperlink{ergmitoexample}{\beamerreturnbutton{go back}}
-
-\end{frame}
-
-
-
-% ------------------------------------------------------------------------------
-\begin{frame}[label=ergmito-bias]
-\frametitle{Paper 2 Simulation Studies: Empirical Bias}
-
-\begin{figure}
-\centering
-\includegraphics[width=.6\linewidth]{bias-02-various-sizes-4-5-ttriad.pdf}
-\end{figure}
-
-%\vfill\hfill \hyperlink{ergmitoexperiment}{\beamerreturnbutton{go back}}
 
 \end{frame}
 
