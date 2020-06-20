@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169, 9pt, handout]{beamer}
+\documentclass[aspectratio=169, 9pt]{beamer}
 
 % \transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
@@ -151,11 +151,11 @@ use this information towards
 
 \begin{itemize}[<+->]
 % \item Three domains: Cellular component, molecular function, biological process.
-\item The GO project has $\sim$ 44,700 validated terms  \hyperlink{aphylo-goexample}{\beamergotobutton{more}}, $\sim$ 7.3M annotations on $\sim$ 4,500 species.
-\item About $\sim$ 500,000 are on human genes.
+\item The GO project has $\sim$ 44,400 validated terms  \hyperlink{aphylo-goexample}{\beamergotobutton{more}}, $\sim$ 7.9M annotations on $\sim$ 4,600 species.
+\item About $\sim$ 550,000 are on human genes.
 \item Roughly half of human genes ($\sim$ 10,000 / 20,000) have some
 form of annotation.
-\item We know something of less than 10\% of known genes (near 1.7M).
+\item We know something of less than 10\% of known genes (near 1.7M). % 40610
 \item An important effort of the GO has to do with phylogenetics...
 \end{itemize}
 
@@ -271,12 +271,55 @@ estimate of the annotation (yes/no).
 	\pause
 	\begin{itemize}
 		\item \textcolor{rootnode}{Root has the function.}\pause[4]
-		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}.}\pause
+		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}.})\pause
 		\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
 		\item Only a fraction of annotations is known.
 	\end{itemize}
 \end{minipage}
 
+\end{frame}
+
+%--------------------------------------------------------------------------------
+\newcommand{\oinclude}[2]{\only<#1>{\includegraphics[width=\tmpwdth,clip,trim={0 0 0 2cm}]{#2}}}
+
+\begin{frame}[t, label=phylo-good]
+	\frametitle{Example of Data + Predictions}
+	
+	\begin{minipage}[m]{.3\linewidth}
+		\small
+		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+		\uncover<1->{\textbf{Family: PTHR11258}}\\
+		\uncover<2->{%
+			\textbf{Type:} Molecular Function\\
+			\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
+			\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
+		}\\
+		\uncover<3->{%
+			\textbf{MAE:} 0.34 \\
+			\textbf{AUC:} 0.91%
+		}
+		\vfill
+		\hyperlink{phylo-bad}{\beamerbutton{see a bad one}}
+	\end{minipage}
+	\begin{minipage}[m]{.65\linewidth}
+		\def\tmpwdth{.9\linewidth}
+		\mode<beamer>{
+			\centering
+			\oinclude{1}{example-trees-good1-loo-annotated-parts-0.pdf}%
+			\oinclude{2}{example-trees-good1-loo-annotated-parts-1.pdf}%
+			\oinclude{3}{example-trees-good1-loo-annotated-0.pdf}%
+			\oinclude{4}{example-trees-good1-loo-annotated-1.pdf}%
+			\oinclude{5}{example-trees-good1-loo-annotated-2.pdf}%
+			\oinclude{6}{example-trees-good1-loo-annotated.pdf}
+			%			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
+		}
+		
+		\mode<handout>{
+			\centering
+			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
+		}
+		
+	\end{minipage}
 \end{frame}
 
 %--------------------------------------------------------------------------------
@@ -287,48 +330,19 @@ estimate of the annotation (yes/no).
 	\end{minipage}}
 \begin{frame}[c,label=phylo-old-results]
 	\frametitle{Results from the first version}
-	\centering
-	\byside{Large scale}{%
+	\centering\pause
+	\byside{Scalable}{%
 		Pooled-data model including hundreds of trees (thousands of genes) fitted within minutes.%
-	}\hfill
-	\byside{Data driven}{%
-		Uninformative (unif) priors provided the highest accuracy results%
-	}\hfill
-	\byside{Aligned with priors}{%
+	}\hfill\pause
+	\byside{Robust}{%
+		Accuracy and estimates are consistent regardless of the used prior.%
+	}\hfill\pause
+	\byside{Intuitive}{%
 		Gains and losses are more likely to happen at \alert{duplication} events.%
-	}\hfill
+	}\hfill\pause
 	\byside{High Accuracy}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC}
 \end{frame}
 
-%--------------------------------------------------------------------------------
-\begin{frame}[t, label=phylo-good]
-	\frametitle{Example on Panther family PTHR11258}
-	
-	\begin{minipage}[m]{.3\linewidth}
-		\small
-		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
-		\textbf{MAE:} 0.34 \\
-		\textbf{AUC:} 0.91 \\
-		\textbf{Type:} Molecular Function\\
-		\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
-		\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
-		\vfill
-		\hyperlink{phylo-bad}{\beamerbutton{see a bad one}}
-	\end{minipage}
-	\begin{minipage}[m]{.65\linewidth}
-		\def\tmpwdth{.9\linewidth}
-		\mode<beamer>{
-			\centering
-			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
-		}
-		
-		\mode<handout>{
-			\centering
-			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}
-		}
-		
-	\end{minipage}
-\end{frame}
 
 
 \note[enumerate]{
@@ -391,10 +405,10 @@ data from PantherDB with GO annotations and fit a large pooled model.
 % ------------------------------------------------------------------------------
 
 
-\begin{frame}[t]
+\begin{frame}[c]
 	\frametitle{Overview of Prediction Results}
 	
-	\begin{minipage}[t]{.55\linewidth}
+	\begin{minipage}[m]{.55\linewidth}
 		\vspace{-.5cm}
 		\begin{table}
 		\centering
@@ -416,23 +430,23 @@ data from PantherDB with GO annotations and fit a large pooled model.
 					\alt<4>{\LARGE Cellular Comp.}{Cellular Component} \\ 
 				\midrule
 				\multicolumn{3}{l}{\hspace{-10pt}Mislabeling} \\
-				$\psi_{01}$ & 0.23 & 0.18 & 0.09 & 0.66 \\ 
-				$\psi_{10}$ & 0.01 & 0.01 & 0.01 & 0.33 \\ 
+				$\psi_{01}$ & 0.23 & 0.18 & 0.09 & \multirow{11}{*}{\uncover<4->{\Huge ?}}\\ %0.66 \\ 
+				$\psi_{10}$ & 0.01 & 0.01 & 0.01 & \\ %0.33 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Duplication Events} \\
-				$\mu_{d01}$ & 0.97 & 0.97 & \hlcAlt{3}{0.10} & 0.55 \\ 
-				$\mu_{d10}$ & 0.52 & 0.51 & \hlcAlt{3}{0.03} & 0.56 \\ 
+				$\mu_{d01}$ & 0.97 & 0.97 & \hlcAlt{3}{0.10} & \\ %0.55 \\ 
+				$\mu_{d10}$ & 0.52 & 0.51 & \hlcAlt{3}{0.03} & \\ %0.56 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Speciation Events} \\
-				$\mu_{s01}$ & 0.05 & 0.05 & 0.05 & 0.37 \\ 
-				$\mu_{s10}$ & 0.01 & 0.01 & 0.02 & 0.37 \\ 
+				$\mu_{s01}$ & 0.05 & 0.05 & 0.05 & \\ % 0.37 \\ 
+				$\mu_{s10}$ & 0.01 & 0.01 & 0.02 & \\ % 0.37 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Root node} \\
-				$\pi$ & 0.79 & 0.71 & 0.88 & 0.52 \\ \midrule
+				$\pi$ & 0.79 & 0.71 & 0.88 & \\ %0.52 \\ \midrule
 				Trees & 141 & 74 & 45 & 22 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the by-aspect model} \\
-				AUC & - & \hlcAlt{2}{0.77} & \hlcAlt{3}{0.83} & 0.53 \\ 
-				MAE & - & \hlcAlt{2}{0.34} & \hlcAlt{3}{0.26} & 0.50 \\ 
+				AUC & - & \hlcAlt{2}{0.77} & \hlcAlt{3}{0.83} & \\ % 0.53 \\ 
+				MAE & - & \hlcAlt{2}{0.34} & \hlcAlt{3}{0.26} & \\ % 0.50 \\ 
 				\multicolumn{3}{l}{\hspace{-10pt}Accuracy under the pooled-data model} \\
-				AUC & - & \hlcAlt{2}{0.77} & 0.75 & 0.75 \\ 
-				MAE & - & \hlcAlt{2}{0.35} & 0.34 & 0.37 \\ 
+				AUC & - & \hlcAlt{2}{0.77} & 0.75 & \\ % 0.75 \\ 
+				MAE & - & \hlcAlt{2}{0.35} & 0.34 & \\ %0.37 \\ 
 				\bottomrule
 		\end{tabular}}
 		%\caption[Parameter estimates comparing pooled-data vs by-type]{MCMC estimates for experimentally annotated trees. The first column shows the estimates under the pooled-data model in \ref{tab:pooled-experimentally-annotated}, while the following three columns report the estimates obtained when fitting the model using a pooled-data approach, but doing so by type of annotation. Readers should be aware that the estimation process of the fourth column, \textit{cellular component}, did not fully converge, likely due to sparsity of annotations within that category.}
@@ -440,13 +454,28 @@ data from PantherDB with GO annotations and fit a large pooled model.
 	\end{table}
 	\end{minipage}
 \hfill
-\begin{minipage}[t]{.44\linewidth}
+\begin{minipage}[m]{.44\linewidth}
 	Previously, joint estimates out-performed one-at-a-time\pause
-	\begin{itemize}[<+->]
-		\item \textbf{Molecular Function} No change.
-		\item \textbf{Biological Process} Significantly better.
-		\item \textbf{Cellular Component} does not converge.
+	\begin{itemize}
+		\item \textbf{Molecular Function} No change.\pause
+		\item \textbf{Biological Process} Significantly better.\pause
+		\item \textbf{Cellular Component} does not converge.\pause
 	\end{itemize}
+
+
+
+\small
+\begin{table}
+\begin{tabular}{%
+		m{.22\linewidth}<\centering m{.03\linewidth}<\centering%
+		m{.22\linewidth}<\centering m{.03\linewidth}<\centering%
+		m{.25\linewidth}<\centering%
+	}
+Molecular function & $\neq$ & Biological Process &  ? & Cellular Component
+\end{tabular}
+\end{table}
+\normalsize
+
 \end{minipage}
 	
 
@@ -496,62 +525,32 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
 	\end{figure}
 	
-	%\begin{center}
-	%\begin{equation*}
-	%\Prcond{\Graph = \graph}{X = x} = \frac{%
-	%\exp{\t{\beta}\s{\graph, x}} %
-	%}{%
-	%\sum_{\graph'\in\GRAPH} \exp{\t{\beta}\s{\graph', x}} %
-	%},\quad \forall \graph\in\GRAPH
-	%\end{equation*}
-	%\end{center}
-	
 	\vfill
 	
-	\begin{minipage}[m]{.45\linewidth}
+	\begin{minipage}[m]{.55\linewidth}
 		
 		\begin{itemize}
 			\item<2-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
-			\item<3-> Focused on vector of sufficient statistics $\s{\graph,x}$ (not the edges themselves) \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}
+			\item<3-> Focused on sufficient statistics $\s{\graph,x}$ \uncover<4->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}.
+			\item<5-> Most (all) applications use \textbf{approximations}.
 		\end{itemize}
 	\end{minipage}\hfill
-	\begin{minipage}[m]{.45\linewidth}
+	\begin{minipage}[m]{.44\linewidth}
 		\begin{figure}[!htbp]
 			\centering
-			\includegraphics<4->[width=.8\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}
+			\includegraphics<4->[width=.9\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}
 			%		\caption[Simple graphs: A ring and a Kite]{Although these two networks may look very different, \textit{a ring} and \textit{a kite}, under the Bernoulli, also known as Erd\H{o}s-R\'enyi, random graph model, both are equally likely, as the only sufficient statistic for this model is the number of observed ties, which is five in both cases.}
 			\label{fig:ring-and-kite}
 		\end{figure}
 	\end{minipage}
 	
 	
-	\vfill\hfill\hyperlink{discrete-exponential-theory}{\beamergotobutton{more theory}}
+	\vfill\hfill\hyperlink{discrete-exponential-theory}{\beamergotobutton{more theory}} %
+	\hyperlink{ergm-terms}{\beamergotobutton{more terms}}
 	
 \end{frame}
 
-% ------------------------------------------------------------------------------
-\begin{frame}[label=ergmterms]
 
-{\bf\color{suffstat} Sufficient statistics} have various forms
-
-\def\fig1width{.45\linewidth}
-\begin{figure}[!htbp]
-	\centering
-	\begin{tabular}{m{.2\linewidth}<\centering m{.4\linewidth}<\raggedright}
-		\toprule Representation & Description  \\ \midrule
-		\includegraphics[width=\fig1width]{mutual.pdf} & Mutual Ties (Reciprocity)\linebreak[4]$\sum_{i\neq j}y_{ij}y_{ji}$  \\
-		\includegraphics[width=\fig1width]{ttriad.pdf} & Transitive Triad (Balance)\linebreak[4]$\sum_{i\neq j\neq k}y_{ij}y_{jk}y_{ik}$  \\
-		\includegraphics[width=\fig1width]{homophily.pdf} & Homophily\linebreak[4]$\sum_{i\neq j}y_{ij}\mathbf{1}\left(x_i=x_j\right)$ \\
-		\includegraphics[width=\fig1width]{nodeicov2.pdf} & Attribute-receiver effect \linebreak[4]$\sum_{i\neq j}y_{ij}x_j$ \\
-		\includegraphics[width=\fig1width]{fourcycle.pdf} & Four Cycle\linebreak[4]$\sum_{i\neq j \neq k \neq l}y_{ij}y_{jk}y_{kl}y_{li}$  \\
-		\bottomrule
-	\end{tabular}
-	\caption[Example of Graph Sufficient Statistics]{Besides of the common edge count statistic (number of ties in a graph), ERGMs allow measuring other more complex structures that can be captured as sufficient statistics. }
-	\label{fig:ergm-structs}
-\end{figure}
-
-% \vfill\hfill \hyperlink{ergmeq}{\beamerreturnbutton{go back}}
-\end{frame}
 
 % % ------------------------------------------------------------------------------
 % \begin{frame}
@@ -568,14 +567,20 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 % \end{frame}
 
 \begin{frame}[c,label=ergmito-checklist]
-\frametitle{Overview of ERGMito}
+\frametitle{\texttt{ergmito}: Estimation of Small ERGM using Exact Statistics}
+
 \begin{minipage}[m]{.28\linewidth}
+	
+	\small Using \textbf{exact statistics} means:\normalsize
+	
 	\fbox{\uncover<2->{{\large $\checkmark$}}} Higher convergence rate.\\
 	\fbox{\uncover<3->{{\large $\checkmark$}}} Lower Type-I error rate.\\
 	\fbox{\uncover<4->{{\large $\checkmark$}}} Smaller Bias.\\
-	\fbox{\uncover<5->{{\large $\checkmark$}}} Improved power levels.\\
+	\fbox{\uncover<5->{{\large $\checkmark$}}} More power.\\
 	\fbox{\uncover<6->{{\large $\checkmark$}}} Faster.\\
 	\fbox{\uncover<7->{{\large $\checkmark$}}} More flexible.
+	
+	\uncover<8->{\includegraphics[width=.7\linewidth]{cran-downloads-ergmito.pdf}}
 \end{minipage}
 \hfill
 \begin{minipage}[m]{.34\linewidth}
@@ -713,7 +718,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\item The current Goodness-of-fit (GOF) for ERGMs does not fit ERGMitos.\pause
 		\item First attempt to approach the problem: Conditional Distributions.\pause
 		\item Idea: Knowing how one structure predicts the other helps selecting the right benchmark.\pause
-		\item Brief study: Analyze the prediction capability that \textbf{Mutuals}, \textbf{Transitive Triads}, \textbf{Homophily}, and Receiver Effect terms have on each other.
+		\item Brief study: Analyze the prediction capability that \textbf{Mutuals}, \textbf{Transitive Triads}, \textbf{Homophily}, and \textbf{Receiver Effect} terms have on each other.\pause
 	\end{itemize}
 	
 \begin{figure}
@@ -728,7 +733,39 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \end{frame}
 
 \begin{frame}[c]
-Using the conditional ERGM probabilities described earlier on, I obtained the expected values of ttriads (and other statistics) when conditioning on edge counts, mutuals, homophily, and sender effect.
+	
+	\begin{minipage}[t]{.48\linewidth}
+	\large\alert{How much Term B can tell us about Term A?}\normalsize\pause
+	
+	\begin{itemize}
+		\item<2-> High predictive power (Term A $\perp$ Term B):
+		\begin{itemize}
+			\item<3-> Stepped slope.
+			\item<3-> Narrow Confidence Interval (CI).
+		\end{itemize}
+		\item<4-> Low predictive power (Term A $\perp$ Term C):
+		\begin{itemize}
+			\item<5-> Positive slope (both increase b/c density increases).
+			\item<5-> Large CI.
+		\end{itemize}
+	\end{itemize}
+	\end{minipage}
+\hfill
+	\begin{minipage}[t]{.48\linewidth}
+	\begin{figure}
+	\mode<beamer>{
+		\only<-2>{\phantom{\includegraphics[width=.75\linewidth]{conditional-example-0.pdf}}}
+		\only<3-4>{\includegraphics[width=.75\linewidth]{conditional-example-0.pdf}}%
+		\only<5->{\includegraphics[width=.75\linewidth]{conditional-example.pdf}}
+	}
+	\mode<handout>{
+		\includegraphics[width=.75\linewidth]{conditional-example.pdf}
+	}
+	\end{figure}
+	\end{minipage}
+
+\only<1->{\footnotesize(All this is based on Chapters 3 and 6)\normalsize}
+
 \end{frame}
 
 
@@ -787,11 +824,14 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 \end{frame}
 
 
+
+\section{Connecting the dots: Phylogenetic Modeling with ERGMs}
+
 %-------------------------------------------------------------------------------
 \begin{frame}[c]
 	\usebeamertemplate{section intro}{}{}
 	\textcolor{uscgold}{
-		\Large {\bf Extending Phylogenetic Modeling with ERGMs}
+		\Large {\bf Connecting the dots: Phylogenetic Modeling with ERGMs}
 	}
 \end{frame}
 
@@ -799,19 +839,25 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 \begin{frame}
 	\frametitle{Phylogenetics Modeling Strategies}
 	
+	\begin{minipage}[m]{.69\linewidth}
 	\mode<beamer>{
 		\begin{figure}
-			\includegraphics<1>[width=.6\linewidth]{phylo-model-overview-1.pdf}\includegraphics<2>[width=.6\linewidth]{phylo-model-overview-2.pdf}\includegraphics<3>[width=.6\linewidth]{phylo-model-overview.pdf}
+			\includegraphics<2>[width=.9\linewidth]{phylo-model-overview-1.pdf}%
+			\includegraphics<3>[width=.9\linewidth]{phylo-model-overview-2.pdf}%
+			\includegraphics<4>[width=.9\linewidth]{phylo-model-overview.pdf}
 		\end{figure}
 	}
 	
 	\mode<handout>{
 		\begin{figure}
-			\includegraphics[width=.6\linewidth]{phylo-model-overview.pdf}
+			\includegraphics[width=.9\linewidth]{phylo-model-overview.pdf}
 		\end{figure}
 	}
-	
-	
+	\end{minipage}
+	\begin{minipage}[m]{.3\linewidth}
+		\includegraphics[width=.9\linewidth]{phylo-model-overview-legend.pdf}
+	\end{minipage}
+		
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -905,13 +951,13 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 \end{frame}
 
 
-\section{Connecting the dots: Phylogenetic Modeling with ERGMs}
+\section{Next steps}
 
 %-------------------------------------------------------------------------------
 \begin{frame}[c]
 	\usebeamertemplate{section intro}{}{}
 	\textcolor{uscgold}{
-		\Large {\bf Connecting the dots: Phylogenetic Modeling with ERGMs}
+		\Large {\bf Next steps}
 	}
 \end{frame}
 
@@ -963,40 +1009,41 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 	}
 \begin{frame}[t]
 \frametitle{Concluding Remarks}
-
-\color<2>{gray}
+\small
+\pause
+\color<4->{gray}
 \ultima{.3}{Before my dissertation}{%
 	\textbf{Gene functions}
 	\begin{itemize}
 		\item ``Small scale''.
 		\item Detached from theory.
-	\end{itemize}
+	\end{itemize}\pause
 	
 	\textbf{ERGMs}
 	\begin{itemize}
 		\item Only approximations.
-		\item Small networks: underlooked.
-		\item ``Static'' approach.
-	\end{itemize}
-}\color<2->{black}\hfill
+		\item Small networks overlooked.
+		\item Limited alternatives for small nets.
+	\end{itemize}\pause
+}\color<4->{black}\hfill
 \ultima{.3}{After my dissertation}{%
 	\textbf{Predicting gene functions}
 	\begin{itemize}
 		\item Scale-up the problem.
-		\item Data-driven models.
 		\item New ways to look at phylo data.
-	\end{itemize}
+		\item More biology.
+	\end{itemize}\pause
 
 	\textbf{ERGMs}
 	\begin{itemize}
-		\item Small $=$ complex.
+		\item Small networks are cool again.
 		\item Exact $=$ Explosion of methods
-	\end{itemize}
+	\end{itemize}\pause
 }\hfill
 \ultima{.39}{Products}{
 \textbf{Publications}
 
-6 journal publications (\tiny Journal of Open Source Software, Stata Journal, Journal of health and social behavior, Translational behavioral medicine, Social Science \& Medicine\small) \textbf{+2 on the queue}
+6 journal publications (\tiny Journal of Open Source Software, Stata Journal, Journal of health and social behavior, Translational behavioral medicine, Social Science \& Medicine\small)\pause\textbf{+2 submitted} (\tiny PLOS Comp. Bio, Social Networks\small)\pause
 
 \textbf{Published software}
 \begin{itemize}
@@ -1004,47 +1051,13 @@ Using the conditional ERGM probabilities described earlier on, I obtained the ex
 \item slurmR \includegraphics[width=.3\linewidth]{cran-downloads-slurmr.pdf}
 \item fmcmc \includegraphics[width=.3\linewidth]{cran-downloads-fmcmc.pdf}
 \item netdiffuseR \includegraphics[width=.3\linewidth]{cran-downloads-netdiffuser.pdf}
-\end{itemize}
+\end{itemize}\pause
 
 \textbf{Other tools}\\
-similR, gnet, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG, and {\large \textbf{Barry}}
+similR, gnet, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG,\pause{} and {\large \textbf{Barry}}
 
 }
 
-%
-
-%\begin{itemize}
-%	content...
-%\end{itemize}
-%
-%% \large {\bf Accomplished so far}
-%\begin{itemize}[<+->]
-%\item Paper 1: Phylogenetic models of gene functional evolution
-%  \begin{itemize}
-%  \item Parsimonious and biologically meaningful.
-%  \item Computationally scalable.
-%  \item Performance comparable to state-of-the-art alternatives.
-%  \item \textbf{Next steps:} Use ERGMs framework to break assumptions.
-%  \end{itemize}
-%\item Paper 2: ERGMs for small networks
-%  \begin{itemize}
-%  \item An extension to a well studied models for social networks.
-%  \item Small size allows exact calculations.
-%  \item Opens the door to a large set of methodological innovations.
-%  \item \textbf{Next steps:} GOF or extensions to large networks?
-%  \end{itemize}
-%\end{itemize}
-%
-%\vfill
-%\footnotesize 
-%\uncover<11->{{\bf Accomplishments during the development of this work}
-%\begin{beamercolorbox}{conclusions}
-%\begin{itemize}
-%\item 6 journal publications (Journal of Open Source Software, Stata Journal, Journal of health and social behavior, Translational behavioral medicine, Social Science \& Medicine)
-%\item 11 packages/libraries built (ergmito, similR, gnet, fmcmc, slurmR, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG)
-%\end{itemize}
-%\end{beamercolorbox}
-%}
 \end{frame}
 
 
@@ -1374,7 +1387,6 @@ There various approaches for this, some to highlight
 	
 \end{frame}
 
-
 %-------------------------------------------------------------------------------
 \begin{frame}
 	\frametitle{Conditional Graph Distributions}
@@ -1405,6 +1417,31 @@ There various approaches for this, some to highlight
 	
 	\vfill\hfill\hyperlink{discrete-exponential}{\beamerreturnbutton{go back}}
 	
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[label=ergm-terms]
+	
+	{\bf\color{suffstat} Sufficient statistics} have various forms
+	\def\fig1width{.4\linewidth}
+	\begin{figure}[!htbp]
+		\small
+		\centering
+		\begin{tabular}{m{.2\linewidth}<\centering m{.4\linewidth}<\raggedright}
+			\toprule Representation & Description  \\ \midrule
+			\includegraphics[width=\fig1width]{mutual.pdf} & Mutual Ties (Reciprocity)\linebreak[4]$\sum_{i\neq j}y_{ij}y_{ji}$  \\
+			\includegraphics[width=\fig1width]{ttriad.pdf} & Transitive Triad (Balance)\linebreak[4]$\sum_{i\neq j\neq k}y_{ij}y_{jk}y_{ik}$  \\
+			\includegraphics[width=\fig1width]{homophily.pdf} & Homophily\linebreak[4]$\sum_{i\neq j}y_{ij}\mathbf{1}\left(x_i=x_j\right)$ \\
+			\includegraphics[width=\fig1width]{nodeicov2.pdf} & Attribute-receiver effect \linebreak[4]$\sum_{i\neq j}y_{ij}x_j$ \\
+			\includegraphics[width=\fig1width]{fourcycle.pdf} & Four Cycle\linebreak[4]$\sum_{i\neq j \neq k \neq l}y_{ij}y_{jk}y_{kl}y_{li}$  \\
+			\bottomrule
+		\end{tabular}
+		\caption[Example of Graph Sufficient Statistics]{Besides of the common edge count statistic (number of ties in a graph), ERGMs allow measuring other more complex structures that can be captured as sufficient statistics. }
+		\label{fig:ergm-structs}
+		\normalsize
+	\end{figure}
+	
+	\vfill\hfill \hyperlink{discrete-exponential}{\beamerreturnbutton{go back}}
 \end{frame}
 
 % Simulation study -------------------------------------------------------------
