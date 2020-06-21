@@ -114,8 +114,8 @@ bioinformatics and social network analysis}
 \begin{frame}
 \frametitle{Genes}
 
-Encode the synthesis of genetic products that ultimately are related to a
-particular aspect of life, for example
+%Encode the synthesis of genetic products that ultimately are related to a
+%particular aspect of life, for example
 
 \def\tmpwidth{.9\linewidth}
 
@@ -562,65 +562,54 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \end{frame}
 
 
-
-\begin{frame}[label=ergmito-table]
-
-\begin{minipage}[c]{.7\linewidth}
-	\begin{table}
-		\centering
-		\scalebox{.65}{
-			\begin{tabular}{l c c c c c c }
-				\toprule
-				& (1) & (2) & (3) & \hlcAlt{5}{(4)} & (5) & \hlcAlt{5}{(4b)} \\
-				\midrule
-				edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
-				& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
-				ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
-				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
-%				\only<3>{\rowcolor{gray!50}} %
-\hlcAlt{6}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
-				& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
-				\hlcAlt{2}{$\text{edges} \times \isone{n = 5}$}       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
-				& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
-				\hlcAlt{3}{$(\text{Homophily})^{1/2}$}                &               &               & $0.54$        &               &               &               \\
-				&               &               & $(1.32)$      &               &               &               \\
-				\hlcAlt{6}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
-				&               &               &               & $(0.18)$      &               & $(0.18)$      \\
-				Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
-				&               &               &               &               & $(0.18)$      &               \\
-				\hlcAlt{4}{\textit{Constraint (offset)}} \\
-				\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
-				\midrule
-				AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
-				BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
-				Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
-				Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
-				N replicates                              &               &               &               &               &               & \hlcAlt{5}{1000}          \\ \bottomrule
-				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
-				\end{tabular}}
-			\label{tab:ci-ergm-full}
-			\end{table}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{.28\linewidth}
-	\pause\small
-	\begin{enumerate}[<+->]
-	\item \alert<2>{Interaction effects: seemingly included.}
-	\item \alert<3>{Transformed variables: also easy to add.}
-	\item \alert<4>{Using offset terms, we can constrain the support.}
-	\item \alert<5>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
-	\item \alert<6>{No support for gender homophily, but evidence of females sending more ties.}
-	\end{enumerate}
-
-	\uncover<7>{What about goodness-of-fit?}
-
-\end{minipage}
-	
+%-------------------------------------------------------------------------------
+\begin{frame}[t, label=ergmito-applied]
+	\centering
+	\mode<beamer>{
+		\includegraphics<1>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide.pdf}%
+		\includegraphics<2>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-edges.pdf}%
+		\includegraphics<3>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-transitivity.pdf}%
+		\includegraphics<4>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide.pdf}%
+		\includegraphics<5>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-sender.pdf}%
+		\includegraphics<6->[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-all.pdf}
+	}%
+	\mode<handout>{
+		\includegraphics[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-all.pdf}
+	}
+	\small
+	\begin{minipage}[t]{.38\linewidth}
+	\begin{center}
+		\shadowbox{Key findings}\pause
+	\end{center}
+	\begin{itemize}
+		\item Low density.\pause
+		\item High balance (transitive triads).\pause
+		\item No evidence of gender homophily.\pause
+		\item Females are more likely to ask for advice.\pause
+	\end{itemize}
+	\end{minipage}\hfill
+	\begin{minipage}[t]{.58\linewidth}
+	\begin{center}
+	\shadowbox{What's different \tiny(from regular ERGMs)\normalsize?}
+	\end{center}\pause
+		
+	\begin{itemize}
+		\item Interaction effects: $\text{edges} \times \isone{n = 5}$.\pause
+		\item Constrained support: $\text{edge} > 4$.\pause
+		\item Transformed variables: $(\text{Homophily})^{1/2}$.\pause
+		\item Bootstrapping: 1,000 replicates in less than 1.5 minutes...\pause \\
+		... if you are lucky, using ``regular'' ERGMs would take you about 5 hours.
+	\end{itemize}
+	\end{minipage}\hfill
 	\vfill\hfill%
-	\hyperlink{ergmito-gof}{\beamergotobutton{gof}} %
-	\hyperlink{example-data-ergm}{\beamergotobutton{data}}
-	
+	\only<1->{%
+		\hyperlink{ergmito-table}{\beamergotobutton{details}} %
+		\hyperlink{ergmito-gof}{\beamergotobutton{gof}} %
+		\hyperlink{example-data-ergm}{\beamergotobutton{data}}%
+	}
 \end{frame}
+
+
 
 
 
@@ -935,20 +924,20 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\item<1-> Sparse matrix represented using double hashmaps (fast row/column access).
 	\item<2-> Template implementation for flexible weights and metadata.
 %	\item<3-> Full enumeration of array powersets.
-	\item<4-> Fast counting using change statistics (\tiny Ch. 4\normalsize).
-	\item<5-> Calculation of support for sufficient stats.
+	\item<3-> Fast counting using change statistics (\tiny Ch. 4\normalsize).
+	\item<4-> Calculation of support for sufficient stats.
 \end{itemize}
 \only<1->{\url{https://USCbiostats.github.io/binaryarrays}}
 \end{minipage}\hfill
 \begin{minipage}[m]{.65\linewidth}
 	\begin{figure}
 	\begin{minipage}[m]{.49\linewidth}
-		\uncover<6->{\includegraphics[width=.99\linewidth]{barray-phylo.png}}
+		\uncover<5->{\includegraphics[width=.99\linewidth]{barray-phylo.png}}
 	\end{minipage}
 	\begin{minipage}[m]{.49\linewidth}
-		\uncover<7->{\includegraphics[width=.99\linewidth]{barray-network.png}}
+		\uncover<6->{\includegraphics[width=.99\linewidth]{barray-network.png}}
 	\end{minipage}
-	\uncover<6->{\caption{Screenshots from the project's website on GitHub.}}
+	\uncover<5->{\caption{Screenshots from the project's website on GitHub.}}
 	\end{figure}
 \end{minipage}
 \end{frame}
@@ -1527,6 +1516,68 @@ these are part of the same evolutionary tree!}
 	\end{minipage}
 \end{frame}
 
+%-------------------------------------------------------------------------------
+\begin{frame}[label=ergmito-table]
+	
+	\begin{minipage}[c]{.7\linewidth}
+		\begin{table}
+			\centering
+			\scalebox{.65}{
+				\begin{tabular}{l c c c c c c }
+					\toprule
+					& (1) & (2) & (3) & \hlcAlt{5}{(4)} & (5) & \hlcAlt{5}{(4b)} \\
+					\midrule
+					edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
+					& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
+					ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
+					& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
+					%				\only<3>{\rowcolor{gray!50}} %
+					\hlcAlt{6}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+					& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
+					\hlcAlt{2}{$\text{edges} \times \isone{n = 5}$}       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
+					& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
+					\hlcAlt{3}{$(\text{Homophily})^{1/2}$}                &               &               & $0.54$        &               &               &               \\
+					&               &               & $(1.32)$      &               &               &               \\
+					\hlcAlt{6}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
+					&               &               &               & $(0.18)$      &               & $(0.18)$      \\
+					Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
+					&               &               &               &               & $(0.18)$      &               \\
+					\hlcAlt{4}{\textit{Constraint (offset)}} \\
+					\hspace{5mm}$\text{edge} > 4$        &               & Yes        &               &               &               &               \\
+					\midrule
+					AIC                                       & 639.26        & 569.93        & 641.08        & 634.68        & 641.07        & 634.68        \\
+					BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
+					Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
+					Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
+					N replicates                              &               &               &               &               &               & \hlcAlt{5}{1000}          \\ \bottomrule
+					\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
+			\end{tabular}}
+			\label{tab:ci-ergm-full}
+		\end{table}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[c]{.28\linewidth}
+		\pause\small
+		\begin{enumerate}[<+->]
+			\item \alert<2>{Interaction effects: seemingly included.}
+			\item \alert<3>{Transformed variables: also easy to add.}
+			\item \alert<4>{Using offset terms, we can constrain the support.}
+			\item \alert<5>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
+			\item \alert<6>{No support for gender homophily, but evidence of females sending more ties.}
+		\end{enumerate}
+		
+		\uncover<7>{What about goodness-of-fit?}
+		
+	\end{minipage}
+	
+	
+	\vfill\hfill%	
+	\hyperlink{ergmito-applied}{\beamerreturnbutton{go back}}
+	
+\end{frame}
+
+
+%-------------------------------------------------------------------------------
 \begin{frame}[label=ergmito-gof]
 	\frametitle{What About Goodness-of-fit?}
 	\begin{figure}[!p]
@@ -1537,7 +1588,7 @@ these are part of the same evolutionary tree!}
 		\label{fig:ci-gof-full}
 	\end{figure}
 	
-	\vfill\hfill\hyperlink{ergmito-table}{\beamerreturnbutton{go back}}
+	\vfill\hfill\hyperlink{ergmito-applied}{\beamerreturnbutton{go back}}
 	
 \end{frame}
 
@@ -1563,7 +1614,7 @@ these are part of the same evolutionary tree!}
 		\end{tabular}
 		\caption[Example of Observed Sufficient Statistics for the Applied Example]{\label{tab:example-suffstats}Example of observed sufficient statistics for the team advice networks. Pooled-data ERGMs have multiple observed sufficient statistics (also known as target statistics). Furthermore, as shown here, we can manipulate common statistics as \textit{edges} (2) and \textit{ttriads} (3) to include, e.g. interaction effects (4) and (5), or more complex transformations, e.g. (6).}
 	\end{table}
-\vfill\hfill\hyperlink{ergmito-table}{\beamerreturnbutton{go back}}
+\vfill\hfill\hyperlink{ergmito-applied}{\beamerreturnbutton{go back}}
 \end{frame}
 
 %--------------------------------------------------------------------------------
