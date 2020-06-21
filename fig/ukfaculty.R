@@ -11,8 +11,8 @@ nplot(
   UKfaculty,
   vertex.color = "gray40",
   edge.width = 2,
-  edge.line.breaks=5,
-  edge.color = ~ ego(alpha=.5) + alter,
+  edge.line.breaks=4,
+  edge.color = ~ ego(alpha=.1) + alter,
   edge.color.alpha=c(.2, .7),
   edge.color.mix=.9
 )

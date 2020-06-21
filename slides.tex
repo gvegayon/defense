@@ -85,13 +85,13 @@ Complex Systems}}
 \large
 \textcolor{usccardinal}{\bf Statistical and computational methods for\\ %
 bioinformatics and social network analysis}
-\end{center}
+\end{center}\pause
 
-\begin{itemize}[<+->]
-\item We live in a non-{\it IID} world.
-\item Some times, the cannot understand a process unless we look at it as a whole.
-\item There's a reason why we usually assume {\it IID}.
-\item {\it Modern} (as of today) computational tools help us cope with that.
+\begin{itemize}
+\item We live in a non-{\it IID} world.\pause
+\item Some times, we cannot understand a process unless we look at it as a whole.\pause
+\item But, while ``the whole'' may be difficult to analyze...\\
+\hfill \pause{\it modern} statistical and computational tools cap help us cope with that.
 \end{itemize}
 \end{frame}
 
@@ -99,13 +99,14 @@ bioinformatics and social network analysis}
 \frame{\frametitle{Contents}\tableofcontents}
 
 % ------------------------------------------------------------------------------
-\section{On the Prediction of Gene Functions Using Phylogenetic Trees}
+\section{On the Prediction of Gene Functions Using Phylogenetic Trees (Ch. 2 \& 4)}
 
 \begin{frame}[t]
 \usebeamertemplate{section intro}{}{}
 \textcolor{uscgold}{
 \Large {\bf On the Prediction of Gene Functions Using Phylogenetic Trees} \vskip0.25em
-\large \textit{Joint with}: Paul D Thomas, Paul Marjoram, Huaiyu Mi, Duncan Thomas, and John Morrison
+\large \textit{Joint with}: Paul D Thomas, Paul Marjoram, Huaiyu Mi, Duncan Thomas, and John Morrison \\
+(\small Chapters 2 and 4\large)
 }
 \end{frame}
 
@@ -134,12 +135,6 @@ particular aspect of life, for example
 
 \end{frame}
 
-\note[enumerate]{
-\item Understanding genes means understanding biology
-\item Far more than simply pursuing knowledge, this means that we can actually
-use this information towards 
-}
-
 
 % ------------------------------------------------------------------------------
 \begin{frame}[label=geneontology]
@@ -160,93 +155,11 @@ form of annotation.
 \end{itemize}
 
 \vfill
-\hfill \textbf{source}: Statistics from \url{pantherdb.org} and \url{geneontology.org}
+\hfill \small \textbf{source}: Statistics from \url{http://pantherdb.org} and \url{http://geneontology.org}\normalsize
 
 \end{frame}
 
-\note[itemize]{
-\item The Gene Ontology Project, which is an international scientific effort to develop
-a knowledge base of biology from molecular level up to organism-level systems.
-\begin{quote}
-[\dots] develop an up-to-date, comprehensive, computational model of biological systems, from the molecular level to larger pathways, cellular and organism-level systems.
-\item It has a large collection of genetic annotations from various types of evidence
-including: experimentally, human curated information, and machine inferred.
-\end{quote}
 
-\item A long way since 1999 (20 years), there's still a lot to learn
-\item This information has been crucial for bio-medical research (e.g. translating
-GWAS to treatment.)
-}
-
-%% ------------------------------------------------------------------------------
-%\begin{frame}
-%
-%\begin{figure}
-%\centering
-%{\footnotesize
-%\def\svgwidth{.7\linewidth}
-%\input{fig/Phylogenetic_tree-wiki.pdf_tex}
-%}
-%\caption{A phylogenetic tree of living things, based on RNA data and proposed by Carl Woese, showing the separation of bacteria, archaea, and eukaryotes (\href{https://en.wikipedia.org/wiki/File:Phylogenetic_tree.svg}{wiki})}
-%\end{figure}
-%\end{frame}
-
-\note[enumerate]{
-\item Phylogenetic trees show evolutionary relationships between species
-\item Traditionally, we think about these based on say physical features, 
-nowadays we build trees based on genetic distances between species.
-}
-
-
-
-\note[enumerate]{
-\item Here we have an example of a (simulated) phylogenetic tree.
-\item We will see this a couple of times during the presentation
-\item This figure summarizes the information that I will be using
-to infer gene functions:
-\begin{itemize}
-\item The tip nodes (leafs) are modern (known) genes
-\item In general, The color bars next to each gene represent genetic annotations
-(GO terms) in three different states: Has the function (blue), does not have the
-function (red), and no information (white)
-\item Each interior node represent ancestors which are classify as 
-duplication/speciation/or horizontal transfer nodes
-\item This is an hypothesis regarding to what type of event lead
-to a split in the family.
-\item we mostly care about whether these are duplication nodes not
-since we believe that functional gain and loses are more likely
-to happen at this stage.
-\end{itemize}
-}
-
-
-\note[enumerate]{
-
-There various approaches for this, some to highlight
-\begin{itemize}%[<+->]
-\item Text analysis like in \cite{Pesaranghader2016}
-\item Protein-protein interaction networks like in \cite{Oliver2000,Piovesan2015}.
-\item Phylogenetic based like SIFTER \cite{Engelhardt2005,Engelhardt2011}.
-\begin{itemize}
-\item Parameters to estimate: $2^{2P}$, where $P$ is the number of functions.
-\end{itemize}
-\end{itemize}
-
-\vfill \hfill (a nice literature review in \cite{Jiang2016,Yu2018})
-
-\item The last one being the most closely related to what we propose here
-(details to be shown).
-\item In SIFTER, functions are modeled using a transition matrix in
-a Markov continuous model.
-\item The main problem with this is that the computational complexity
-of the model grows horribly (estimating a model with a 100 functions)
-takes literally infinite time.
-\item B/c of this, they truncate some of their modelling and work with
-small sets of up to 5 functions in a single tree (for example).
-\item One key point of most of these models is that these provide a
-point estimate rather than a distribution, and mostly a binary
-estimate of the annotation (yes/no).
-}
 
 % ------------------------------------------------------------------------------
 \begin{frame}[label=aphylographicalview,c]
@@ -262,7 +175,13 @@ estimate of the annotation (yes/no).
 	\centering
 	\def\svgwidth{.9\linewidth}
 	\mode<beamer>{
-	\only<1>{\input{fig/phylo-model-0.pdf_tex}}\only<2>{\input{fig/phylo-model-0b.pdf_tex}}\only<3>{\input{fig/phylo-model-0c.pdf_tex}}\only<4>{\input{fig/phylo-model-1.pdf_tex}}\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}\only<7>{\input{fig/phylo-model-2b.pdf_tex}}\only<8>{\input{fig/phylo-model.pdf_tex}}
+	\only<1>{\input{fig/phylo-model-0.pdf_tex}}%
+	\only<2>{\input{fig/phylo-model-0b.pdf_tex}}%
+	\only<3>{\input{fig/phylo-model-0c.pdf_tex}}%
+	\only<4>{\input{fig/phylo-model-1.pdf_tex}}%
+	\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}%
+	\only<7>{\input{fig/phylo-model-2b.pdf_tex}}%
+	\only<8>{\input{fig/phylo-model.pdf_tex}}
 	}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
 \end{figure}
 \end{minipage}
@@ -271,9 +190,9 @@ estimate of the annotation (yes/no).
 	\pause
 	\begin{itemize}
 		\item \textcolor{rootnode}{Root has the function.}\pause[4]
-		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}.})\pause
+		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}).\pause
 		\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
-		\item Only a fraction of the genes has some form of annotation.
+		\item Only a fraction of the known genes has some form of annotation.
 	\end{itemize}
 \end{minipage}
 
@@ -340,7 +259,7 @@ estimate of the annotation (yes/no).
 	\byside{Intuitive}{%
 		Gains and losses are more likely to happen at \alert{duplication} events.%
 	}\hfill\pause
-	\byside{High Accuracy}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC.}
+	\byside{Competitive}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC.}
 \end{frame}
 
 
@@ -403,11 +322,9 @@ data from PantherDB with GO annotations and fit a large pooled model.
 	\frametitle{Overview of Prediction Results}
 	
 	\begin{minipage}[m]{.55\linewidth}
-		\vspace{-.5cm}
 		\begin{table}
 		\centering
 		\scalebox{.64}{
-%			\begin{tabular}{l*{4}{m{.22\linewidth}<\centering}}
 			\begin{tabular}{%
 					m{.24\linewidth}<\raggedright %
 					>{\color<1>{usccardinal}}m{.24\linewidth}<\centering%
@@ -487,14 +404,15 @@ Molecular Function & $\neq$ & Biological Process &  ? & Cellular Component
 
 
 % ------------------------------------------------------------------------------
-\section{Exponential Random Graph Models for Small Networks}
+\section{Exponential Random Graph Models for Small Networks (Ch. 5)}
 % \frame{\frametitle{Contents}\tableofcontents}
 
 \begin{frame}[t]
 \usebeamertemplate{section intro}{}{}
 \textcolor{uscgold}{
 \Large {\bf Exponential Random Graph Models for Small Networks} \vskip0.25em
-\large \textit{Joint with}: Andrew Slaughter and Kayla de la Haye
+\large \textit{Joint with}: Andrew Slaughter and Kayla de la Haye \\
+(\small Chapter 2\large)
 }
 \end{frame}
 
@@ -530,10 +448,11 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 \begin{itemize}
 \item Statistical models of (social) networks.\pause
-\item Not about individual ties, but about structures:\pause
+\item Not about individual ties, but about local structures.\pause
 \begin{figure}
 \includegraphics[width=.6\linewidth]{friendly-terms.pdf}
 \end{figure}
+%\item Used to test hypotheses 
 \end{itemize}
 
 \end{frame}
@@ -544,27 +463,16 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	
 	\begin{figure}
 		\includegraphics[width=.7\linewidth]{parts-of-ergm.pdf}
-	\end{figure}
+	\end{figure}\pause
 	
 	\vfill
-	
-	\begin{minipage}[m]{.55\linewidth}
 		
-		\begin{itemize}
-			\item<2-> Focused on sufficient statistics $\s{\graph,x}$ \uncover<3->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}.
-			\item<4-> For any array of size $(n\times m)$, there are $2^{(n\times m)}$ possible arrangements.
-		\end{itemize}
-	 \uncover<5->{\LARGE Most (all) applications use \textbf{approximations}.\normalsize}
-	\end{minipage}\hfill
-	\begin{minipage}[m]{.44\linewidth}
-		\begin{figure}[!htbp]
-			\centering
-			\uncover<4->{\includegraphics[width=.9\linewidth,clip,trim={.5cm .5cm .5cm .5cm}]{ring-and-kite.pdf}}
-			%		\caption[Simple graphs: A ring and a Kite]{Although these two networks may look very different, \textit{a ring} and \textit{a kite}, under the Bernoulli, also known as Erd\H{o}s-R\'enyi, random graph model, both are equally likely, as the only sufficient statistic for this model is the number of observed ties, which is five in both cases.}
-			\label{fig:ring-and-kite}
-		\end{figure}
-	\end{minipage}
-	
+	\begin{itemize}
+		%\item<2-> Focused on sufficient statistics $\s{\graph,x}$ \uncover<3->{\textbf{e.g.}\\Two Bernoulli, a.k.a. Erd\H{o}s-R\'enyi, random graphs}.
+		\item For any 0/1 matrix of size $(n\times m)$, there are $2^{(n\times m)}$ possible realizations.\pause
+		\item A directed graph of size 5 has 1,048,576 possible configurations!\pause
+		\item Most (all) applications use \textbf{approximations}...\pause{} yet, for sufficiently small graphs we ``can be exact''.
+	\end{itemize}
 	
 	\vfill\hfill\hyperlink{discrete-exponential-theory}{\beamergotobutton{more theory}} %
 	\hyperlink{ergm-terms}{\beamergotobutton{more terms}}
@@ -595,8 +503,8 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\small Using \textbf{exact statistics} means:\normalsize
 	
 	\fbox{\uncover<2->{{\large $\checkmark$}}} Higher convergence rate.\\
-	\fbox{\uncover<3->{{\large $\checkmark$}}} Lower Type-I error rate.\\
-	\fbox{\uncover<4->{{\large $\checkmark$}}} Smaller Bias.\\
+	\fbox{\uncover<3->{{\large $\checkmark$}}} Lower type-I error rate.\\
+	\fbox{\uncover<4->{{\large $\checkmark$}}} Smaller bias.\\
 	\fbox{\uncover<5->{{\large $\checkmark$}}} More power.\\
 	\fbox{\uncover<6->{{\large $\checkmark$}}} Faster.\\
 	\fbox{\uncover<7->{{\large $\checkmark$}}} More flexible.
@@ -622,7 +530,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 % ------------------------------------------------------------------------------
 \begin{frame}[c]
-	\frametitle{ERGMitos: Featured Application}
+	\frametitle{Featured Application: Small Teams}
 	
 	\begin{minipage}[t]{.38\linewidth}
 		\small
@@ -663,20 +571,20 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 		\scalebox{.65}{
 			\begin{tabular}{l c c c c c c }
 				\toprule
-				& (1) & (2) & (3) & \hlcAlt{6}{(4)} & (5) & \hlcAlt{6}{(4b)} \\
+				& (1) & (2) & (3) & \hlcAlt{5}{(4)} & (5) & \hlcAlt{5}{(4b)} \\
 				\midrule
 				edges                                     & $-0.52^{**}$  & $-0.91^{***}$ & $-0.54^{**}$  & $-0.72^{***}$ & $-0.48^{*}$   & $-0.72^{***}$ \\
 				& $(0.17)$      & $(0.23)$      & $(0.18)$      & $(0.19)$      & $(0.19)$      & $(0.17)$      \\
 				ttriads                                   & $0.36^{***}$  & $0.46^{***}$  & $0.37^{***}$  & $0.36^{***}$  & $0.36^{***}$  & $0.36^{***}$  \\
 				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.05)$      \\
 %				\only<3>{\rowcolor{gray!50}} %
-\hlcAlt{5}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
+\hlcAlt{6}{Homophily (gender)}                        & $-0.03$       & $-0.01$       & $-0.20$       & $-0.12$       & $-0.01$       & $-0.12$       \\
 				& $(0.20)$      & $(0.21)$      & $(0.46)$      & $(0.20)$      & $(0.20)$      & $(0.20)$      \\
 				\hlcAlt{2}{$\text{edges} \times \isone{n = 5}$}       & $-0.53^{***}$ & $-0.47^{**}$  & $-0.52^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ & $-0.53^{***}$ \\
 				& $(0.12)$      & $(0.16)$      & $(0.13)$      & $(0.13)$      & $(0.12)$      & $(0.13)$      \\
 				\hlcAlt{3}{$(\text{Homophily})^{1/2}$}                &               &               & $0.54$        &               &               &               \\
 				&               &               & $(1.32)$      &               &               &               \\
-				\hlcAlt{5}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
+				\hlcAlt{6}{Sender (female)}                           &               &               &               & $0.46^{*}$    &               & $0.46^{*}$    \\
 				&               &               &               & $(0.18)$      &               & $(0.18)$      \\
 				Receiver (female)                           &               &               &               &               & $-0.08$       &               \\
 				&               &               &               &               & $(0.18)$      &               \\
@@ -687,7 +595,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 				BIC                                       & 655.99        & 586.66        & 661.99        & 655.59        & 661.98        & 655.59        \\
 				Num. networks                             & 31            & 28            & 31            & 31            & 31            & 31            \\
 				Time (seconds)                            & 2.26          & 2.32          & 2.28          & 5.10          & 5.19          & 83.97         \\
-				N replicates                              &               &               &               &               &               & \hlcAlt{6}{1000}          \\ \bottomrule
+				N replicates                              &               &               &               &               &               & \hlcAlt{5}{1000}          \\ \bottomrule
 				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.001$, $^{**}p<0.01$, $^*p<0.05$}}
 				\end{tabular}}
 			\label{tab:ci-ergm-full}
@@ -700,47 +608,51 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\item \alert<2>{Interaction effects: seemingly included.}
 	\item \alert<3>{Transformed variables: also easy to add.}
 	\item \alert<4>{Using offset terms, we can constrain the support.}
-	\item \alert<5>{No support for gender homophily, but evidence of females sending more ties.}
-	\item \alert<6>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
+	\item \alert<5>{Each 1,000 bootstrap replicates took roughly 0.08 secs.}
+	\item \alert<6>{No support for gender homophily, but evidence of females sending more ties.}
 	\end{enumerate}
+
+	\uncover<7>{What about goodness-of-fit?}
+
 \end{minipage}
 	
-	\vfill\hfill\hyperlink{example-data-ergm}{\beamergotobutton{data}}
+	\vfill\hfill%
+	\hyperlink{ergmito-gof}{\beamergotobutton{gof}} %
+	\hyperlink{example-data-ergm}{\beamergotobutton{data}}
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Small teams: Goodness-of-fit}
-	\begin{figure}[!p]
-		\centering
-		\footnotesize
-  \def\svgwidth{.9\linewidth}
-   \input{fig/ci-ergmito-gof-full.pdf_tex}
-		\label{fig:ci-gof-full}
-	\end{figure}
-\end{frame}
+
 
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
 % ------------------------------------------------------------------------------
-\section{Goodness-of-fit for Small Networks}
+\section{Goodness-of-fit for Small Networks (Ch. 3 \& 6)}
 
-\begin{frame}[c]
+\begin{frame}[t]
 \usebeamertemplate{section intro}{}{}
 \textcolor{uscgold}{
-\Large {\bf Goodness-of-fit for Small Networks}
+\Large {\bf Goodness-of-fit for Small Networks}\\(\small Chapters 3 and 6\Large)
 }
 \end{frame}
 
 
-
-\begin{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[c]
 	\frametitle{Goodness-of-fit: Conditional Distributions}
+	
+	\begin{center}
+	\begin{minipage}[m]{.6\linewidth}
+		\centering\Large
+		``Does the model edges+transitivity captures the observed path-length distribution?''
+	\end{minipage}	
+	\end{center}\pause
+	
 	\begin{itemize}
 		\item The current Goodness-of-fit (GOF) for ERGMs does not fit ERGMitos.\pause
-		\item First attempt to approach the problem: Conditional Distributions.\pause
-		\item Idea: Knowing how one structure predicts the other helps select the right benchmark.\pause
+		\item A closely related idea: Conditional Distributions.\pause
+%		\item Idea: Knowing how one structure predicts the other helps select the right benchmark.\pause
 		\item Brief study: Analyze the prediction capability that \textbf{Mutuals}, \textbf{Transitive Triads}, \textbf{Homophily}, and \textbf{Receiver Effect} terms have on each other.\pause
 	\end{itemize}
 	
@@ -833,7 +745,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \frametitle{GOF for Small Networks}
 
 
-\begin{enumerate}
+\begin{enumerate}[<+->]
 	\item Markov structures (involve two or more ties) are better predictors of each other.
 	\item \textit{Miopic} terms: fast saturation implies poor information, e.g. homophily and receiver effect saturate at 8/20 ties:
 	\begin{figure}
@@ -857,13 +769,14 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 
 
-\section{Connecting the Dots: Phylogenetic Modeling with ERGMs}
+\section{Connecting the Dots: Phylogenetic Modeling with ERGMs (Ch. 4)}
 
 %-------------------------------------------------------------------------------
-\begin{frame}[c]
+\begin{frame}[t]
 	\usebeamertemplate{section intro}{}{}
 	\textcolor{uscgold}{
-		\Large {\bf Connecting the Dots: Phylogenetic Modeling with ERGMs}
+		\Large {\bf Connecting the Dots: Phylogenetic Modeling with ERGMs} \\
+		(\small Chapter 4\Large)
 	}
 \end{frame}
 
@@ -917,11 +830,11 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 				\end{array}\right]$ & 
 				$\left[\begin{array}{cc} %
 				0 & \nhlc{-2}{1}\nhlc{4}{1}\hlc{3}{1}\hlc{5}{1}\nhlc{6-}{1} \\ %
-				\nhlc{-5}{1}\hlc{6}{1}\nhlc{7-}{1} & \nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0}\\ %
-				\nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0} & \nhlc{1-5}{1}\hlc{6}{1}\nhlc{7-}{1}%
+				\nhlc{-5}{1}\hlc{6}{1} & \nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0}\\ %
+				\nhlc{-4}{0}\hlc{5}{0}\nhlc{6-}{0} & \nhlc{1-5}{1}\hlc{6}{1}%
 				\end{array}\right]$ \pause \\ \midrule 
 				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \pause \\ 
-				& \# Gains (Neofunctionalization) & 1 & 1 \pause \\
+				& \# Gains & 1 & 1 \pause \\
 				& Only one offspring changes (yes/no) & 1 & 0 \pause \\
 				& \# Changes (gain+loss) & 2 & 3 \pause \\
 				& Subfunctionalization (yes/no) & 0 & 1 \\ \bottomrule
@@ -946,7 +859,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 				0 & 1%
 				\end{array}\right]$ \\ \midrule 
 				\multicolumn{3}{l}{\textbf{Sufficient statistics}} \\ 
-				& \# Neofunctionalizations & 1 & 1  \\
+				& \# Gains & 1 & 1  \\
 				& Only one offspring changes (yes/no) & 1 & 0 \\
 				& \# Changes (gain+loss) & 2 & 3 \\
 				& Subfunctionalizations (yes/no) & 0 & 1 \\ \bottomrule
@@ -964,18 +877,19 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\frametitle{What Drives Evolution: a game changer}
 	
 	\begin{minipage}[m]{.59\linewidth}
-		In a model with 3 functions and 2 offspring per node
+		In the model with 3 functions and 2 offspring per node:\pause
 		\begin{itemize}
-			\item Full Markov transition matrix: $2^3 \times 2^6 = 512$
-			\item Using sufficient statistics:
+			\item Full Markov transition matrix: $2^3 \times 2^6 = 512$\pause
+			\item Using sufficient statistics:\pause
 			\begin{itemize}
-				\item[] Pairwise co-evolution: 3 terms,
-				\item[]	Pairwise Neofunctionalization: 3 terms,
-				\item[] Pairwise Subfunctionalization: 3 terms,
-				\item[] Function specific gain: 3 terms,
-				\item[] Function specific loss: 3 terms,
-				\item[Total:] 15 parameters. 
+				\item[] Pairwise co-evolution: 3 terms,\pause
+				\item[]	Pairwise Neofunctionalization: 3 terms,\pause
+				\item[] Pairwise Subfunctionalization: 3 terms,\pause
+				\item[] Function specific gain: 3 terms,\pause
+				\item[] Function specific loss: 3 terms,\pause
+				\item[Total:] 15 parameters. \pause
 			\end{itemize}
+			\item Easier to fit and interpret.
 		\end{itemize}
 	\end{minipage}\hfill
 	\begin{minipage}[m]{.39\linewidth}
@@ -988,13 +902,14 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \end{frame}
 
 
-\section{Next Steps}
+\section{Next Steps (Ch. 7)}
 
 %-------------------------------------------------------------------------------
-\begin{frame}[c]
+\begin{frame}[t]
 	\usebeamertemplate{section intro}{}{}
 	\textcolor{uscgold}{
-		\Large {\bf Next Steps}
+		\Large {\bf Next Steps} \\
+		(\small Chapter 7\Large)
 	}
 \end{frame}
 
@@ -1019,8 +934,8 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \begin{itemize}
 	\item<1-> Sparse matrix represented using double hashmaps (fast row/column access).
 	\item<2-> Template implementation for flexible weights and metadata.
-	\item<3-> Full enumeration of array powersets.
-	\item<4-> Fast counting using change statistics.
+%	\item<3-> Full enumeration of array powersets.
+	\item<4-> Fast counting using change statistics (\tiny Ch. 4\normalsize).
 	\item<5-> Calculation of support for sufficient stats.
 \end{itemize}
 \only<1->{\url{https://USCbiostats.github.io/binaryarrays}}
@@ -1040,7 +955,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 % ------------------------------------------------------------------------------
 \newcommand{\ultima}[3]{\begin{minipage}[t]{#1\linewidth}%
-		\begin{center}\shadowbox{#2}\end{center}\vspace{-.75cm}\hfill%	
+		\begin{center}\shadowbox{#2}\end{center}\vspace{-.55cm}\hfill%	
 
 		\small#3\normalsize\end{minipage}%
 	}
@@ -1050,7 +965,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \pause
 \color<4->{gray}
 \ultima{.3}{Before my dissertation}{%
-	\textbf{Gene functions}
+	\textbf{Predicting gene functions}
 	\begin{itemize}
 		\item ``Small scale''.
 		\item Detached from theory.
@@ -1073,9 +988,13 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 
 	\textbf{ERGMs}
 	\begin{itemize}
-		\item Small networks are cool again.
-		\item Exact $=$ Explosion of methods
+		\item New light on small networks.
+		\item Many opportunities for methodological innovations.
 	\end{itemize}\pause
+
+	\vfill
+	
+
 }\hfill
 \ultima{.39}{Products}{
 \textbf{Publications}
@@ -1219,60 +1138,60 @@ these are part of the same evolutionary tree!}
 \end{frame}
 
 
+%% ------------------------------------------------------------------------------
+%\begin{frame}[label=other-models]
+%\frametitle{Predicting gene functions}
+%There are various approaches for this, some to highlight
+%\begin{itemize}%[<+->]
+%\item Text analysis like in \cite{Pesaranghader2016}
+%\item Protein-protein interaction networks like in \cite{Oliver2000,Piovesan2015}.
+%\item Phylogenetic based like SIFTER \cite{Engelhardt2005,Engelhardt2011}.
+%\begin{itemize}
+%\item Parameters to estimate: $2^{2P}$, where $P$ is the number of functions.
+%\end{itemize}
+%\end{itemize}
+%
+%\vfill \hfill (a nice literature review in \cite{Jiang2016,Yu2018})
+%\hyperlink{aphylographicalview}{\beamerreturnbutton{go back}}
+%
+%\end{frame}
+
+
 % ------------------------------------------------------------------------------
-\begin{frame}[label=other-models]
-\frametitle{Predicting gene functions}
-There are various approaches for this, some to highlight
-\begin{itemize}%[<+->]
-\item Text analysis like in \cite{Pesaranghader2016}
-\item Protein-protein interaction networks like in \cite{Oliver2000,Piovesan2015}.
-\item Phylogenetic based like SIFTER \cite{Engelhardt2005,Engelhardt2011}.
-\begin{itemize}
-\item Parameters to estimate: $2^{2P}$, where $P$ is the number of functions.
-\end{itemize}
-\end{itemize}
-
-\vfill \hfill (a nice literature review in \cite{Jiang2016,Yu2018})
-\hyperlink{aphylographicalview}{\beamerreturnbutton{go back}}
-
-\end{frame}
-
-
-% ------------------------------------------------------------------------------
-\begin{frame}[label=aphyloalgorithmicview]
-\frametitle{An evolutionary model of gene functions (algorithmic view)}
-
-\scalebox{.7}{
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\KwData{A phylogenetic tree, $\{\pi, \mu, \psi\}$(Model probabilities)}
-\KwResult{An annotated tree}
-%\pause
-\For{$n \in PostOrder(N)$}{
-  $\mbox{\bf\color{usccardinal}Nodes gain/loss function depending on their parent}$\;%\pause
-  \Switch{class of $n$}{
-    \uCase{root node}{
-      Gain function with probability $\pi$\;
-    }%\pause
-    \uCase{interior node} {%\pause
-      \lIf{Parent has the function}{Keep it with prob. $(1-\mu_1)$}%\pause
-      \lElse{Gain it with prob. $\mu_0$}%\pause
-    }
-  }%\pause
-  $\mbox{\bf\color{usccardinal}Finally, we allow for mislabeling}$\;%\pause
-  \uIf{$n$ is leaf}{%\pause
-    \lIf{has the function}{Mislabel with prob. $\psi_1$}%\pause
-    \lElse{Mislabel with prob. $\psi_0$}%\pause
-  }
-}
-\end{algorithm}
-}
-
-\vfill\hfill \hyperlink{aphylographicalview}{\beamergotobutton{go back}}
-
-
-\end{frame}
+%\begin{frame}[label=aphyloalgorithmicview]
+%\frametitle{An evolutionary model of gene functions (algorithmic view)}
+%
+%\scalebox{.7}{
+%
+%\begin{algorithm}[H]
+%\SetAlgoLined
+%\KwData{A phylogenetic tree, $\{\pi, \mu, \psi\}$(Model probabilities)}
+%\KwResult{An annotated tree}
+%%\pause
+%\For{$n \in PostOrder(N)$}{
+%  $\mbox{\bf\color{usccardinal}Nodes gain/loss function depending on their parent}$\;%\pause
+%  \Switch{class of $n$}{
+%    \uCase{root node}{
+%      Gain function with probability $\pi$\;
+%    }%\pause
+%    \uCase{interior node} {%\pause
+%      \lIf{Parent has the function}{Keep it with prob. $(1-\mu_1)$}%\pause
+%      \lElse{Gain it with prob. $\mu_0$}%\pause
+%    }
+%  }%\pause
+%  $\mbox{\bf\color{usccardinal}Finally, we allow for mislabeling}$\;%\pause
+%  \uIf{$n$ is leaf}{%\pause
+%    \lIf{has the function}{Mislabel with prob. $\psi_1$}%\pause
+%    \lElse{Mislabel with prob. $\psi_0$}%\pause
+%  }
+%}
+%\end{algorithm}
+%}
+%
+%\vfill\hfill \hyperlink{aphylographicalview}{\beamergotobutton{go back}}
+%
+%
+%\end{frame}
 
 % --------------------------
 \begin{frame}[label=aphylo-pooled]
@@ -1608,6 +1527,20 @@ There are various approaches for this, some to highlight
 	\end{minipage}
 \end{frame}
 
+\begin{frame}[label=ergmito-gof]
+	\frametitle{What About Goodness-of-fit?}
+	\begin{figure}[!p]
+		\centering
+		\footnotesize
+		\def\svgwidth{.85\linewidth}
+		\input{fig/ci-ergmito-gof-full.pdf_tex}
+		\label{fig:ci-gof-full}
+	\end{figure}
+	
+	\vfill\hfill\hyperlink{ergmito-table}{\beamerreturnbutton{go back}}
+	
+\end{frame}
+
 % ------------------------------------------------------------------------------
 \begin{frame}[label=example-data-ergm]
 	% latex table generated in R 3.6.3 by xtable 1.8-4 package
@@ -1631,24 +1564,6 @@ There are various approaches for this, some to highlight
 		\caption[Example of Observed Sufficient Statistics for the Applied Example]{\label{tab:example-suffstats}Example of observed sufficient statistics for the team advice networks. Pooled-data ERGMs have multiple observed sufficient statistics (also known as target statistics). Furthermore, as shown here, we can manipulate common statistics as \textit{edges} (2) and \textit{ttriads} (3) to include, e.g. interaction effects (4) and (5), or more complex transformations, e.g. (6).}
 	\end{table}
 \vfill\hfill\hyperlink{ergmito-table}{\beamerreturnbutton{go back}}
-\end{frame}
-
-
-% ------------------------------------------------------------------------------
-\begin{frame}[label=ergmitodgp]
-\frametitle{Paper 2 Simulation Studies}
-
-We performed a simulation study with the following features:
-
-\begin{itemize}%[<+->]
-\item Draw 20,000 samples of groups of small networks
-\item Each group had prescribed: (model parameters, number of networks, sizes of the networks)
-\item Each group could have from 5 to 300 small networks
-\item We estimated the models using MC-MLE and MLE.
-\end{itemize}
-
-\vfill\hfill\hyperlink{ergmitoexample}{\beamerreturnbutton{go back}}
-
 \end{frame}
 
 %--------------------------------------------------------------------------------

@@ -54,18 +54,16 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{phylo-model-2a.pdf}}%
-    \put(0.19365001,0.15463963){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Root node\end{tabular}}}}%
+    \put(0.19365001,0.08636527){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}True state\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{phylo-model-2a.pdf}}%
-    \put(0.19365001,0.08636527){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Internal node\end{tabular}}}}%
+    \put(0.19534102,0.01986794){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Observed state\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{phylo-model-2a.pdf}}%
-    \put(0.19534102,0.01986794){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Gene (observed)\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{phylo-model-2a.pdf}}%
     \put(0.65409784,0.08636527){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Function is absent\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{phylo-model-2a.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{phylo-model-2a.pdf}}%
     \put(0.65409787,0.01749509){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Function is present\end{tabular}}}}%
     \put(0.16115643,0.37621674){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{innernode}{$\gain$}}\end{tabular}}}}%
     \put(0.46175715,0.28780196){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{innernode}{$\loss$}}\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{phylo-model-2a.pdf}}%
     \put(0.0694898,0.643148){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\shadowbox{\large\color{rootnode}{$\pi$}}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{phylo-model-2a.pdf}}%
   \end{picture}%
 \endgroup%
