@@ -44,7 +44,7 @@
 	Essays on Bioinformatics and Social Network Analysis\linebreak %
 	{\small Statistical and Computational Methods for Complex Systems}%
 }
-\author[GGVY]{George G Vega Yon}
+\author[GGVY -- slides on \url{https://github.com/gvegayon/defense}]{George G Vega Yon}
 \institute[USC-PREVMED]{University of Southern California, Department of Preventive Medicine}
 \date{June 22, 2020}
 
@@ -111,7 +111,11 @@
 %\end{frame}
 
 
-\frame{\frametitle{Contents}\tableofcontents}
+\frame{\frametitle{Contents}
+	\tableofcontents
+	\vfill
+	You can download the slides from\large{} {\color{usccardinal}\url{https://github.com/gvegayon/defense}}\normalsize
+}
 
 % ------------------------------------------------------------------------------
 \section{On the Prediction of Gene Functions Using Phylogenetic Trees (Ch. 2 \& 4)}
@@ -133,11 +137,11 @@
 \begin{figure}
 \includegraphics[width=.5\linewidth]{go-logo.png}
 \end{figure}
-
-\begin{itemize}[<+->]
+\pause
+\begin{itemize}
 % \item Three domains: Cellular component, molecular function, biological process.
-\item The GO project has $\sim$ 44,400 validated terms  \hyperlink{aphylo-goexample}{\beamergotobutton{more}}, $\sim$ 7.9M annotations on $\sim$ 4,600 species.
-\item About $\sim$ 550,000 are on human genes.
+\item The GO project has $\sim$ 44,400 validated terms \pause \hyperlink{aphylo-goexample}{\beamergotobutton{more}}, $\sim$ 7.9M annotations\pause on $\sim$ 4,600 species.\pause
+\item About $\sim$ 550,000 are on human genes.\pause
 %\item Roughly half of human genes ($\sim$ 10,000 / 20,000) have some form of annotation.
 \item Yet, less than 10\% of those annotations are based on experimental evidence. % 40610
 %\item An important effort of the GO has to do with phylogenetics...
@@ -193,8 +197,8 @@
 			\textbf{MAE:} 0.34 \\
 			\textbf{AUC:} 0.91%
 		}
-		\vfill
-		\hyperlink{phylo-bad}{\beamerbutton{see a bad one}}
+%		\vfill
+%		\hyperlink{phylo-bad}{\beamerbutton{see a bad one}}
 	\end{minipage}
 	\begin{minipage}[m]{.65\linewidth}
 		\def\tmpwdth{.9\linewidth}
@@ -221,7 +225,7 @@
 \begin{frame}
 	\frametitle{An evolutionary model of gene functions}
 	
-	Image a relay race...
+	Imagine a relay race...
 	\begin{figure}
 		\includegraphics[width=.55\linewidth]{800px-2019-09-01_ISTAF_2019_4_x_100_m_relay_race_(Martin_Rulsch)_10.jpg}
 		\caption{ISTAF 2019 4 x 100 m relay race (Martin Rulsch, \href{https://commons.wikimedia.org/wiki/File:2019-09-01_ISTAF_2019_4_x_100_m_relay_race_(Martin_Rulsch)_10.jpg}{wikimedia})}
@@ -260,10 +264,10 @@
 		\begin{itemize}
 			\item Starting with the root node (no function in this case).\pause
 			\item Passes the baton to its offspring.\pause
-			\item Possibly without change.\pause
+			\item Possibly without change (on this particular function).\pause
 			\item Or, with some probability, gaining...\pause[7] or loosing the function.\pause
 %			\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
-			\item Until the baton reaches the end of the tree (modern genes).\pause
+			\item Until the \textit{baton} reaches the end of the tree (modern genes).\pause
 		\end{itemize}
 	\vfill\hfill\hyperlink{duplicationvsspeciation}{\beamergotobutton{more on diplication}} %
 	 \hyperlink{aphylographicalview}{\beamergotobutton{alt view}}
@@ -643,17 +647,17 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \begin{frame}[t, label=ergmito-applied]
 	\centering
 	\mode<beamer>{
-		\includegraphics<1>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide.pdf}%
-		\includegraphics<2>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-edges.pdf}%
-		\includegraphics<3>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-transitivity.pdf}%
-		\includegraphics<4>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide.pdf}%
-		\includegraphics<5>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-sender.pdf}%
-		\includegraphics<6->[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-all.pdf}
+		\includegraphics<1-2>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide.pdf}%
+		\includegraphics<3>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-edges.pdf}%
+		\includegraphics<4>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-transitivity.pdf}%
+		\includegraphics<5>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide.pdf}%
+		\includegraphics<6>[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-sender.pdf}%
+		\includegraphics<7->[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-all.pdf}
 	}%
 	\mode<handout>{
 		\includegraphics[width=.99\linewidth]{fig/ci-ergm-all-nets-wide-all.pdf}
 	}
-	\small
+	\small\pause
 	\begin{minipage}[t]{.38\linewidth}
 	\begin{center}
 		\shadowbox{Key findings}\pause
