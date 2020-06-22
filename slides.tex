@@ -1,6 +1,6 @@
 \documentclass[aspectratio=169, 9pt]{beamer}
 
-\transdissolve[duration=0.2] % Only works with Adobe Acrobat
+%\transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
 % Some important packages
 \usepackage{epstopdf}
@@ -217,6 +217,18 @@
 	\end{minipage}
 \end{frame}
 
+%-------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{An evolutionary model of gene functions}
+	
+	Image a relay race...
+	\begin{figure}
+		\includegraphics[width=.55\linewidth]{800px-2019-09-01_ISTAF_2019_4_x_100_m_relay_race_(Martin_Rulsch)_10.jpg}
+		\caption{ISTAF 2019 4 x 100 m relay race (Martin Rulsch, \href{https://commons.wikimedia.org/wiki/File:2019-09-01_ISTAF_2019_4_x_100_m_relay_race_(Martin_Rulsch)_10.jpg}{wikimedia})}
+	\end{figure}
+	
+\end{frame}
+
 % ------------------------------------------------------------------------------
 \begin{frame}[label=aphylographicalview,c]
 	\frametitle{An evolutionary model of gene functions}
@@ -229,30 +241,36 @@
 		\begin{figure}
 			\footnotesize
 			\centering
-			\def\svgwidth{.9\linewidth}
 			\mode<beamer>{
-				\only<1>{\input{fig/phylo-model-0.pdf_tex}}%
-				\only<2>{\input{fig/phylo-model-0b.pdf_tex}}%
-				\only<3>{\input{fig/phylo-model-0c.pdf_tex}}%
-				\only<4>{\input{fig/phylo-model-1.pdf_tex}}%
-				\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}%
-				\only<7>{\input{fig/phylo-model-2b.pdf_tex}}%
-				\only<8>{\input{fig/phylo-model.pdf_tex}}
-			}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
+				\only<1>{\includegraphics[width=.9\linewidth]{phylo-model2-0.pdf}}%
+				\only<2>{\includegraphics[width=.9\linewidth]{phylo-model2-1.pdf}}%
+				\only<3>{\includegraphics[width=.9\linewidth]{phylo-model2-2.pdf}}%
+				\only<4>{\includegraphics[width=.9\linewidth]{phylo-model2-3.pdf}}%
+				\only<5>{\includegraphics[width=.9\linewidth]{phylo-model2-4.pdf}}%
+				\only<6>{\includegraphics[width=.9\linewidth]{phylo-model2-5.pdf}}%
+				\only<7>{\includegraphics[width=.9\linewidth]{phylo-model2-6.pdf}}%
+				\only<8>{\includegraphics[width=.9\linewidth]{phylo-model2-7.pdf}}%
+				\only<9->{\includegraphics[width=.9\linewidth]{phylo-model2.pdf}}%
+			}\mode<handout>{\includegraphics[width=.9\linewidth]{fig/phylo-model2.pdf}}
 		\end{figure}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[m]{.38\linewidth}
 		\pause
 		\begin{itemize}
-			\item \textcolor{rootnode}{Root has the function.}\pause[4]
-			\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}).\pause
-			\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
-			\item Only a fraction of the known genes have some form of annotation.
+			\item Starting with the root node (no function in this case).\pause
+			\item Passes the baton to its offspring.\pause
+			\item Possibly without change.\pause
+			\item Or, with some probability, gaining...\pause[7] or loosing the function.\pause
+%			\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
+			\item Until the baton reaches the end of the tree (modern genes).\pause
 		\end{itemize}
+	\vfill\hfill\hyperlink{duplicationvsspeciation}{\beamergotobutton{more on diplication}} %
+	 \hyperlink{aphylographicalview}{\beamergotobutton{alt view}}
 	\end{minipage}
 	
 \end{frame}
+
 
 
 %--------------------------------------------------------------------------------
@@ -482,7 +500,7 @@ Molecular Function & $\neq$ & Biological Process &  ? & Cellular Component
 \begin{minipage}[m]{.3\linewidth}
 	\begin{itemize}
 		\item<2-> If COVID-19 has taught us something it is that networks matter.
-		\item<3-> And specially small networks: Families, teams, friends, etc. \uncover<4->{The cornerstone of larger social systems.}
+		\item<3-> And especially small networks: Families, teams, friends, etc. \uncover<4->{The cornerstone of larger social systems.}
 		\item<5-> We can study networks using ERGMs.
 	\end{itemize}
 \vfill
@@ -1327,6 +1345,45 @@ these are part of the same evolutionary tree!}
 \end{table}
 
 \end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[label=aphylographicalview-altview,c]
+	\frametitle{An evolutionary model of gene functions}
+	\def\shadowsize{2pt}
+	\definecolor{rootnode}{RGB}{0,159,211}
+	\definecolor{innernode}{RGB}{90,159,89}
+	\definecolor{leafnode}{RGB}{255,107,0}
+	
+	\begin{minipage}[m]{.60\linewidth}
+		\begin{figure}
+			\footnotesize
+			\centering
+			\def\svgwidth{.9\linewidth}
+			\mode<beamer>{
+				\only<1>{\input{fig/phylo-model-0.pdf_tex}}%
+				\only<2>{\input{fig/phylo-model-0b.pdf_tex}}%
+				\only<3>{\input{fig/phylo-model-0c.pdf_tex}}%
+				\only<4>{\input{fig/phylo-model-1.pdf_tex}}%
+				\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}%
+				\only<7>{\input{fig/phylo-model-2b.pdf_tex}}%
+				\only<8>{\input{fig/phylo-model.pdf_tex}}
+			}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
+		\end{figure}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[m]{.38\linewidth}
+		\pause
+		\begin{itemize}
+			\item \textcolor{rootnode}{Root has the function.}\pause[4]
+			\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}).\pause
+			\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
+			\item Only a fraction of the known genes have some form of annotation.
+		\end{itemize}
+		\vfill\hfill\hyperlink{aphylographicalview}{\beamerreturnbutton{go back}}
+	\end{minipage}
+	
+\end{frame}
+
 
 % ------------------------------------------------------------------------------
 \begin{frame}[label = duplicationvsspeciation]
