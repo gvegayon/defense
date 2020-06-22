@@ -1,6 +1,6 @@
 \documentclass[aspectratio=169, 9pt]{beamer}
 
-% \transdissolve[duration=0.2] % Only works with Adobe Acrobat
+\transdissolve[duration=0.2] % Only works with Adobe Acrobat
 
 % Some important packages
 \usepackage{epstopdf}
@@ -40,10 +40,10 @@
 % Noice!
 \usetheme{usckeck}
 
-\title[Stat. Comp. for Complex Systems]{Essays on Bioinformatics and
-Social Network Analysis
-\linebreak{\small Statistical and Computational Methods for
-Complex Systems}}
+\title[Stat. Comp. for Complex Systems]{%
+	Essays on Bioinformatics and Social Network Analysis\linebreak %
+	{\small Statistical and Computational Methods for Complex Systems}%
+}
 \author[GGVY]{George G Vega Yon}
 \institute[USC-PREVMED]{University of Southern California, Department of Preventive Medicine}
 \date{June 22, 2020}
@@ -54,6 +54,8 @@ Complex Systems}}
 \newcommand{\ergmitopkg}[0]{\texttt{ergmito}}
 \newcommand{\aphylopkg}[0]{\texttt{aphylo}}
 \graphicspath{{.}{fig/}}
+
+\usepackage{media9}
 
 
 % ------------------------------------------------------------------------------
@@ -75,25 +77,38 @@ Complex Systems}}
 % ------------------------------------------------------------------------------
 \begin{frame}%[noframenumbering]
 \maketitle
-\end{frame}
-
-% ------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{What motivates my research}
-
+\vspace{-.5cm}
 \begin{center}
-\large
-\textcolor{usccardinal}{\bf Statistical and computational methods for\\ %
-bioinformatics and social network analysis}
-\end{center}\pause
+	\begin{minipage}[m]{.5\linewidth}
+		\color{uscgold}\centering
+		\textbf{Committee} \\
+		Paul~Marjoram (chair), Kayla~de~la~Haye, Paul~D~Thomas, Duncan~C~Thomas, Emilio~Ferrara
+	\end{minipage}
 
-\begin{itemize}
-\item We live in a non-{\it IID} world.\pause
-\item Some times, we cannot understand a process unless we look at it as a whole.\pause
-\item But, while ``the whole'' may be difficult to analyze...\\
-\hfill \pause{\it modern} statistical and computational tools cap help us cope with that.
-\end{itemize}
+\end{center}
 \end{frame}
+
+%% ------------------------------------------------------------------------------
+%\begin{frame}
+%\frametitle{What motivates my research}
+%
+%\centering
+%
+%\begin{center}
+%\large
+%\textcolor{usccardinal}{
+%Essays on Bioinformatics and Social Network Analysis
+%\linebreak{\small Statistical and Computational Methods for Complex Systems}
+%}
+%\end{center}\pause
+%
+%\begin{itemize}
+%\item We live in a non-{\it IID} world.\pause
+%\item Sometimes, we cannot understand a process unless we look at it as a whole.\pause
+%\item But, while ``the whole'' may be difficult to analyze...\\
+%\hfill \pause{\it modern} statistical and computational tools cap help us cope with that.
+%\end{itemize}
+%\end{frame}
 
 
 \frame{\frametitle{Contents}\tableofcontents}
@@ -110,31 +125,6 @@ bioinformatics and social network analysis}
 }
 \end{frame}
 
-% ------------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Genes}
-
-%Encode the synthesis of genetic products that ultimately are related to a
-%particular aspect of life, for example
-
-\def\tmpwidth{.9\linewidth}
-
-\begin{table}
-\begin{tabular}{*{3}{m{.31\linewidth}<{\centering}}}
-\onslide<2->\bf Molecular function & %
-\onslide<3->\bf Cellular component & %
-\onslide<4->\bf Biological process \\
-\onslide<2->\href{http://amigo.geneontology.org/amigo/term/GO:0005215}{Active transport GO:0005215}& %
-\onslide<3->\href{http://amigo.geneontology.org/amigo/term/GO:0004016}{Mitochondria GO:0004016} & %
-\onslide<4->\href{http://amigo.geneontology.org/amigo/term/GO:0060047}{Heart contraction GO:0060047} \\
-\onslide<2->\includegraphics[width=\tmpwidth]{Sodium-potassium_pump_and_diffusion.png} & %
-\onslide<3->\includegraphics[width=\tmpwidth]{640px-Animal_Cell-svg.png} & % 
-\onslide<4->\includegraphics[width=\tmpwidth]{Systolevs_Diastole.png}
-\end{tabular}
-\end{table}
-
-\end{frame}
-
 
 % ------------------------------------------------------------------------------
 \begin{frame}[label=geneontology]
@@ -148,9 +138,8 @@ bioinformatics and social network analysis}
 % \item Three domains: Cellular component, molecular function, biological process.
 \item The GO project has $\sim$ 44,400 validated terms  \hyperlink{aphylo-goexample}{\beamergotobutton{more}}, $\sim$ 7.9M annotations on $\sim$ 4,600 species.
 \item About $\sim$ 550,000 are on human genes.
-\item Roughly half of human genes ($\sim$ 10,000 / 20,000) have some
-form of annotation.
-\item We know something of less than 10\% of known genes (near 1.7M). % 40610
+%\item Roughly half of human genes ($\sim$ 10,000 / 20,000) have some form of annotation.
+\item Yet, less than 10\% of those annotations are based on experimental evidence. % 40610
 %\item An important effort of the GO has to do with phylogenetics...
 \end{itemize}
 
@@ -160,49 +149,36 @@ form of annotation.
 \end{frame}
 
 
-
 % ------------------------------------------------------------------------------
-\begin{frame}[label=aphylographicalview,c]
-\frametitle{An evolutionary model of gene functions}
-\def\shadowsize{2pt}
-\definecolor{rootnode}{RGB}{0,159,211}
-\definecolor{innernode}{RGB}{90,159,89}
-\definecolor{leafnode}{RGB}{255,107,0}
-
-\begin{minipage}[m]{.60\linewidth}
-\begin{figure}
-	\footnotesize
-	\centering
-	\def\svgwidth{.9\linewidth}
-	\mode<beamer>{
-	\only<1>{\input{fig/phylo-model-0.pdf_tex}}%
-	\only<2>{\input{fig/phylo-model-0b.pdf_tex}}%
-	\only<3>{\input{fig/phylo-model-0c.pdf_tex}}%
-	\only<4>{\input{fig/phylo-model-1.pdf_tex}}%
-	\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}%
-	\only<7>{\input{fig/phylo-model-2b.pdf_tex}}%
-	\only<8>{\input{fig/phylo-model.pdf_tex}}
-	}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
-\end{figure}
-\end{minipage}
-\hfill
-\begin{minipage}[m]{.38\linewidth}
-	\pause
-	\begin{itemize}
-		\item \textcolor{rootnode}{Root has the function.}\pause[4]
-		\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}).\pause
-		\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
-		\item Only a fraction of the known genes has some form of annotation.
-	\end{itemize}
-\end{minipage}
-
+\begin{frame}
+	\frametitle{Genes and their Functions}
+	
+	Gene functions can be classified in three types:
+	
+	\def\tmpwidth{.9\linewidth}
+	
+	\begin{table}
+		\begin{tabular}{*{3}{m{.31\linewidth}<{\centering}}}
+			\onslide<2->\bf Molecular function & %
+			\onslide<3->\bf Cellular component & %
+			\onslide<4->\bf Biological process \\
+			\onslide<2->\href{http://amigo.geneontology.org/amigo/term/GO:0005215}{Active transport GO:0005215}& %
+			\onslide<3->\href{http://amigo.geneontology.org/amigo/term/GO:0004016}{Mitochondria GO:0004016} & %
+			\onslide<4->\href{http://amigo.geneontology.org/amigo/term/GO:0060047}{Heart contraction GO:0060047} \\
+			\onslide<2->\includegraphics[width=\tmpwidth]{Sodium-potassium_pump_and_diffusion.png} & %
+			\onslide<3->\includegraphics[width=\tmpwidth]{640px-Animal_Cell-svg.png} & % 
+			\onslide<4->\includegraphics[width=\tmpwidth]{Systolevs_Diastole.png}
+		\end{tabular}
+	\end{table}
+	
 \end{frame}
+
 
 %--------------------------------------------------------------------------------
 \newcommand{\oinclude}[2]{\only<#1>{\includegraphics[width=\tmpwdth,clip,trim={0 0 0 2cm}]{#2}}}
 
-\begin{frame}[t, label=phylo-good]
-	\frametitle{Example of Data + Predictions}
+\begin{frame}[t]
+	\frametitle{GO Annotations and Phylogenetic Trees}
 	
 	\begin{minipage}[m]{.3\linewidth}
 		\small
@@ -213,7 +189,7 @@ form of annotation.
 			\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
 			\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
 		}\\
-		\uncover<3->{%
+		\phantom{%
 			\textbf{MAE:} 0.34 \\
 			\textbf{AUC:} 0.91%
 		}
@@ -226,10 +202,90 @@ form of annotation.
 			\centering
 			\oinclude{1}{example-trees-good1-loo-annotated-parts-0.pdf}%
 			\oinclude{2}{example-trees-good1-loo-annotated-parts-1.pdf}%
-			\oinclude{3}{example-trees-good1-loo-annotated-0.pdf}%
-			\oinclude{4}{example-trees-good1-loo-annotated-1.pdf}%
-			\oinclude{5}{example-trees-good1-loo-annotated-2.pdf}%
-			\oinclude{6}{example-trees-good1-loo-annotated.pdf}
+%			\oinclude{3}{example-trees-good1-loo-annotated-0.pdf}%
+%			\oinclude{4}{example-trees-good1-loo-annotated-1.pdf}%
+%			\oinclude{5}{example-trees-good1-loo-annotated-2.pdf}%
+%			\oinclude{6}{example-trees-good1-loo-annotated.pdf}
+			%			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
+		}
+		
+		\mode<handout>{
+			\centering
+			\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}
+		}
+		
+	\end{minipage}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[label=aphylographicalview,c]
+	\frametitle{An evolutionary model of gene functions}
+	\def\shadowsize{2pt}
+	\definecolor{rootnode}{RGB}{0,159,211}
+	\definecolor{innernode}{RGB}{90,159,89}
+	\definecolor{leafnode}{RGB}{255,107,0}
+	
+	\begin{minipage}[m]{.60\linewidth}
+		\begin{figure}
+			\footnotesize
+			\centering
+			\def\svgwidth{.9\linewidth}
+			\mode<beamer>{
+				\only<1>{\input{fig/phylo-model-0.pdf_tex}}%
+				\only<2>{\input{fig/phylo-model-0b.pdf_tex}}%
+				\only<3>{\input{fig/phylo-model-0c.pdf_tex}}%
+				\only<4>{\input{fig/phylo-model-1.pdf_tex}}%
+				\only<5-6>{\input{fig/phylo-model-2a.pdf_tex}}%
+				\only<7>{\input{fig/phylo-model-2b.pdf_tex}}%
+				\only<8>{\input{fig/phylo-model.pdf_tex}}
+			}\mode<handout>{\input{fig/phylo-model.pdf_tex}}
+		\end{figure}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[m]{.38\linewidth}
+		\pause
+		\begin{itemize}
+			\item \textcolor{rootnode}{Root has the function.}\pause[4]
+			\item \textcolor{innernode}{Gain\pause{} and loss\pause{} (also depends on the type of event \hyperlink{duplicationvsspeciation}{\beamergotobutton{more}}}).\pause
+			\item \textcolor{leafnode}{\textbf{Observed} annotations may be incorrect.}\pause
+			\item Only a fraction of the known genes have some form of annotation.
+		\end{itemize}
+	\end{minipage}
+	
+\end{frame}
+
+
+%--------------------------------------------------------------------------------
+%\newcommand{\oinclude}[2]{\only<#1>{\includegraphics[width=\tmpwdth,clip,trim={0 0 0 2cm}]{#2}}}
+
+\begin{frame}[t, label=phylo-good]
+	\frametitle{Example of Data + Predictions}
+	
+	\begin{minipage}[m]{.3\linewidth}
+		\small
+		%	The AUC for this analysis is 0.91 and the Mean Absolute Error is 0.34
+		\uncover<1->{\textbf{Family: PTHR11258}}\\
+		\uncover<1->{%
+			\textbf{Type:} Molecular Function\\
+			\textbf{Name:} 2'-5'-oligoadenylate synthetase activity\\
+			\textbf{Desc:}  \href{http://amigo.geneontology.org/amigo/term/GO:0001730}{\alert{GO:0001730}} involved in the process of cellular antiviral activity (wiki on \href{https://en.wikipedia.org/wiki/Interferon}{\alert{interferon}}).
+		}\\
+		\uncover<2->{%
+			\textbf{MAE:} 0.34 \\
+			\textbf{AUC:} 0.91%
+		}
+		\vfill
+		\hyperlink{phylo-bad}{\beamerbutton{see a bad one}}
+	\end{minipage}
+	\begin{minipage}[m]{.65\linewidth}
+		\def\tmpwdth{.9\linewidth}
+		\mode<beamer>{
+			\centering
+			\oinclude{1}{example-trees-good1-loo-annotated-parts-1.pdf}%
+			\oinclude{2}{example-trees-good1-loo-annotated-0.pdf}%
+			\oinclude{3}{example-trees-good1-loo-annotated-1.pdf}%
+			\oinclude{4}{example-trees-good1-loo-annotated-2.pdf}%
+			\oinclude{5}{example-trees-good1-loo-annotated.pdf}
 			%			\only<1>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-0.pdf}}\only<2>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-1.pdf}}\only<3>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated-2.pdf}}\only<4>{\includegraphics[width=\tmpwdth, clip, trim={0 0 0 2cm}]{example-trees-good1-loo-annotated.pdf}}
 		}
 		
@@ -240,6 +296,7 @@ form of annotation.
 		
 	\end{minipage}
 \end{frame}
+
 
 %--------------------------------------------------------------------------------
 \newcommand{\byside}[2]{\begin{minipage}[t]{.24\linewidth}%
@@ -260,6 +317,8 @@ form of annotation.
 		Gains and losses are more likely to happen at \alert{duplication} events.%
 	}\hfill\pause
 	\byside{Competitive}{Matches state-of-the-art phylo-based prediction models with $\sim$ 0.75 AUC.}
+	\vfill
+	\uncover<6>{...all this assuming that all functions had the same gain/loss rate.}
 \end{frame}
 
 
@@ -422,7 +481,7 @@ Molecular Function & $\neq$ & Biological Process &  ? & Cellular Component
 
 \begin{minipage}[m]{.3\linewidth}
 	\begin{itemize}
-		\item<2-> If COVID-19 has taught us something is that networks matter.
+		\item<2-> If COVID-19 has taught us something it is that networks matter.
 		\item<3-> And specially small networks: Families, teams, friends, etc. \uncover<4->{The cornerstone of larger social systems.}
 		\item<5-> We can study networks using ERGMs.
 	\end{itemize}
@@ -634,13 +693,17 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\begin{center}
 	\begin{minipage}[m]{.6\linewidth}
 		\centering\Large
-		``Does the model edges+transitivity captures the observed path-length distribution?''
+		``Does the model edges+transitivity capture the observed path-length distribution?''
 	\end{minipage}	
 	\end{center}\pause
 	
 	\begin{itemize}
 		\item The current Goodness-of-fit (GOF) for ERGMs does not fit ERGMitos.\pause
-		\item A closely related idea: Conditional Distributions.\pause
+		\item A closely related idea: Conditional Distributions. \\
+		\begin{center}
+			\large \alert{How much does \textit{Term B} can tell us about \textit{Term A}?}
+		\end{center}		
+		\pause
 %		\item Idea: Knowing how one structure predicts the other helps select the right benchmark.\pause
 		\item Brief study: Analyze the prediction capability that \textbf{Mutuals}, \textbf{Transitive Triads}, \textbf{Homophily}, and \textbf{Receiver Effect} terms have on each other.\pause
 	\end{itemize}
@@ -650,8 +713,6 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\centering
 	\def\svgwidth{.6\linewidth}
 	\input{fig/max-out-stats.pdf_tex}
-%	\includegraphics[width = .6\linewidth]{max-out-stats.pdf}
-	%\caption[Examples of Networks with Saturated Statistics]{Networks with saturated statistics. All three networks have five vertices composed of two females (black vertices) and three males (gray vertices). Network (a) shows the required set of ties to saturate the \textit{Mutuals} and \textit{Transitive Triads} sufficient statistics, which actually coincides with a fully connected graph, containing $(5\times 4)/2 = 10$ mutual ties and $5 \times 4 \times 3 = 60$ transitive triads. Graph (b) shows the required configuration to saturate the \textit{Gender-Homophily} sufficient statistic, containing $3\times 2 + 2\times 1 = 8$ homophilic ties. Graph (c) shows the minimum arrangement to saturate the \textit{Gender-Receiver Effect} statistic, also having $4 + 4 = 8$ ties (so each female receives 4 ties).}
 	\label{fig:maxout-gof-chapter}
 \end{figure}
 \end{frame}
@@ -659,7 +720,7 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \begin{frame}[c]
 	
 	\begin{minipage}[t]{.48\linewidth}
-	\large\alert{How much Term B can tell us about Term A?}\normalsize\pause
+	\large\alert{How much does \textit{Term B} can tell us about \textit{Term A}?}\normalsize\pause
 	
 	\begin{itemize}
 		\item<2-> High predictive power (Term A $|$ Term B):
@@ -971,12 +1032,13 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 	\textbf{Predicting gene functions}
 	\begin{itemize}
 		\item Scale-up the problem.
+		\item More biology (via ERGMs).
 		\item New ways to look at phylo data.
-		\item More biology.
 	\end{itemize}\pause
 
 	\textbf{ERGMs}
 	\begin{itemize}
+		\item Revisited exact methods.
 		\item New light on small networks.
 		\item Many opportunities for methodological innovations.
 	\end{itemize}\pause
@@ -999,20 +1061,80 @@ Exponential Family Random Graph Models, aka \alert{ERGMs} are:\pause
 \end{itemize}\pause
 
 \textbf{Other tools}\\
-similR, gnet, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG,\pause{} and {\large \textbf{Barry}}
+similR, gnet, aphylo, polygons, pruner, netplot, rphyloxml, jsPhyloSVG,\pause{} and {\large\color{usccardinal}\textbf{Barry}}
 
 }
 
 \end{frame}
 
-
 % ------------------------------------------------------------------------------
 \begin{frame}
-\maketitle
-\begin{center}
-\scalebox{2}{\textcolor{uscgold}{Thanks!}}
-\end{center}
+\frametitle{Acknowledgments}
+
+\begin{minipage}[m]{.48\linewidth}
+	\begin{itemize}\pause
+		\item Prof. Paul~Marjoram
+		\item Prof. Kayla~de~la~Haye
+		\item Prof. Paul~D~Thomas
+		\item Prof. Duncan~C~Thomas
+		\item Prof. Emilio~Ferrara\pause
+		\item Prof. Kim Siegmund
+		\item Prof. Jim Gauderman
+		\item Prof. Tom Valente\pause
+		\item Colleagues at USC
+	\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[m]{.48\linewidth}
+	\begin{itemize}
+		\item Coauthors\pause
+		\item Members of the P01 group
+		\item Members of the CANA group\pause
+		\item Department of Preventive medicine\pause
+		\item Friends and family\pause
+		\item Mateo (4yo)
+		\item Tomas ($\lim_{\varepsilon\downarrow0}\left\{3-\exp{\varepsilon}\right\}$yo)
+		\item Valentina (my wife)
+	\end{itemize}
+\end{minipage}
+\vfill
+And many more...
+
 \end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[c]
+	\centering
+	\usebeamertemplate{section intro}{}{}
+	\textbf{%
+		\color{uscgold}
+		\large Essays on Bioinformatics and Social Network Analysis\linebreak %
+		{\small Statistical and Computational Methods for Complex Systems}%
+	}
+	
+	
+\includemedia[%
+	width=.3\linewidth,%
+	height=.3\linewidth,%
+	addresource=fig/walking-dead.mp4,%
+	transparent,
+	%transparent player background
+	activate=pageopen,
+	passcontext,
+	%show VPlayer's right-click menu
+	flashvars={
+		source=fig/walking-dead.mp4
+		&loop=true
+		% loop video
+	}
+]{}{VPlayer.swf}
+	
+	
+	\begin{center}
+	\scalebox{2}{\textcolor{uscgold}{Thank you!}} 
+	\end{center}
+\end{frame}
+
 
 \renewcommand{\section}[2]{}%
 \appendix
@@ -1215,7 +1337,7 @@ these are part of the same evolutionary tree!}
 \tiny
 % Source 
 \input{fig/Drosophila_speciation_experiment.pdf_tex}
-\caption{\cite{Dodd1989}: After one year of isolation, flies showed a significant level or assortativity in mating (\href{https://commons.wikimedia.org/wiki/File:Drosophila_speciation_experiment.svg}{wikimedia})}
+\caption{\cite{Dodd1989}: After one year of isolation, flies showed a significant level of assortativity in mating (\href{https://commons.wikimedia.org/wiki/File:Drosophila_speciation_experiment.svg}{wikimedia})}
 \end{figure}
 
 \vfill\hfill \hyperlink{aphylographicalview}{\beamerreturnbutton{go back}}
